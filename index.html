@@ -1,0 +1,679 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DocKit Master — Codebase to Beautiful Docs in Seconds</title>
+    <meta name="description"
+        content="Unleash your AI agent. Automatically scan your codebase and deploy beautiful Technical Docs, SOPs, and API references. Markdown or Docusaurus. Free forever.">
+    <link rel="icon"
+        href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><rect rx='20' width='100' height='100' fill='%236d5dfc'/><text x='50' y='72' text-anchor='middle' font-size='60' fill='white'>📚</text></svg>">
+    <meta property="og:type" content="website">
+    <meta property="og:title" content="DocKit Master — AI Documentation Toolkit">
+    <meta property="og:description"
+        content="Scan your codebase. Generate Technical Docs, SOPs, API References. Markdown or premium Docusaurus site. Free forever.">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap"
+        rel="stylesheet">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        heading: ['"Plus Jakarta Sans"', 'system-ui', 'sans-serif'],
+                        body: ['"Inter"', 'system-ui', 'sans-serif'],
+                        mono: ['"JetBrains Mono"', 'ui-monospace', 'monospace']
+                    },
+                    colors: {
+                        surface: { 50: '#fafafa', 100: '#18181b', 200: '#111114', 300: '#0c0c0f', 400: '#09090b' },
+                        accent: { DEFAULT: '#6d5dfc', light: '#8a7efd', dark: '#5b4cd9', soft: '#ede9fe' },
+                        magic: { DEFAULT: '#ec4899', light: '#f472b6', dark: '#db2777' },
+                        success: { DEFAULT: '#10b981', light: '#34d399' },
+                        warn: { DEFAULT: '#f59e0b', light: '#fbbf24' }
+                    }
+                }
+            }
+        }
+    </script>
+    <link rel="stylesheet" href="css/styles.css">
+</head>
+
+<body class="antialiased">
+
+    <!-- NAVBAR -->
+    <nav
+        class="nav-glass fixed top-3 left-3 right-3 sm:top-4 sm:left-4 sm:right-4 z-50 rounded-2xl px-4 py-2.5 sm:px-6 sm:py-3 flex items-center justify-between max-w-6xl mx-auto">
+        <a href="#" class="flex items-center gap-2.5 group">
+            <div
+                class="w-8 h-8 rounded-xl bg-gradient-to-br from-accent to-magic flex items-center justify-center text-sm font-bold text-white shrink-0">
+                📚</div>
+            <span class="font-heading font-bold text-base sm:text-lg tracking-tight">DocKit Master</span>
+        </a>
+        <div class="hidden md:flex items-center gap-8 text-sm text-zinc-400">
+            <a href="#" class="text-white transition-colors cursor-pointer">Home</a>
+            <a href="#features" class="hover:text-white transition-colors cursor-pointer">Features</a>
+            <a href="#how" class="hover:text-white transition-colors cursor-pointer">How It Works</a>
+            <a href="docusaurus-site/" class="hover:text-white transition-colors cursor-pointer">Docs Site</a>
+        </div>
+        <div class="flex items-center gap-1.5 sm:gap-3">
+            <a href="https://github.com/relukdev/DocKit Master" target="_blank" rel="noopener"
+                class="hidden lg:inline-flex items-center justify-center gap-2 bg-white/5 hover:bg-white/10 text-zinc-300 text-sm font-medium px-4 h-9 rounded-xl border border-white/10 transition-all cursor-pointer">⭐
+                Star</a>
+            <a href="#start"
+                class="cta-primary text-white text-sm font-semibold px-4 h-9 rounded-xl transition-all cursor-pointer hidden md:flex items-center justify-center shrink-0">Get
+                Started Free</a>
+            <button
+                class="md:hidden bg-white/5 border border-white/10 w-9 h-9 flex items-center justify-center rounded-xl shrink-0"
+                onclick="toggleMobileMenu()">
+                <svg class="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16m-7 6h7">
+                    </path>
+                </svg>
+            </button>
+        </div>
+    </nav>
+
+    <!-- MOBILE MENU -->
+    <div id="mobileMenu"
+        class="md:hidden mobile-menu fixed top-20 left-4 right-4 z-40 bg-zinc-900/95 backdrop-blur-xl border border-white/10 rounded-2xl px-6 py-4 flex flex-col gap-4 text-sm font-medium shadow-2xl">
+        <a href="#" onclick="closeMobileMenu()" class="text-white py-2">Home</a>
+        <a href="#features" onclick="closeMobileMenu()" class="text-zinc-300 hover:text-white py-2">Features</a>
+        <a href="#how" onclick="closeMobileMenu()" class="text-zinc-300 hover:text-white py-2">How It Works</a>
+        <a href="docusaurus-site/" onclick="closeMobileMenu()" class="text-zinc-300 hover:text-white py-2">Docs Site</a>
+        <a href="#start" onclick="closeMobileMenu()"
+            class="cta-primary text-white text-center font-semibold px-4 py-2.5 rounded-xl mt-2">Get Started Free</a>
+    </div>
+
+    <!-- HERO -->
+    <section class="relative min-h-screen flex items-center justify-center px-4 pt-24 pb-16 overflow-hidden">
+        <div class="hero-bg"></div>
+        <div class="grid-pattern"></div>
+        <div class="relative z-10 max-w-4xl mx-auto text-center">
+            <div
+                class="float-badge inline-flex items-center gap-2 px-5 py-2 rounded-full text-xs font-medium bg-white/5 border border-white/10 text-zinc-300 mb-8">
+                <span class="flex -space-x-2">
+                    <span
+                        class="w-5 h-5 rounded-full bg-gradient-to-br from-violet-400 to-pink-400 border-2 border-surface-400"></span>
+                    <span
+                        class="w-5 h-5 rounded-full bg-gradient-to-br from-emerald-400 to-cyan-400 border-2 border-surface-400"></span>
+                    <span
+                        class="w-5 h-5 rounded-full bg-gradient-to-br from-amber-400 to-orange-400 border-2 border-surface-400"></span>
+                </span>
+                Google Antigravity Toolkit
+            </div>
+            <h1
+                class="font-heading font-extrabold text-4xl sm:text-5xl md:text-6xl lg:text-7xl tracking-tight leading-[1.05] mb-6">
+                <span
+                    class="bg-gradient-to-r from-white via-white to-zinc-400 bg-clip-text text-transparent">Documentation
+                    that</span><br>
+                <span
+                    class="bg-gradient-to-r from-accent-light via-magic to-magic-light bg-clip-text text-transparent">Writes
+                    Itself</span>
+            </h1>
+            <p class="text-zinc-400 text-lg sm:text-xl max-w-2xl mx-auto mb-4 leading-relaxed">
+                Unleash your AI agent. Automatically scan your codebase and deploy<br class="hidden sm:block">
+                <span class="text-white font-medium">beautiful Technical Docs, SOPs, and API references</span> in
+                seconds.
+            </p>
+            <p class="text-zinc-600 text-sm max-w-lg mx-auto mb-10">Output as structured Markdown or a premium
+                Docusaurus site with glassmorphism, dark mode, and rich diagrams.</p>
+            <div class="flex flex-col sm:flex-row items-center justify-center gap-4 mb-16">
+                <a href="#start"
+                    class="cta-primary text-white font-semibold px-10 py-4 rounded-2xl transition-all cursor-pointer glow-purple text-base">✦
+                    Get Started — 60 Seconds</a>
+                <a href="#magic"
+                    class="bg-white/5 hover:bg-white/10 text-zinc-300 font-medium px-8 py-4 rounded-2xl border border-white/10 transition-all cursor-pointer text-base">See
+                    the Magic ↓</a>
+            </div>
+            <div class="flex flex-wrap items-center justify-center gap-x-6 gap-y-4 text-center">
+                <div>
+                    <div class="text-2xl font-bold text-white">3</div>
+                    <div class="text-xs text-zinc-500 mt-1">Doc Types</div>
+                </div>
+                <div class="w-px h-8 bg-zinc-800 hidden sm:block"></div>
+                <div>
+                    <div class="text-2xl font-bold text-accent-light">2</div>
+                    <div class="text-xs text-zinc-500 mt-1">Output Formats</div>
+                </div>
+                <div class="w-px h-8 bg-zinc-800 hidden sm:block"></div>
+                <div>
+                    <div class="text-2xl font-bold text-magic">4+</div>
+                    <div class="text-xs text-zinc-500 mt-1">Languages</div>
+                </div>
+                <div class="w-px h-8 bg-zinc-800 hidden sm:block"></div>
+                <div>
+                    <div class="text-2xl font-bold text-success">$0</div>
+                    <div class="text-xs text-zinc-500 mt-1">Forever Free</div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <div class="glow-line max-w-4xl mx-auto"></div>
+
+    <!-- PROBLEM / SOLUTION -->
+    <section id="problem" class="max-w-5xl mx-auto px-4 py-24">
+        <div class="text-center mb-16 reveal">
+            <p class="text-magic text-sm font-semibold tracking-widest uppercase mb-3">The Real Problem</p>
+            <h2 class="font-heading font-bold text-3xl sm:text-4xl tracking-tight mb-4">Your codebase is
+                amazing.<br>Your docs are... nonexistent.</h2>
+            <p class="text-zinc-500 text-base max-w-xl mx-auto">This is the reality for 90% of dev teams and solo
+                makers.</p>
+        </div>
+        <div class="grid md:grid-cols-2 gap-6 mb-12">
+            <div class="before-card rounded-2xl p-8 reveal">
+                <div class="flex items-center gap-2 mb-6"><span class="text-red-400 text-lg">✕</span><span
+                        class="text-red-400 font-semibold text-sm uppercase tracking-wide">Without DocKit Master</span>
+                </div>
+                <ul class="space-y-4 text-sm">
+                    <li class="flex gap-3 text-zinc-400"><span
+                            class="text-red-400/60 mt-0.5 shrink-0">●</span><span>"We'll write docs later" — later never
+                            comes</span></li>
+                    <li class="flex gap-3 text-zinc-400"><span class="text-red-400/60 mt-0.5 shrink-0">●</span><span>New
+                            team members spend weeks understanding the codebase</span></li>
+                    <li class="flex gap-3 text-zinc-400"><span class="text-red-400/60 mt-0.5 shrink-0">●</span><span>API
+                            docs are outdated the day they're written</span></li>
+                    <li class="flex gap-3 text-zinc-400"><span
+                            class="text-red-400/60 mt-0.5 shrink-0">●</span><span>Hiring a technical writer:
+                            $5,000–$20,000. Wait 3–6 weeks.</span></li>
+                    <li class="flex gap-3 text-zinc-400"><span
+                            class="text-red-400/60 mt-0.5 shrink-0">●</span><span>SOPs? "Just ask David" — but David
+                            left last month.</span></li>
+                </ul>
+            </div>
+            <div class="after-card rounded-2xl p-8 reveal reveal-delay-1">
+                <div class="flex items-center gap-2 mb-6"><span class="text-emerald-400 text-lg">✦</span><span
+                        class="text-emerald-400 font-semibold text-sm uppercase tracking-wide">With DocKit Master</span>
+                </div>
+                <ul class="space-y-4 text-sm">
+                    <li class="flex gap-3 text-zinc-300"><span
+                            class="text-emerald-400/80 mt-0.5 shrink-0">✓</span><span>Complete docs generated in <span
+                                class="text-white font-medium">minutes</span>, not weeks</span></li>
+                    <li class="flex gap-3 text-zinc-300"><span
+                            class="text-emerald-400/80 mt-0.5 shrink-0">✓</span><span>AI traces <span
+                                class="text-white font-medium">actual code paths</span> — no shallow analysis</span>
+                    </li>
+                    <li class="flex gap-3 text-zinc-300"><span
+                            class="text-emerald-400/80 mt-0.5 shrink-0">✓</span><span>Every claim cites <span
+                                class="text-white font-medium">(file:line_number)</span> — verifiable</span></li>
+                    <li class="flex gap-3 text-zinc-300"><span
+                            class="text-emerald-400/80 mt-0.5 shrink-0">✓</span><span>$0 cost. Zero waiting.
+                            Deploy-ready docs.</span></li>
+                    <li class="flex gap-3 text-zinc-300"><span
+                            class="text-emerald-400/80 mt-0.5 shrink-0">✓</span><span>Premium Docusaurus site with dark
+                            mode, diagrams, search</span></li>
+                </ul>
+            </div>
+        </div>
+        <div class="text-center reveal">
+            <p class="text-zinc-500 text-sm italic">"Good documentation isn't a luxury — it's the difference between a
+                <span class="text-white">product</span> and a <span class="text-white">project</span>."
+            </p>
+        </div>
+    </section>
+    <div class="glow-line max-w-4xl mx-auto"></div>
+
+    <!-- MAGIC DEMO -->
+    <section id="magic" class="max-w-6xl mx-auto px-4 py-24">
+        <div class="text-center mb-16 reveal">
+            <p class="text-accent-light text-sm font-semibold tracking-widest uppercase mb-3">The Magic</p>
+            <h2 class="font-heading font-bold text-3xl sm:text-4xl tracking-tight mb-4">One script. Complete
+                documentation.</h2>
+            <p class="text-zinc-500 text-base max-w-xl mx-auto">DocKit Master orchestrates 4 AI sub-skills to analyze,
+                map,
+                and write your entire documentation suite.</p>
+        </div>
+
+        <!-- Terminal Demo -->
+        <div class="max-w-3xl mx-auto mb-16 reveal">
+            <div class="terminal-window">
+                <div class="terminal-header">
+                    <div class="flex gap-1.5">
+                        <div class="terminal-dot" style="background:#ff5f56"></div>
+                        <div class="terminal-dot" style="background:#ffbd2e"></div>
+                        <div class="terminal-dot" style="background:#27c93f"></div>
+                    </div>
+                    <span class="text-zinc-500 text-xs ml-4 font-mono">~/my-project</span>
+                </div>
+                <div class="terminal-body text-zinc-300">
+                    <span class="text-emerald-400">$</span> <span class="text-white">bash doc-gen.sh</span><br><br>
+                    <span class="text-accent font-bold">📚 DocKit Master — Documentation Generator</span><br><br>
+                    <span class="text-zinc-500">📑 Step 1: Document Type</span><br>
+                    <span class="text-zinc-500">&nbsp;&nbsp;1) tech — Technical docs (Architecture, DB,
+                        Deployment)</span><br>
+                    <span class="text-zinc-500">&nbsp;&nbsp;2) sop — SOP User Guides (step-by-step)</span><br>
+                    <span class="text-zinc-500">&nbsp;&nbsp;3) api — API Reference (endpoints, schemas)</span><br>
+                    <span class="text-zinc-500">&nbsp;&nbsp;4) all — Full documentation suite</span><br><br>
+                    <span class="text-emerald-400 font-bold">Select [1-4]:</span> <span
+                        class="text-accent-light">4</span><br><br>
+                    <span class="text-zinc-500">🎨 Output Format:</span> <span class="text-white">docusaurus</span><br>
+                    <span class="text-zinc-500">📂 Source Path:</span> <span class="text-white">/src/app</span><br>
+                    <span class="text-zinc-500">🌏 Languages:</span> <span class="text-white">English +
+                        Vietnamese</span><br><br>
+                    <span class="text-accent-light font-bold">✅ Prompt generated! Paste into your AI agent
+                        session.</span><br>
+                    <span class="text-zinc-600 text-xs">→ AI will orchestrate: analyze-codebase → content-guidelines →
+                        tech-docs + sop-guide + api-reference → setup-docusaurus</span>
+                </div>
+            </div>
+        </div>
+
+        <!-- Features Grid -->
+        <div id="features" class="grid sm:grid-cols-2 lg:grid-cols-3 gap-5">
+            <div class="glass-card rounded-2xl p-7 reveal">
+                <div
+                    class="w-12 h-12 rounded-2xl bg-gradient-to-br from-accent/20 to-accent/5 flex items-center justify-center text-accent-light mb-5 text-2xl">
+                    🧠</div>
+                <h3 class="font-heading font-bold text-lg mb-2">Deep Code Analysis</h3>
+                <p class="text-zinc-500 text-sm leading-relaxed">Traces actual code paths, inspects ORMs, maps API
+                    routes. No more guessing or shallow descriptions.</p>
+            </div>
+            <div class="glass-card rounded-2xl p-7 reveal reveal-delay-1">
+                <div
+                    class="w-12 h-12 rounded-2xl bg-gradient-to-br from-magic/20 to-magic/5 flex items-center justify-center text-magic-light mb-5 text-2xl">
+                    📐</div>
+                <h3 class="font-heading font-bold text-lg mb-2">Intelligent Diagrams</h3>
+                <p class="text-zinc-500 text-sm leading-relaxed">Beautiful Mermaid diagrams for Data Flows, ER Diagrams,
+                    and System Architecture — dark-mode ready.</p>
+            </div>
+            <div class="glass-card rounded-2xl p-7 reveal reveal-delay-2">
+                <div
+                    class="w-12 h-12 rounded-2xl bg-gradient-to-br from-success/20 to-success/5 flex items-center justify-center text-success-light mb-5 text-2xl">
+                    ⚡</div>
+                <h3 class="font-heading font-bold text-lg mb-2">Dual Output Formats</h3>
+                <p class="text-zinc-500 text-sm leading-relaxed">Clean Markdown files or a premium Docusaurus site with
+                    glassmorphism, search, and sidebar navigation.</p>
+            </div>
+            <div class="glass-card rounded-2xl p-7 reveal">
+                <div
+                    class="w-12 h-12 rounded-2xl bg-gradient-to-br from-warn/20 to-warn/5 flex items-center justify-center text-warn-light mb-5 text-2xl">
+                    🎯</div>
+                <h3 class="font-heading font-bold text-lg mb-2">UX-Powered Docs</h3>
+                <p class="text-zinc-500 text-sm leading-relaxed">Applies Hick's Law, Miller's Law, progressive
+                    disclosure. Docs that are scannable, not overwhelming.</p>
+            </div>
+            <div class="glass-card rounded-2xl p-7 reveal reveal-delay-1">
+                <div
+                    class="w-12 h-12 rounded-2xl bg-gradient-to-br from-cyan-500/20 to-cyan-500/5 flex items-center justify-center text-cyan-400 mb-5 text-2xl">
+                    🔍</div>
+                <h3 class="font-heading font-bold text-lg mb-2">Zero Shallow Analysis</h3>
+                <p class="text-zinc-500 text-sm leading-relaxed">Every technical claim cites <code
+                        class="text-accent-light bg-white/5 px-1.5 py-0.5 rounded text-xs">(file_path:line_number)</code>.
+                    Verifiable by design.</p>
+            </div>
+            <div class="glass-card rounded-2xl p-7 reveal reveal-delay-2">
+                <div
+                    class="w-12 h-12 rounded-2xl bg-gradient-to-br from-rose-500/20 to-rose-500/5 flex items-center justify-center text-rose-400 mb-5 text-2xl">
+                    🌍</div>
+                <h3 class="font-heading font-bold text-lg mb-2">Multi-Language Output</h3>
+                <p class="text-zinc-500 text-sm leading-relaxed">Auto-detect chat language. Support for English,
+                    Vietnamese, Chinese, Russian, and more.</p>
+            </div>
+        </div>
+    </section>
+    <div class="glow-line max-w-4xl mx-auto"></div>
+
+    <!-- WHO IS THIS FOR -->
+    <section class="max-w-5xl mx-auto px-4 py-24">
+        <div class="text-center mb-16 reveal">
+            <p class="text-warn text-sm font-semibold tracking-widest uppercase mb-3">Built for</p>
+            <h2 class="font-heading font-bold text-3xl sm:text-4xl tracking-tight mb-4">Your code deserves great
+                docs.<br>Now it gets them automatically.</h2>
+        </div>
+        <div class="grid sm:grid-cols-2 lg:grid-cols-3 gap-4 reveal">
+            <div class="persona-pill rounded-2xl p-6 text-center cursor-pointer">
+                <h4 class="font-heading font-bold text-base mb-1">🏗️ CTOs & Tech Leads</h4>
+                <p class="text-zinc-500 text-xs leading-relaxed">Onboard new devs in days, not weeks. Architecture docs
+                    always current.</p>
+            </div>
+            <div class="persona-pill rounded-2xl p-6 text-center cursor-pointer">
+                <h4 class="font-heading font-bold text-base mb-1">💻 Developers</h4>
+                <p class="text-zinc-500 text-xs leading-relaxed">Stop writing docs manually. Let AI trace the code and
+                    generate everything.</p>
+            </div>
+            <div class="persona-pill rounded-2xl p-6 text-center cursor-pointer">
+                <h4 class="font-heading font-bold text-base mb-1">📋 Product Managers</h4>
+                <p class="text-zinc-500 text-xs leading-relaxed">SOP guides with visual flows. Hand off to support and
+                    training teams.</p>
+            </div>
+            <div class="persona-pill rounded-2xl p-6 text-center cursor-pointer">
+                <h4 class="font-heading font-bold text-base mb-1">🚀 Startup Founders</h4>
+                <p class="text-zinc-500 text-xs leading-relaxed">Ship professional docs for investors and enterprise
+                    clients. Zero extra cost.</p>
+            </div>
+            <div class="persona-pill rounded-2xl p-6 text-center cursor-pointer">
+                <h4 class="font-heading font-bold text-base mb-1">💡 Solo Makers</h4>
+                <p class="text-zinc-500 text-xs leading-relaxed">One person = entire docs team. Technical + user-facing,
+                    all automated.</p>
+            </div>
+            <div class="persona-pill rounded-2xl p-6 text-center cursor-pointer">
+                <h4 class="font-heading font-bold text-base mb-1">🔌 API Providers</h4>
+                <p class="text-zinc-500 text-xs leading-relaxed">Auto-generate endpoint docs with examples in cURL, JS,
+                    and Python.</p>
+            </div>
+        </div>
+    </section>
+    <div class="glow-line max-w-4xl mx-auto"></div>
+
+    <!-- HOW IT WORKS -->
+    <section id="how" class="max-w-5xl mx-auto px-4 py-24">
+        <div class="text-center mb-16 reveal">
+            <p class="text-accent-light text-sm font-semibold tracking-widest uppercase mb-3">Surprisingly Simple</p>
+            <h2 class="font-heading font-bold text-3xl sm:text-4xl tracking-tight mb-4">3 steps. Done.</h2>
+            <p class="text-zinc-500 text-base max-w-lg mx-auto">No complicated setup. No config files. Just run and go.
+            </p>
+        </div>
+        <div class="grid md:grid-cols-3 gap-8 reveal">
+            <div class="text-center">
+                <div
+                    class="step-ring rounded-full flex items-center justify-center text-accent-light font-heading font-bold text-xl mx-auto mb-6">
+                    1</div>
+                <h3 class="font-heading font-bold text-lg mb-3">Install</h3>
+                <p class="text-zinc-500 text-sm leading-relaxed mb-4">Copy DocKit Master into your Antigravity skills
+                    folder.
+                    One command.</p>
+                <div class="bg-zinc-900/80 rounded-xl p-4 text-left"><code
+                        class="text-xs text-accent-light">cp -r DocKit Master ~/.gemini/antigravity/skills/</code>
+                    <p class="text-[10px] text-zinc-600 mt-2">Works with any Antigravity-compatible AI agent</p>
+                </div>
+            </div>
+            <div class="text-center">
+                <div
+                    class="step-ring rounded-full flex items-center justify-center text-magic-light font-heading font-bold text-xl mx-auto mb-6">
+                    2</div>
+                <h3 class="font-heading font-bold text-lg mb-3">Generate Prompt</h3>
+                <p class="text-zinc-500 text-sm leading-relaxed mb-4">Run the interactive CLI to pick doc type, output
+                    format, and language.</p>
+                <div class="bg-zinc-900/80 rounded-xl p-4 text-left">
+                    <code class="text-xs text-accent-light">bash doc-gen.sh</code>
+                    <p class="text-[10px] text-zinc-600 mt-2">Tech · SOP · API · All — Markdown or Docusaurus</p>
+                </div>
+            </div>
+            <div class="text-center">
+                <div
+                    class="step-ring rounded-full flex items-center justify-center text-success-light font-heading font-bold text-xl mx-auto mb-6">
+                    3</div>
+                <h3 class="font-heading font-bold text-lg mb-3">Let AI Work</h3>
+                <p class="text-zinc-500 text-sm leading-relaxed mb-4">Paste the prompt. AI orchestrates 4 skills to
+                    analyze, map, and write.</p>
+                <div class="bg-zinc-900/80 rounded-xl p-4 text-left">
+                    <p class="text-xs text-emerald-400">✓ Architecture, DB, Deployment docs</p>
+                    <p class="text-xs text-emerald-400">✓ SOP user guides with visual flows</p>
+                    <p class="text-xs text-emerald-400">✓ API reference with code examples</p>
+                </div>
+            </div>
+        </div>
+    </section>
+    <div class="glow-line max-w-4xl mx-auto"></div>
+
+    <!-- DOC TYPES -->
+    <section class="max-w-6xl mx-auto px-4 py-24">
+        <div class="text-center mb-16 reveal">
+            <p class="text-cyan-400 text-sm font-semibold tracking-widest uppercase mb-3">Under the Hood</p>
+            <h2 class="font-heading font-bold text-3xl sm:text-4xl tracking-tight mb-4">3 doc types. 4 AI
+                sub-skills.<br>Complete coverage.</h2>
+            <p class="text-zinc-500 text-base max-w-2xl mx-auto">Each document type is powered by a dedicated AI skill
+                with strict content guidelines, citation rules, and UX principles baked in.</p>
+        </div>
+
+        <div class="grid sm:grid-cols-2 lg:grid-cols-3 gap-5 mb-16 reveal">
+            <div class="glass-card rounded-2xl p-6 text-center">
+                <div
+                    class="w-12 h-12 rounded-2xl bg-gradient-to-br from-accent/20 to-accent/5 flex items-center justify-center text-accent-light mb-4 text-2xl mx-auto">
+                    🏗️</div>
+                <h3 class="font-heading font-bold text-base mb-2">Technical Docs</h3>
+                <p class="text-zinc-500 text-xs leading-relaxed mb-4">Architecture • Database Schema • Deployment • Data
+                    Flow diagrams. All with Mermaid visualizations.</p>
+                <div
+                    class="text-[10px] font-medium text-accent-light bg-accent/10 rounded-full px-2.5 py-0.5 inline-block">
+                    tech-docs.md</div>
+            </div>
+            <div class="glass-card rounded-2xl p-6 text-center">
+                <div
+                    class="w-12 h-12 rounded-2xl bg-gradient-to-br from-magic/20 to-magic/5 flex items-center justify-center text-magic-light mb-4 text-2xl mx-auto">
+                    📋</div>
+                <h3 class="font-heading font-bold text-base mb-2">SOP User Guides</h3>
+                <p class="text-zinc-500 text-xs leading-relaxed mb-4">Step-by-step guides with prerequisites,
+                    troubleshooting, FAQ. Progressive disclosure built in.</p>
+                <div
+                    class="text-[10px] font-medium text-magic-light bg-magic/10 rounded-full px-2.5 py-0.5 inline-block">
+                    sop-guide.md</div>
+            </div>
+            <div class="glass-card rounded-2xl p-6 text-center">
+                <div
+                    class="w-12 h-12 rounded-2xl bg-gradient-to-br from-success/20 to-success/5 flex items-center justify-center text-success-light mb-4 text-2xl mx-auto">
+                    🔌</div>
+                <h3 class="font-heading font-bold text-base mb-2">API Reference</h3>
+                <p class="text-zinc-500 text-xs leading-relaxed mb-4">Endpoints, schemas, auth, error codes.
+                    Multi-language examples in cURL, JavaScript, Python.</p>
+                <div
+                    class="text-[10px] font-medium text-success-light bg-success/10 rounded-full px-2.5 py-0.5 inline-block">
+                    api-reference.md</div>
+            </div>
+        </div>
+
+        <!-- UX Principles -->
+        <div class="grid sm:grid-cols-3 gap-4 reveal">
+            <div class="glass-card rounded-xl p-5 text-center">
+                <div class="text-2xl mb-2">📏</div>
+                <h4 class="font-heading font-semibold text-sm mb-1 text-white">Hick's Law</h4>
+                <p class="text-zinc-500 text-xs">≤7 TOC items. Progressive disclosure for advanced content.</p>
+            </div>
+            <div class="glass-card rounded-xl p-5 text-center">
+                <div class="text-2xl mb-2">🧩</div>
+                <h4 class="font-heading font-semibold text-sm mb-1 text-white">Miller's Law</h4>
+                <p class="text-zinc-500 text-xs">Information chunked into groups of 5-9. Scannable hierarchy.</p>
+            </div>
+            <div class="glass-card rounded-xl p-5 text-center">
+                <div class="text-2xl mb-2">♿</div>
+                <h4 class="font-heading font-semibold text-sm mb-1 text-white">WCAG 2.1 AA</h4>
+                <p class="text-zinc-500 text-xs">Focus-visible rings, contrast ratios, reduced motion support.</p>
+            </div>
+        </div>
+    </section>
+    <div class="glow-line max-w-4xl mx-auto"></div>
+
+    <!-- OUTPUT FORMATS -->
+    <section class="max-w-5xl mx-auto px-4 py-24">
+        <div class="text-center mb-16 reveal">
+            <p class="text-magic text-sm font-semibold tracking-widest uppercase mb-3">Choose Your Output</p>
+            <h2 class="font-heading font-bold text-3xl sm:text-4xl tracking-tight mb-4">Markdown or Docusaurus.<br>Your
+                call.</h2>
+        </div>
+        <div class="grid md:grid-cols-2 gap-6 reveal">
+            <div class="glass-card rounded-2xl p-8">
+                <div class="flex items-center gap-3 mb-6">
+                    <div
+                        class="w-12 h-12 rounded-2xl bg-gradient-to-br from-zinc-500/20 to-zinc-500/5 flex items-center justify-center text-zinc-300 text-2xl">
+                        📝</div>
+                    <div>
+                        <h3 class="font-heading font-bold text-lg">Markdown</h3>
+                        <p class="text-zinc-500 text-xs">Clean, portable, version-controlled</p>
+                    </div>
+                </div>
+                <ul class="space-y-3 text-sm text-zinc-400">
+                    <li class="flex gap-2"><span class="text-zinc-500">→</span> Plain <code
+                            class="text-accent-light bg-white/5 px-1 rounded text-xs">.md</code> files in <code
+                            class="text-accent-light bg-white/5 px-1 rounded text-xs">docs/</code></li>
+                    <li class="flex gap-2"><span class="text-zinc-500">→</span> Works with any Markdown viewer</li>
+                    <li class="flex gap-2"><span class="text-zinc-500">→</span> Git-friendly, diff-able</li>
+                    <li class="flex gap-2"><span class="text-zinc-500">→</span> Auto-generated README index</li>
+                </ul>
+            </div>
+            <div class="glass-card rounded-2xl p-8 border-accent/20">
+                <div class="flex items-center gap-3 mb-6">
+                    <div
+                        class="w-12 h-12 rounded-2xl bg-gradient-to-br from-accent/20 to-accent/5 flex items-center justify-center text-accent-light text-2xl">
+                        🦖</div>
+                    <div>
+                        <h3 class="font-heading font-bold text-lg">Docusaurus <span
+                                class="text-xs text-accent-light bg-accent/10 rounded-full px-2 py-0.5 ml-2">Premium</span>
+                        </h3>
+                        <p class="text-zinc-500 text-xs">Full static site, ready to deploy</p>
+                    </div>
+                </div>
+                <ul class="space-y-3 text-sm text-zinc-300">
+                    <li class="flex gap-2"><span class="text-accent-light">✦</span> Glassmorphism dark theme</li>
+                    <li class="flex gap-2"><span class="text-accent-light">✦</span> Sidebar navigation + search</li>
+                    <li class="flex gap-2"><span class="text-accent-light">✦</span> Mermaid diagrams with dark mode</li>
+                    <li class="flex gap-2"><span class="text-accent-light">✦</span> i18n multi-language support</li>
+                    <li class="flex gap-2"><span class="text-accent-light">✦</span> Deploy to Vercel/Netlify in 1 click
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </section>
+    <div class="glow-line max-w-4xl mx-auto"></div>
+
+    <!-- INSTALL CTA -->
+    <section id="start" class="max-w-5xl mx-auto px-4 py-24">
+        <div class="text-center mb-16 reveal">
+            <p class="text-accent-light text-sm font-semibold tracking-widest uppercase mb-3">Get Started</p>
+            <h2 class="font-heading font-bold text-3xl sm:text-4xl tracking-tight mb-4">60 seconds. Free. Forever.</h2>
+            <p class="text-zinc-500 text-base max-w-lg mx-auto">Just copy the folder. No dependencies. No credit card.
+            </p>
+        </div>
+        <div class="max-w-2xl mx-auto reveal">
+            <div class="terminal-window mb-8">
+                <div class="terminal-header">
+                    <div class="flex gap-1.5">
+                        <div class="terminal-dot" style="background:#ff5f56"></div>
+                        <div class="terminal-dot" style="background:#ffbd2e"></div>
+                        <div class="terminal-dot" style="background:#27c93f"></div>
+                    </div>
+                    <span class="text-zinc-500 text-xs ml-4 font-mono">terminal</span>
+                </div>
+                <div class="terminal-body text-zinc-300">
+                    <span class="text-zinc-600"># Clone the toolkit</span><br>
+                    <span class="text-emerald-400">$</span> <span class="text-white">git clone
+                        https://github.com/relukdev/DocKit Master.git</span><br><br>
+                    <span class="text-zinc-600"># Install to your AI agent</span><br>
+                    <span class="text-emerald-400">$</span> <span class="text-white">cp -r DocKit Master
+                        ~/.gemini/antigravity/skills/</span><br><br>
+                    <span class="text-zinc-600"># Generate your docs prompt</span><br>
+                    <span class="text-emerald-400">$</span> <span class="text-white">bash
+                        ~/.gemini/antigravity/skills/DocKit Master/scripts/doc-gen.sh</span><br><br>
+                    <span class="text-accent-light font-bold">✅ Done! Paste the prompt into your AI session.</span>
+                </div>
+            </div>
+
+            <div class="text-center">
+                <p class="text-zinc-500 text-sm mb-6">Then open your AI tool and try:</p>
+                <div class="bg-zinc-900/80 rounded-xl p-4 text-left max-w-md mx-auto mb-8">
+                    <p class="text-sm text-zinc-300 italic">"Generate complete documentation for my project — all types,
+                        docusaurus format, full scope"</p>
+                </div>
+                <p class="text-zinc-600 text-xs">If the AI mentions <span
+                        class="text-accent-light">analyze-codebase</span>, <span
+                        class="text-accent-light">content-guidelines</span>, <span
+                        class="text-accent-light">tech-docs</span> → it's working! 🎉</p>
+            </div>
+        </div>
+    </section>
+    <div class="glow-line max-w-4xl mx-auto"></div>
+
+    <!-- STATS -->
+    <section class="max-w-5xl mx-auto px-4 py-24">
+        <div class="text-center mb-16 reveal">
+            <p class="text-accent-light text-sm font-semibold tracking-widest uppercase mb-3">By the Numbers</p>
+            <h2 class="font-heading font-bold text-3xl sm:text-4xl tracking-tight">3 doc types. 6 UX Laws. Zero shallow
+                analysis.</h2>
+        </div>
+        <div class="flex flex-wrap justify-center gap-3 reveal">
+            <span class="persona-pill px-5 py-2.5 rounded-xl text-sm text-zinc-300 cursor-pointer">📐 Mermaid
+                Diagrams</span>
+            <span class="persona-pill px-5 py-2.5 rounded-xl text-sm text-zinc-300 cursor-pointer">🎨 Dark Mode
+                CSS</span>
+            <span class="persona-pill px-5 py-2.5 rounded-xl text-sm text-zinc-300 cursor-pointer">📱 MDX-Safe
+                Content</span>
+            <span class="persona-pill px-5 py-2.5 rounded-xl text-sm text-zinc-300 cursor-pointer">🧠 Progressive
+                Disclosure</span>
+            <span class="persona-pill px-5 py-2.5 rounded-xl text-sm text-zinc-300 cursor-pointer">🌐 Multi-Language
+                i18n</span>
+            <span class="persona-pill px-5 py-2.5 rounded-xl text-sm text-zinc-300 cursor-pointer">📝 YAML
+                Frontmatter</span>
+            <span class="persona-pill px-5 py-2.5 rounded-xl text-sm text-zinc-300 cursor-pointer">🔍 Code
+                Citations</span>
+            <span class="persona-pill px-5 py-2.5 rounded-xl text-sm text-zinc-300 cursor-pointer">⚡ Deploy-Ready</span>
+            <span class="persona-pill px-5 py-2.5 rounded-xl text-sm text-zinc-300 cursor-pointer">♿ WCAG 2.1 AA</span>
+            <span class="persona-pill px-5 py-2.5 rounded-xl text-sm text-zinc-300 cursor-pointer">🦖 Docusaurus
+                Premium</span>
+        </div>
+    </section>
+    <div class="glow-line max-w-4xl mx-auto"></div>
+
+    <!-- FINAL CTA -->
+    <section class="max-w-4xl mx-auto px-4 py-24 text-center">
+        <div class="reveal">
+            <h2 class="font-heading font-bold text-3xl sm:text-4xl tracking-tight mb-4">Know someone building a
+                product?<br>Send them this.</h2>
+            <p class="text-zinc-500 text-base mb-8 max-w-lg mx-auto">Every codebase deserves great documentation.
+                DocKit Master makes it automatic.</p>
+            <div class="flex flex-col sm:flex-row items-center justify-center gap-4">
+                <a href="#start"
+                    class="cta-primary text-white font-semibold px-10 py-4 rounded-2xl transition-all cursor-pointer glow-purple text-base">✦
+                    Get DocKit Master Free</a>
+                <a href="https://github.com/relukdev/DocKit Master" target="_blank" rel="noopener"
+                    class="bg-white/5 hover:bg-white/10 text-zinc-300 font-medium px-8 py-4 rounded-2xl border border-white/10 transition-all cursor-pointer text-base">View
+                    on GitHub</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- FOOTER -->
+    <footer class="border-t border-white/5 px-4 py-12">
+        <div class="max-w-5xl mx-auto flex flex-col md:flex-row items-center justify-between gap-6">
+            <div class="flex items-center gap-3">
+                <div
+                    class="w-8 h-8 rounded-xl bg-gradient-to-br from-accent to-magic flex items-center justify-center text-sm font-bold text-white">
+                    📚</div>
+                <span class="font-heading font-bold">DocKit Master</span>
+            </div>
+            <div class="flex items-center gap-6 text-sm text-zinc-500">
+                <a href="README.md" class="hover:text-white transition-colors cursor-pointer">README</a>
+                <a href="docusaurus-site/" class="hover:text-white transition-colors cursor-pointer">Docs Site</a>
+                <a href="https://github.com/relukdev/DocKit Master" target="_blank"
+                    class="hover:text-white transition-colors cursor-pointer">GitHub</a>
+            </div>
+            <p class="text-zinc-600 text-xs">Your code dreams it. AI documents it. DocKit Master makes it beautiful.</p>
+        </div>
+    </footer>
+
+    <script>
+        // Mobile menu
+        function toggleMobileMenu() {
+            document.getElementById('mobileMenu').classList.toggle('open');
+        }
+        function closeMobileMenu() {
+            document.getElementById('mobileMenu').classList.remove('open');
+        }
+
+        // Scroll reveal
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('visible');
+                }
+            });
+        }, { threshold: 0.1, rootMargin: '0px 0px -50px 0px' });
+
+        document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+
+        // Smooth scroll for anchor links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    e.preventDefault();
+                    target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                }
+            });
+        });
+    </script>
+
+</body>
+
+</html>

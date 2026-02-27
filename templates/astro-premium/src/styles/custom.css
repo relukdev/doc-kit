@@ -1,0 +1,604 @@
+/* ============================================================
+   DocKit Master — UX Master Edition
+   Redesigned by MasterDesign Agent
+   
+   Design Principles:
+   - Fitts's Law: Touch targets ≥ 44px on mobile
+   - Doherty Threshold: Smooth 150ms transitions
+   - WCAG 2.1 AA: Contrast ratios, focus-visible rings
+   - Miller's Law: Visual chunking via spacing & borders
+   - Typography: Compact, information-dense, professional
+   ============================================================ */
+
+/* --- Google Fonts Import --- */
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap');
+
+/* ============================================================
+   1. DESIGN TOKENS
+   ============================================================ */
+:root {
+    /* Primary palette — Purple accent (refined) */
+    --sl-color-accent-low: #1a1440;
+    --sl-color-accent: #7c6afc;
+    --sl-color-accent-high: #c9bfff;
+
+    /* Typography — Compact, professional */
+    --sl-font: 'Inter', system-ui, -apple-system, 'Segoe UI', sans-serif;
+    --sl-font-mono: 'JetBrains Mono', 'Fira Code', monospace;
+    --sl-text-base: 0.875rem;
+    --sl-line-height: 1.7;
+    --sl-line-height-headings: 1.25;
+
+    /* Spacing — Tight 4px grid */
+    --doc-spacing-xs: 0.125rem;
+    --doc-spacing-sm: 0.375rem;
+    --doc-spacing-md: 0.75rem;
+    --doc-spacing-lg: 1.25rem;
+    --doc-spacing-xl: 1.75rem;
+    --doc-spacing-2xl: 2.5rem;
+
+    /* Borders — Sharp, minimal */
+    --doc-radius-sm: 4px;
+    --doc-radius-md: 8px;
+    --doc-radius-lg: 12px;
+
+    /* Shadows — Subtle */
+    --doc-shadow-sm: 0 1px 2px rgba(0, 0, 0, 0.05);
+    --doc-shadow-md: 0 2px 8px rgba(0, 0, 0, 0.08);
+    --doc-shadow-lg: 0 4px 16px rgba(0, 0, 0, 0.1);
+    --doc-shadow-glow: 0 0 16px rgba(124, 106, 252, 0.12);
+}
+
+/* ============================================================
+   2. DARK MODE — Deep, refined dark theme
+   ============================================================ */
+:root[data-theme='dark'] {
+    --sl-color-bg: #0b0d11;
+    --sl-color-bg-nav: rgba(14, 17, 23, 0.88);
+    --sl-color-bg-sidebar: #0f1217;
+    --sl-color-hairline-shade: #1a1e26;
+    --sl-color-hairline-light: #252a33;
+    --sl-color-text: #d4d8e0;
+    --sl-color-text-accent: #9387fd;
+    --sl-color-white: #e8eaef;
+    --sl-color-gray-1: #bcc1ca;
+    --sl-color-gray-2: #9ca2ad;
+    --sl-color-gray-3: #7a8190;
+    --sl-color-gray-4: #5c6370;
+    --sl-color-gray-5: #3e4550;
+    --sl-color-gray-6: #252a33;
+    --sl-color-gray-7: #1a1e26;
+
+    --sl-color-accent-low: #15112e;
+    --sl-color-accent: #9387fd;
+    --sl-color-accent-high: #c9bfff;
+
+    --doc-shadow-sm: 0 1px 2px rgba(0, 0, 0, 0.25);
+    --doc-shadow-md: 0 2px 8px rgba(0, 0, 0, 0.35);
+    --doc-shadow-lg: 0 4px 16px rgba(0, 0, 0, 0.45);
+    --doc-shadow-glow: 0 0 20px rgba(147, 135, 253, 0.15);
+}
+
+/* Light mode */
+:root[data-theme='light'] {
+    --sl-color-accent-low: #f0edff;
+    --sl-color-accent: #6d5dfc;
+    --sl-color-accent-high: #3520a0;
+}
+
+/* ============================================================
+   3. GLOBAL BASE — Smaller, tighter default font
+   ============================================================ */
+html {
+    font-size: 15px;
+}
+
+body {
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    text-rendering: optimizeLegibility;
+}
+
+/* ============================================================
+   4. NAVBAR — Clean glassmorphism
+   ============================================================ */
+header.header {
+    backdrop-filter: saturate(160%) blur(14px);
+    -webkit-backdrop-filter: saturate(160%) blur(14px);
+    border-bottom: 1px solid var(--sl-color-hairline-shade);
+    box-shadow: none;
+    transition: background-color 150ms ease;
+}
+
+/* Site title — compact */
+.site-title {
+    font-weight: 700;
+    font-size: 0.9rem;
+    letter-spacing: -0.01em;
+}
+
+/* Nav links — Fitts's Law touch targets */
+nav a {
+    min-height: 40px;
+    display: inline-flex;
+    align-items: center;
+    border-radius: var(--doc-radius-sm);
+    transition: color 150ms ease, background-color 150ms ease;
+    font-size: 0.8rem;
+}
+
+/* Search input — refined */
+site-search button[data-open-modal] {
+    font-size: 0.8rem;
+}
+
+/* ============================================================
+   5. SIDEBAR — Minimal, compact
+   ============================================================ */
+starlight-menu-button button {
+    min-width: 40px;
+    min-height: 40px;
+}
+
+nav.sidebar {
+    font-size: 0.8rem;
+}
+
+nav.sidebar a {
+    border-radius: var(--doc-radius-sm);
+    transition: all 150ms ease;
+    font-size: 0.8rem;
+    min-height: 32px;
+    padding-top: 0.25rem;
+    padding-bottom: 0.25rem;
+    line-height: 1.4;
+}
+
+nav.sidebar a[aria-current='page'] {
+    font-weight: 600;
+    border-left: 2px solid var(--sl-color-accent);
+    padding-left: calc(var(--doc-spacing-md) - 2px);
+    background: var(--sl-color-accent-low);
+}
+
+nav.sidebar details>summary {
+    border-radius: var(--doc-radius-sm);
+    transition: background-color 150ms ease;
+    font-size: 0.78rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.04em;
+    color: var(--sl-color-gray-3);
+    min-height: 32px;
+}
+
+nav.sidebar details>summary:hover {
+    background-color: var(--sl-color-accent-low);
+    color: var(--sl-color-accent);
+}
+
+/* Sidebar top-level group labels */
+.sidebar-content .top-level>li>details>summary,
+nav.sidebar>ul>li>details>summary {
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    font-size: 0.7rem;
+    font-weight: 700;
+    color: var(--sl-color-gray-4);
+    margin-top: 0.75rem;
+}
+
+/* ============================================================
+   6. CONTENT — Information-dense, readable
+   ============================================================ */
+
+/* Content area max width */
+.sl-markdown-content {
+    font-size: 0.875rem;
+    line-height: 1.7;
+}
+
+/* Headings — Compact, sharp */
+.sl-markdown-content h1 {
+    font-size: 1.5rem;
+    letter-spacing: -0.025em;
+    margin-bottom: var(--doc-spacing-lg);
+    padding-bottom: var(--doc-spacing-sm);
+    border-bottom: 1px solid var(--sl-color-hairline-shade);
+    font-weight: 700;
+    line-height: 1.2;
+}
+
+.sl-markdown-content h2 {
+    font-size: 1.15rem;
+    letter-spacing: -0.02em;
+    margin-top: var(--doc-spacing-2xl);
+    margin-bottom: var(--doc-spacing-md);
+    font-weight: 700;
+    line-height: 1.25;
+}
+
+.sl-markdown-content h3 {
+    font-size: 0.95rem;
+    letter-spacing: -0.01em;
+    margin-top: var(--doc-spacing-xl);
+    margin-bottom: var(--doc-spacing-sm);
+    font-weight: 600;
+    line-height: 1.3;
+}
+
+.sl-markdown-content h4 {
+    font-size: 0.85rem;
+    font-weight: 600;
+    margin-top: var(--doc-spacing-lg);
+    margin-bottom: var(--doc-spacing-xs);
+    line-height: 1.35;
+}
+
+/* Paragraphs — Optimal reading width */
+.sl-markdown-content p {
+    max-width: 68ch;
+    line-height: 1.7;
+    font-size: 0.875rem;
+    color: var(--sl-color-gray-1);
+}
+
+/* Lists — Tighter spacing */
+.sl-markdown-content ul,
+.sl-markdown-content ol {
+    font-size: 0.875rem;
+    line-height: 1.65;
+}
+
+.sl-markdown-content li {
+    margin-bottom: 0.15rem;
+}
+
+/* Strong text */
+.sl-markdown-content strong {
+    font-weight: 600;
+    color: var(--sl-color-white);
+}
+
+/* Links */
+.sl-markdown-content a {
+    text-decoration: none;
+    border-bottom: 1px solid transparent;
+    transition: border-color 150ms ease, color 150ms ease;
+}
+
+.sl-markdown-content a:hover {
+    border-bottom-color: var(--sl-color-accent);
+}
+
+/* ============================================================
+   7. TABLES — Striped, compact, refined
+   ============================================================ */
+.sl-markdown-content table {
+    display: table;
+    width: 100%;
+    border-collapse: separate;
+    border-spacing: 0;
+    border-radius: var(--doc-radius-md);
+    overflow: hidden;
+    border: 1px solid var(--sl-color-hairline-shade);
+    font-size: 0.8rem;
+    line-height: 1.5;
+}
+
+.sl-markdown-content th {
+    background-color: var(--sl-color-gray-7, var(--sl-color-bg-sidebar));
+    font-weight: 600;
+    text-transform: uppercase;
+    font-size: 0.68rem;
+    letter-spacing: 0.06em;
+    padding: 0.4rem 0.65rem;
+    color: var(--sl-color-gray-3);
+    white-space: nowrap;
+}
+
+.sl-markdown-content td {
+    padding: 0.35rem 0.65rem;
+    border-top: 1px solid var(--sl-color-hairline-shade);
+    font-size: 0.8rem;
+}
+
+/* Zebra striping */
+.sl-markdown-content tbody tr:nth-child(even) {
+    background-color: rgba(255, 255, 255, 0.015);
+}
+
+:root[data-theme='dark'] .sl-markdown-content tbody tr:nth-child(even) {
+    background-color: rgba(255, 255, 255, 0.02);
+}
+
+/* Hover — Doherty Threshold */
+.sl-markdown-content tr {
+    transition: background-color 150ms ease;
+}
+
+.sl-markdown-content tbody tr:hover {
+    background-color: var(--sl-color-accent-low);
+}
+
+/* ============================================================
+   8. CODE BLOCKS — Compact, refined
+   ============================================================ */
+.sl-markdown-content pre {
+    border-radius: var(--doc-radius-md) !important;
+    border: 1px solid var(--sl-color-hairline-shade);
+    font-size: 0.78rem;
+    line-height: 1.6;
+    padding: 0.75rem 1rem !important;
+}
+
+.sl-markdown-content :not(pre)>code {
+    border-radius: var(--doc-radius-sm);
+    padding: 0.1em 0.35em;
+    font-size: 0.82em;
+    background-color: var(--sl-color-accent-low);
+    color: var(--sl-color-accent-high);
+    font-weight: 500;
+}
+
+/* ============================================================
+   9. ASIDES (Admonitions) — Minimal, integrated
+   ============================================================ */
+.starlight-aside {
+    border-radius: var(--doc-radius-md);
+    box-shadow: none;
+    font-size: 0.825rem;
+    padding: 0.65rem 0.85rem;
+    margin: 0.75rem 0;
+}
+
+.starlight-aside--title {
+    font-weight: 600;
+    font-size: 0.78rem;
+    text-transform: uppercase;
+    letter-spacing: 0.03em;
+}
+
+/* ============================================================
+   10. CARDS & LINK CARDS — Subtle hover
+   ============================================================ */
+.card {
+    border-radius: var(--doc-radius-md);
+    border: 1px solid var(--sl-color-hairline-shade);
+    background: var(--sl-color-bg-sidebar, var(--sl-color-gray-7));
+    transition: all 200ms cubic-bezier(0.4, 0, 0.2, 1);
+    overflow: hidden;
+}
+
+.card:hover {
+    transform: translateY(-2px);
+    border-color: var(--sl-color-accent);
+    box-shadow: var(--doc-shadow-glow);
+}
+
+.sl-link-card {
+    border-radius: var(--doc-radius-md);
+    transition: all 150ms ease;
+    font-size: 0.825rem;
+}
+
+.sl-link-card:hover {
+    transform: translateY(-1px);
+    box-shadow: var(--doc-shadow-glow);
+}
+
+/* ============================================================
+   11. TABLE OF CONTENTS — Right sidebar, refined
+   ============================================================ */
+starlight-toc a {
+    font-size: 0.75rem;
+    transition: color 150ms ease;
+    line-height: 1.5;
+}
+
+starlight-toc a[aria-current='true'] {
+    font-weight: 600;
+    color: var(--sl-color-accent);
+}
+
+/* "On this page" label */
+starlight-toc h2,
+.right-sidebar-panel h2 {
+    font-size: 0.68rem;
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+    font-weight: 700;
+    color: var(--sl-color-gray-4);
+}
+
+/* ============================================================
+   12. MERMAID — Dark mode compatible
+   ============================================================ */
+.mermaid {
+    background: var(--sl-color-bg-sidebar, var(--sl-color-gray-7));
+    border-radius: var(--doc-radius-md);
+    padding: var(--doc-spacing-md);
+    border: 1px solid var(--sl-color-hairline-shade);
+    font-size: 0.8rem;
+}
+
+:root[data-theme='dark'] .mermaid .node rect,
+:root[data-theme='dark'] .mermaid .node circle,
+:root[data-theme='dark'] .mermaid .node polygon {
+    fill: #1a1e26 !important;
+    stroke: #7c6afc !important;
+}
+
+:root[data-theme='dark'] .mermaid text {
+    fill: #d4d8e0 !important;
+    font-size: 0.75rem !important;
+}
+
+:root[data-theme='dark'] .mermaid .edgeLabel {
+    background-color: #0f1217 !important;
+    color: #d4d8e0 !important;
+}
+
+:root[data-theme='dark'] .mermaid .flowchart-link {
+    stroke: #5c6370 !important;
+}
+
+/* ============================================================
+   13. ACCESSIBILITY — WCAG 2.1 AA
+   ============================================================ */
+
+/* Focus-visible for keyboard navigation */
+a:focus-visible,
+button:focus-visible,
+input:focus-visible,
+[tabindex]:focus-visible {
+    outline: 2px solid var(--sl-color-accent);
+    outline-offset: 2px;
+    border-radius: var(--doc-radius-sm);
+}
+
+/* Reduced motion */
+@media (prefers-reduced-motion: reduce) {
+
+    *,
+    *::before,
+    *::after {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+    }
+}
+
+/* ============================================================
+   14. RESPONSIVE — Mobile optimized
+   ============================================================ */
+@media (max-width: 72rem) {
+    html {
+        font-size: 14px;
+    }
+
+    .sl-markdown-content h1 {
+        font-size: 1.35rem;
+    }
+
+    .sl-markdown-content h2 {
+        font-size: 1.05rem;
+    }
+
+    .sl-markdown-content h3 {
+        font-size: 0.9rem;
+    }
+
+    /* Table scroll on mobile */
+    .sl-markdown-content table {
+        display: block;
+        overflow-x: auto;
+        -webkit-overflow-scrolling: touch;
+    }
+}
+
+/* ============================================================
+   15. UTILITY CLASSES
+   ============================================================ */
+
+/* Badge */
+.badge--premium {
+    background-color: rgba(124, 106, 252, 0.08);
+    color: var(--sl-color-accent);
+    border: 1px solid rgba(147, 135, 253, 0.2);
+    padding: 0.1rem 0.4rem;
+    border-radius: 50px;
+    font-weight: 600;
+    font-size: 0.68rem;
+    letter-spacing: 0.02em;
+}
+
+/* Quick Reference box */
+.quick-ref {
+    background: var(--sl-color-bg-sidebar, var(--sl-color-gray-7));
+    border: 1px solid var(--sl-color-hairline-shade);
+    border-left: 3px solid var(--sl-color-accent);
+    border-radius: var(--doc-radius-md);
+    padding: var(--doc-spacing-md);
+    margin-bottom: var(--doc-spacing-lg);
+    font-size: 0.825rem;
+}
+
+/* Blockquotes — Quick Reference style */
+.sl-markdown-content blockquote {
+    font-size: 0.825rem;
+    line-height: 1.6;
+    border-left-width: 3px;
+    padding: 0.5rem 0.85rem;
+    margin: 0.5rem 0 1rem;
+}
+
+.sl-markdown-content blockquote p {
+    font-size: 0.825rem;
+    margin: 0.15rem 0;
+}
+
+/* Details/Accordion — Progressive disclosure */
+.sl-markdown-content details {
+    border: 1px solid var(--sl-color-hairline-shade);
+    border-radius: var(--doc-radius-md);
+    padding: 0.5rem 0.75rem;
+    margin-bottom: 0.5rem;
+    transition: all 150ms ease;
+    font-size: 0.825rem;
+}
+
+.sl-markdown-content details[open] {
+    border-color: var(--sl-color-accent);
+    box-shadow: var(--doc-shadow-sm);
+}
+
+.sl-markdown-content details summary {
+    cursor: pointer;
+    font-weight: 600;
+    font-size: 0.825rem;
+    padding: 0.15rem 0;
+    min-height: 36px;
+    display: flex;
+    align-items: center;
+}
+
+.sl-markdown-content details summary:hover {
+    color: var(--sl-color-accent);
+}
+
+/* ============================================================
+   16. HERO / PAGE TITLE — Refined
+   ============================================================ */
+.content-panel+.content-panel .sl-markdown-content>h1:first-child,
+[data-page-title] {
+    font-size: 1.5rem;
+    letter-spacing: -0.025em;
+}
+
+/* Page header area */
+.main-pane h1.heading {
+    font-size: 1.5rem;
+    letter-spacing: -0.025em;
+}
+
+/* ============================================================
+   17. FOOTER — Clean
+   ============================================================ */
+footer {
+    border-top: 1px solid var(--sl-color-hairline-shade);
+    font-size: 0.75rem;
+}
+
+/* Pagination links */
+.pagination-links a {
+    font-size: 0.8rem;
+}
+
+/* ============================================================
+   18. LAST UPDATED — Subtle
+   ============================================================ */
+.meta {
+    font-size: 0.7rem;
+    color: var(--sl-color-gray-4);
+}
