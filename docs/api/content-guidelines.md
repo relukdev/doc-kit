@@ -1,103 +1,58 @@
 ---
-title: "Content Guidelines Reference"
-description: "Tham chiếu chi tiết quy tắc nội dung: UX laws, Markdown rules, frontmatter schema, Mermaid palette, SEO fields"
-keywords: ["content guidelines", "UX laws", "Markdown rules", "DocKit Master"]
+title: "content-guidelines API Reference"
+description: "API reference for the content-guidelines skill — formatting rules, UX laws, Mermaid colors, and Astro Starlight conventions"
+keywords: ["API", "content-guidelines", "formatting rules", "Mermaid"]
 robots: "index, follow"
 sidebar:
-  order: 4
+  order: 3
 ---
 
-# Content Guidelines
+# content-guidelines API
 
-> **Tham Khảo Nhanh**
-> - **File**: `skills/content-guidelines.md` (275 dòng)
-> - **Vai trò**: Quy tắc chất lượng bắt buộc cho mọi nội dung
-> - **Áp dụng**: Step 3 — trước khi generate bất kỳ docs nào
-> - **Kèm theo**: `content-writing.md`, `seo-checklist.md`, `llm-optimization.md`
+> **Quick Reference**
+> - **File**: `skills/content-guidelines.md` (276 lines)
+> - **Type**: Quality rules (read-only, no output)
+> - **Dependencies**: None
+> - **Applied To**: All generated documentation
 
-## Mô Tả
+## Rules Summary
 
-Content Guidelines định nghĩa tất cả quy tắc mà mọi nội dung DocKit Master phải tuân theo. Bao gồm UX laws, Markdown formatting, frontmatter schema, Mermaid palette, và writing style.
+### UX Laws Applied
 
-## UX Laws Áp Dụng
+| Law | Rule | Application |
+|-----|------|-------------|
+| Hick's Law | Max 7 items | TOC top level, sidebar categories |
+| Miller's Law | Chunk 5-9 | Table row groups, section breaks |
+| Doherty Threshold | Scan-first | Lead with summary, use tables |
+| Jakob's Law | Standard layout | Sidebar left, content center, TOC right |
 
-| Luật | Quy tắc | Nguồn |
+### Formatting Rules
+
+| Rule | Correct | Wrong |
 |------|---------|-------|
-| **Hick's Law** | ≤7 items TOC top level, ≤2 CTAs per page | `content-guidelines.md:19-22` |
-| **Miller's Law** | Chunk tables 5-9 rows, break \>500 line pages | `content-guidelines.md:26-29` |
-| **Doherty Threshold** | Lead with summary, tables \> paragraphs | `content-guidelines.md:33-36` |
-| **Jakob's Law** | Standard layouts: sidebar + content + TOC | `content-guidelines.md:40-42` |
+| Filenames | `kebab-case.md` | `_Under_Score.md` |
+| Frontmatter | Required (title, description) | Missing |
+| Links | `[text](./page)` without .md | `[text](./page.md)` |
+| Admonitions | `:::tip`, `:::note` | Custom HTML |
 
-## Markdown Rules (Astro Starlight)
+### Mermaid Color Palette
 
-### Khác biệt với Docusaurus
+| Element | Color | Hex |
+|---------|-------|-----|
+| Node fill | Dark gray | `#232221` |
+| Node border | Blue | `#60A5FA` |
+| Node text | Light gray | `#E8E5DF` |
+| Background | Near-black | `#1C1B1A` |
+| Success | Green | `#3fb950` |
+| Warning | Gold | `#d29922` |
+| Danger | Red | `#f85149` |
 
-| Vấn đề | Docusaurus MDX | Astro Starlight |
-|--------|---------------|-----------------|
-| `<` trong text | Phải escape: `\<` | **Không cần** ✅ |
-| `{` `}` trong text | Phải escape | **Không cần** ✅ |
-| HTML tags | Hạn chế | **Hoạt động bình thường** ✅ |
-| Sidebar | Thủ công (`sidebars.ts`) | **Auto-generated** ✅ |
+### Internal Linking
 
-### Quy tắc Filename
+Every page must include at least 2 internal links to other documentation pages. Use descriptive anchor text (never "click here").
 
-| Quy tắc | ✅ Đúng | ❌ Sai |
-|---------|---------|-------|
-| kebab-case | `getting-started.md` | `Getting_Started.md` |
-| No underscore prefix | `analysis.md` | `_analysis.md` |
-| Lowercase only | `api-reference.md` | `API_Reference.md` |
+## Related
 
-### YAML Frontmatter Bắt Buộc
-
-Mọi `.md` file phải có:
-
-```yaml
----
-title: "Tiêu Đề (50-60 chars)"
-description: "Mô tả SEO (150-160 chars)"
----
-```
-
-## Admonition Types
-
-```markdown
-:::tip[Title]
-Helpful hint
-:::
-
-:::note
-Background info
-:::
-
-:::caution[Breaking Change]
-Warning
-:::
-
-:::danger[Security]
-Critical warning
-:::
-```
-
-## Mermaid Palette
-
-| Element | Color |
-|---------|-------|
-| Node fill | `#2d333b` |
-| Node border | `#6d5dfc` |
-| Node text | `#e6edf3` |
-| Success | `#3fb950` |
-| Warning | `#d29922` |
-| Danger | `#f85149` |
-
-## Internal Linking
-
-Mọi trang phải có **≥2 internal links** trong:
-- Quick Reference box
-- Body text (ngữ cảnh)
-- Related section (cuối trang)
-
-**Source:** `skills/content-guidelines.md:1-275`
-
----
-
-> Xem thêm: [Orchestrator](./orchestrator) · [Analyzer](./analyze-codebase)
+- [analyze-codebase API](./analyze-codebase)
+- [Skill API Overview](./index)
+- [Data Flow](../data-flow)

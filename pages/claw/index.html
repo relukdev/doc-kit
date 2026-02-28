@@ -1,0 +1,442 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DocKit Master on OpenClaw & ZeroClaw — Chat to Document</title>
+    <meta name="description"
+        content="Install DocKit Master on OpenClaw and ZeroClaw. Generate complete documentation, design systems, and code — all through chat or CLI.">
+    <link rel="icon"
+        href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><rect rx='20' width='100' height='100' fill='%236d5dfc'/><text x='50' y='72' text-anchor='middle' font-size='60' fill='white'>📚</text></svg>">
+    <meta property="og:type" content="website">
+    <meta property="og:title" content="DocKit Master on OpenClaw & ZeroClaw">
+    <meta property="og:description"
+        content="Chat to document. Generate complete docs, design systems, and code with AI agent platforms.">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap"
+        rel="stylesheet">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        heading: ['"Plus Jakarta Sans"', 'system-ui', 'sans-serif'],
+                        body: ['"Inter"', 'system-ui', 'sans-serif'],
+                        mono: ['"JetBrains Mono"', 'ui-monospace', 'monospace']
+                    },
+                    colors: {
+                        surface: { 50: '#fafafa', 100: '#18181b', 200: '#111114', 300: '#0c0c0f', 400: '#09090b' },
+                        accent: { DEFAULT: '#6d5dfc', light: '#8a7efd', dark: '#5b4cd9', soft: '#ede9fe' },
+                        magic: { DEFAULT: '#ec4899', light: '#f472b6', dark: '#db2777' },
+                        success: { DEFAULT: '#10b981', light: '#34d399' },
+                        warn: { DEFAULT: '#f59e0b', light: '#fbbf24' },
+                        claw: { DEFAULT: '#0ea5e9', light: '#38bdf8' },
+                        zero: { DEFAULT: '#f97316', light: '#fb923c' }
+                    }
+                }
+            }
+        }
+    </script>
+    <link rel="stylesheet" href="../../css/styles.css">
+    <link rel="stylesheet" href="../css/sub-page.css">
+    <link rel="stylesheet" href="../css/claw.css">
+</head>
+
+<body class="antialiased">
+
+    <!-- NAVBAR -->
+    <nav
+        class="nav-glass fixed top-3 left-3 right-3 sm:top-4 sm:left-4 sm:right-4 z-50 rounded-2xl px-4 py-2.5 sm:px-6 sm:py-3 flex items-center justify-between max-w-6xl mx-auto">
+        <a href="../../index.html" class="flex items-center gap-2.5 group">
+            <div
+                class="w-8 h-8 rounded-xl bg-gradient-to-br from-accent to-magic flex items-center justify-center text-sm font-bold text-white shrink-0">
+                📚</div>
+            <span class="font-heading font-bold text-base sm:text-lg tracking-tight">DocKit Master</span>
+        </a>
+        <div class="hidden md:flex items-center gap-6 text-sm text-zinc-400">
+            <a href="../../index.html" data-i18n="nav.home" class="hover:text-white transition-colors">Home</a>
+            <a href="../../index.html#features" data-i18n="nav.features"
+                class="hover:text-white transition-colors">Features</a>
+            <a href="../../docs/" data-i18n="nav.docs" class="hover:text-white transition-colors">Docs Site</a>
+            <a href="#" class="text-white transition-colors" data-i18n="nav.claw">Claw</a>
+            <div class="lang-switcher-mini">
+                <button data-lang-btn="en" onclick="I18n.switchTo('en')"
+                    class="lang-btn-mini text-white bg-white/10">EN</button>
+                <button data-lang-btn="vi" onclick="I18n.switchTo('vi')"
+                    class="lang-btn-mini text-zinc-500 hover:text-white">VI</button>
+                <button data-lang-btn="ru" onclick="I18n.switchTo('ru')"
+                    class="lang-btn-mini text-zinc-500 hover:text-white">RU</button>
+                <button data-lang-btn="zh" onclick="I18n.switchTo('zh')"
+                    class="lang-btn-mini text-zinc-500 hover:text-white">ZH</button>
+            </div>
+        </div>
+        <div class="flex items-center gap-1.5 sm:gap-3">
+            <a href="https://github.com/relukdev/doc-kit" target="_blank" rel="noopener"
+                class="hidden lg:inline-flex items-center justify-center gap-2 bg-white/5 hover:bg-white/10 text-zinc-300 text-sm font-medium px-4 h-9 rounded-xl border border-white/10 transition-all cursor-pointer">⭐
+                Star</a>
+            <button
+                class="md:hidden bg-white/5 border border-white/10 w-9 h-9 flex items-center justify-center rounded-xl shrink-0"
+                onclick="toggleMobileMenu()">
+                <svg class="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16m-7 6h7">
+                    </path>
+                </svg>
+            </button>
+        </div>
+    </nav>
+
+    <!-- MOBILE MENU -->
+    <div id="mobileMenu"
+        class="md:hidden mobile-menu fixed top-20 left-4 right-4 z-40 bg-zinc-900/95 backdrop-blur-xl border border-white/10 rounded-2xl px-6 py-4 flex flex-col gap-4 text-sm font-medium shadow-2xl">
+        <a href="../../index.html" onclick="closeMobileMenu()" class="text-zinc-300 hover:text-white py-2"
+            data-i18n="nav.home">Home</a>
+        <a href="../../index.html#features" onclick="closeMobileMenu()" class="text-zinc-300 hover:text-white py-2"
+            data-i18n="nav.features">Features</a>
+        <a href="../../docs/" onclick="closeMobileMenu()" class="text-zinc-300 hover:text-white py-2"
+            data-i18n="nav.docs">Docs Site</a>
+        <a href="#" onclick="closeMobileMenu()" class="text-white py-2" data-i18n="nav.claw">Claw</a>
+        <div class="lang-switcher-mini justify-center">
+            <button data-lang-btn="en" onclick="I18n.switchTo('en')"
+                class="lang-btn-mini text-white bg-white/10">EN</button>
+            <button data-lang-btn="vi" onclick="I18n.switchTo('vi')" class="lang-btn-mini text-zinc-500">VI</button>
+            <button data-lang-btn="ru" onclick="I18n.switchTo('ru')" class="lang-btn-mini text-zinc-500">RU</button>
+            <button data-lang-btn="zh" onclick="I18n.switchTo('zh')" class="lang-btn-mini text-zinc-500">ZH</button>
+        </div>
+    </div>
+
+    <!-- HERO -->
+    <section class="relative min-h-[60vh] flex items-center justify-center px-4 pt-24 pb-16 overflow-hidden">
+        <div class="hero-bg"></div>
+        <div class="grid-pattern"></div>
+        <div class="relative z-10 max-w-4xl mx-auto text-center">
+            <div class="flex items-center justify-center gap-4 mb-6">
+                <!-- OpenClaw -->
+                <div
+                    class="w-16 h-16 sm:w-20 sm:h-20 rounded-3xl bg-gradient-to-br from-claw/20 to-claw-light/10 flex items-center justify-center text-4xl sm:text-5xl border border-claw/20 shadow-[0_0_30px_rgba(14,165,233,0.15)]">
+                    🐾</div>
+                <div class="text-zinc-600 font-bold text-xl">&</div>
+                <!-- ZeroClaw -->
+                <div
+                    class="w-16 h-16 sm:w-20 sm:h-20 rounded-3xl bg-gradient-to-br from-zero/20 to-zero-light/10 flex items-center justify-center text-4xl sm:text-5xl border border-zero/20 shadow-[0_0_30px_rgba(249,115,22,0.15)]">
+                    ⚡</div>
+            </div>
+            <div class="inline-flex items-center gap-2 px-4 py-1.5 rounded-full text-xs font-semibold bg-white/5 border border-white/10 text-zinc-300 mb-4 tracking-wide uppercase"
+                data-i18n="hero.badge">
+                AI Agent Platforms</div>
+            <h1 class="font-heading font-extrabold text-4xl sm:text-5xl md:text-6xl tracking-tight leading-[1.05] mb-6">
+                <span
+                    class="bg-gradient-to-r from-claw-light via-white to-zero-light bg-clip-text text-transparent">OpenClaw
+                    & ZeroClaw</span><br>
+                <span class="text-white">Documentation Intelligence.</span>
+            </h1>
+            <p class="text-zinc-400 text-lg sm:text-xl max-w-2xl mx-auto leading-relaxed" data-i18n="hero.subtitle">
+                Two powerful AI agent ecosystems. One master documentation skill. From Telegram bots to Rust-native
+                speed, DocKit Master integrates flawlessly with the tools you already use.
+            </p>
+        </div>
+    </section>
+    <div class="glow-line max-w-4xl mx-auto"></div>
+
+    <!-- COMPARISON -->
+    <section class="max-w-5xl mx-auto px-4 py-16 reveal">
+        <div class="grid md:grid-cols-2 gap-6">
+            <!-- OpenClaw Card -->
+            <div
+                class="glass-card rounded-2xl p-8 border-t-4 border-t-claw/50 relative overflow-hidden group hover:-translate-y-1 transition-transform duration-300">
+                <div
+                    class="absolute top-0 right-0 w-32 h-32 bg-claw/10 rounded-full blur-3xl -mr-10 -mt-10 transition-opacity group-hover:opacity-100 opacity-50">
+                </div>
+                <div class="flex items-center gap-4 mb-6">
+                    <div
+                        class="w-12 h-12 rounded-xl bg-claw/10 flex items-center justify-center text-2xl border border-claw/20 text-claw">
+                        🐾</div>
+                    <div>
+                        <h2 class="font-heading font-bold text-2xl text-white" data-i18n="openclaw.name">OpenClaw</h2>
+                        <p class="text-claw-light text-sm" data-i18n="openclaw.tagline">The Telegram Bot Ecosystem</p>
+                    </div>
+                </div>
+                <p class="text-zinc-400 text-sm mb-6 leading-relaxed" data-i18n="openclaw.desc">
+                    Designed for makers who love chatting with their infrastructure. Generate complete documentation
+                    through Telegram — no terminal needed.
+                </p>
+                <ul id="openclawFeatures" class="space-y-3 mb-8"></ul>
+                <a href="#openclaw"
+                    class="inline-flex items-center justify-center w-full bg-claw/10 hover:bg-claw/20 text-claw-light font-medium py-2.5 rounded-xl transition-colors border border-claw/10"
+                    data-i18n="openclaw.viewGuide">View OpenClaw Guide</a>
+            </div>
+
+            <!-- ZeroClaw Card -->
+            <div
+                class="glass-card rounded-2xl p-8 border-t-4 border-t-zero/50 relative overflow-hidden group hover:-translate-y-1 transition-transform duration-300">
+                <div
+                    class="absolute top-0 right-0 w-32 h-32 bg-zero/10 rounded-full blur-3xl -mr-10 -mt-10 transition-opacity group-hover:opacity-100 opacity-50">
+                </div>
+                <div class="flex items-center gap-4 mb-6">
+                    <div
+                        class="w-12 h-12 rounded-xl bg-zero/10 flex items-center justify-center text-2xl border border-zero/20 text-zero">
+                        ⚡</div>
+                    <div>
+                        <h2 class="font-heading font-bold text-2xl text-white" data-i18n="zeroclaw.name">ZeroClaw</h2>
+                        <p class="text-zero-light text-sm" data-i18n="zeroclaw.tagline">The Rust-Native Engine</p>
+                    </div>
+                </div>
+                <p class="text-zinc-400 text-sm mb-6 leading-relaxed" data-i18n="zeroclaw.desc">
+                    Built for performance. ZeroClaw brings local-first, blazing fast operations written in Rust. No
+                    latency, complete privacy.
+                </p>
+                <ul id="zeroclawFeatures" class="space-y-3 mb-8"></ul>
+                <a href="#zeroclaw"
+                    class="inline-flex items-center justify-center w-full bg-zero/10 hover:bg-zero/20 text-zero-light font-medium py-2.5 rounded-xl transition-colors border border-zero/10"
+                    data-i18n="zeroclaw.viewGuide">View ZeroClaw Guide</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- OPENCLAW GUIDE -->
+    <article id="openclaw" class="max-w-4xl mx-auto px-4 pt-20 pb-10 guide-content">
+        <div class="flex items-center gap-3 mb-4">
+            <span class="text-3xl">🐾</span>
+            <h2 class="!mt-0 !mb-0 text-3xl" data-i18n="openclaw.guideTitle">OpenClaw Guide</h2>
+        </div>
+        <p class="text-lg" data-i18n="openclaw.guideSubtitle">Chat. Install. Document. Generate complete docs using the
+            OpenClaw Telegram bot.</p>
+
+        <section class="reveal mt-8">
+            <h3 data-i18n="openclaw.method1Title">Method 1: Via Telegram Bot (Recommended)</h3>
+            <p data-i18n="openclaw.method1Desc">Chat with your OpenClaw bot on Telegram:</p>
+            <div class="chat-bubble user">
+                <p class="!mb-0"><strong>You:</strong> <span data-i18n="openclaw.chatUser1">Install the doc-kit skill
+                        from GitHub</span></p>
+            </div>
+            <div class="chat-bubble">
+                <p class="!text-claw-light !mb-0"><strong>🐾 OpenClaw:</strong> <span
+                        data-i18n="openclaw.chatBot1">Cloning doc-kit... ✅ Skill installed successfully! 11 AI
+                        sub-skills loaded. Type "help doc-kit" to see available commands.</span></p>
+            </div>
+
+            <h3 data-i18n="openclaw.method2Title">Method 2: One-Command Install</h3>
+            <p data-i18n="openclaw.method2Desc">SSH into your VPS and run:</p>
+            <pre><code>openclaw skills install relukdev/doc-kit</code></pre>
+
+            <h3 data-i18n="openclaw.demoTitle">Generate Docs via Telegram</h3>
+            <p data-i18n="openclaw.demoDesc">Generate complete documentation just by chatting:</p>
+            <div class="chat-bubble user">
+                <p class="!mb-0"><strong>You:</strong> <span data-i18n="openclaw.chatUser2">Generate full docs for my
+                        project — all types, astro format</span></p>
+            </div>
+            <div class="chat-bubble">
+                <p class="!text-claw-light !mb-2"><strong>🐾 OpenClaw:</strong> Running DocKit Master...</p>
+                <p class="!text-zinc-300 text-sm !mb-0">✅ Analyzing codebase: 127 files, 3 frameworks detected<br>
+                    ✅ Generated: Personas, JTBD, Process Flows<br>
+                    ✅ Generated: Architecture, Database, Deployment docs<br>
+                    ✅ Generated: SOP guides + API reference<br>
+                    ✅ Astro Starlight site ready at ./astro-site/</p>
+            </div>
+
+            <h3>🎨 Create Design System + Code</h3>
+            <p>Combine DocKit Master with UX Master for the ultimate workflow:</p>
+            <div class="chat-bubble user">
+                <p class="!mb-0"><strong>You:</strong> <span data-i18n="openclaw.chatUser3">Now create a design system
+                        from the Linear app</span></p>
+            </div>
+            <div class="chat-bubble">
+                <p class="!text-claw-light !mb-2"><strong>🐾 OpenClaw:</strong> Running UX Master Harvester...</p>
+                <p class="!text-zinc-300 text-sm !mb-0">✅ Extracted 127 tokens: 24 colors, 8 fonts, 12 spacing
+                    scales<br>
+                    ✅ Generated: design-system.css, design-system.json<br>
+                    ✅ Components ready: Button, Card, Input, Badge</p>
+            </div>
+        </section>
+    </article>
+
+    <div class="glow-line max-w-4xl mx-auto"></div>
+
+    <!-- ZEROCLAW GUIDE -->
+    <article id="zeroclaw" class="max-w-4xl mx-auto px-4 pt-20 pb-16 guide-content">
+        <div class="flex items-center gap-3 mb-4">
+            <span class="text-3xl">⚡</span>
+            <h2 class="!mt-0 !mb-0 text-3xl" data-i18n="zeroclaw.guideTitle">ZeroClaw Guide</h2>
+        </div>
+        <p class="text-lg" data-i18n="zeroclaw.guideSubtitle">Rust-Native speed for local-first documentation
+            generation.</p>
+
+        <section class="reveal mt-8">
+            <h3 data-i18n="zeroclaw.installTitle">⚡ Quick Install</h3>
+            <p data-i18n="zeroclaw.installDesc">ZeroClaw uses the standard <strong>agentskills.io</strong> format.
+                DocKit Master is fully compatible:</p>
+
+            <pre><code># Clone DocKit Master
+git clone https://github.com/relukdev/doc-kit.git ~/skills/doc-kit
+
+# Tell ZeroClaw about it
+zeroclaw skills add ~/skills/doc-kit</code></pre>
+
+            <h3 data-i18n="zeroclaw.verifyTitle">Verify Installation</h3>
+            <pre><code># Check skill is loaded
+zeroclaw skills list
+
+# Expected output:
+# doc-kit    v1.0.0    11 AI sub-skills, 5 doc types, SEO + LLM optimization</code></pre>
+
+            <h3 data-i18n="zeroclaw.archTitle">🏗️ Architecture Fit</h3>
+            <p data-i18n="zeroclaw.archDesc">ZeroClaw's architecture and DocKit Master's local-first approach are a
+                perfect match:</p>
+            <div id="archCards" class="grid sm:grid-cols-2 gap-4 my-6"></div>
+        </section>
+    </article>
+
+    <div class="glow-line max-w-4xl mx-auto"></div>
+
+    <!-- USE CASES -->
+    <section class="max-w-5xl mx-auto px-4 py-24">
+        <div class="text-center mb-16 reveal">
+            <p class="text-accent-light text-sm font-semibold tracking-widest uppercase mb-3"
+                data-i18n="useCases.label">What You Can Do</p>
+            <h2 class="font-heading font-bold text-3xl sm:text-4xl tracking-tight mb-4" data-i18n="useCases.title">
+                OpenClaw + ZeroClaw + DocKit Master</h2>
+        </div>
+        <div id="useCasesGrid" class="grid md:grid-cols-3 gap-6 reveal"></div>
+    </section>
+    <div class="glow-line max-w-4xl mx-auto"></div>
+
+    <!-- CTA -->
+    <section class="max-w-4xl mx-auto px-4 py-24 text-center">
+        <div class="reveal">
+            <h2 class="font-heading font-bold text-3xl sm:text-4xl tracking-tight mb-4" data-i18n="cta.title">Ready to
+                document smarter?</h2>
+            <p class="text-zinc-500 text-base mb-8 max-w-lg mx-auto" data-i18n="cta.desc">Add 11 AI documentation
+                skills to your OpenClaw or ZeroClaw agent. Free, local, and blazing fast.</p>
+            <div class="flex flex-col sm:flex-row items-center justify-center gap-4">
+                <a href="../../index.html#start"
+                    class="cta-primary text-white font-semibold px-10 py-4 rounded-2xl transition-all cursor-pointer glow-purple text-base"
+                    data-i18n="cta.start">Get Started Free →</a>
+                <a href="../../index.html"
+                    class="bg-white/5 hover:bg-white/10 text-zinc-300 font-medium px-8 py-4 rounded-2xl border border-white/10 transition-all cursor-pointer text-base"
+                    data-i18n="cta.back">← Back to Home</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- FOOTER -->
+    <footer class="border-t border-white/5 px-4 py-12">
+        <div class="max-w-5xl mx-auto flex flex-col md:flex-row items-center justify-between gap-6">
+            <div class="flex items-center gap-3">
+                <div
+                    class="w-8 h-8 rounded-xl bg-gradient-to-br from-accent to-magic flex items-center justify-center text-sm font-bold text-white">
+                    📚</div>
+                <span class="font-heading font-bold">DocKit Master</span>
+            </div>
+            <div class="flex items-center gap-6 text-sm text-zinc-500">
+                <a href="../../index.html" class="hover:text-white transition-colors" data-i18n="nav.home">Home</a>
+                <a href="../../docs/" class="hover:text-white transition-colors" data-i18n="nav.docs">Docs Site</a>
+                <a href="#" class="text-white transition-colors" data-i18n="nav.claw">Claw</a>
+                <a href="https://github.com/relukdev/doc-kit" target="_blank"
+                    class="hover:text-white transition-colors">GitHub</a>
+            </div>
+            <p class="text-zinc-600 text-xs" data-i18n="footer.tagline">Your code dreams it. AI documents it. DocKit
+                Master makes it beautiful.</p>
+        </div>
+    </footer>
+
+    <!-- SCRIPTS -->
+    <script src="../js/translations/shared.js"></script>
+    <script src="../js/translations/claw.js"></script>
+    <script src="../js/i18n.js"></script>
+    <script>
+        // Merge shared + claw translations
+        const mergedTranslations = {};
+        for (const lang of ['en', 'vi', 'ru', 'zh']) {
+            mergedTranslations[lang] = {
+                ...sharedTranslations[lang],
+                ...clawTranslations[lang]
+            };
+        }
+        I18n.init(mergedTranslations);
+
+        // Dynamic content rendering
+        function renderDynamic() {
+            const t = I18n.translations[I18n.currentLang] || I18n.translations['en'];
+
+            // OpenClaw features
+            const ocFeatures = document.getElementById('openclawFeatures');
+            if (t.openclaw?.features) {
+                ocFeatures.innerHTML = t.openclaw.features.map(f => `
+                    <li class="flex items-center text-sm text-zinc-300"><span class="text-claw mr-3">✓</span>${f}</li>
+                `).join('');
+            }
+
+            // ZeroClaw features
+            const zcFeatures = document.getElementById('zeroclawFeatures');
+            if (t.zeroclaw?.features) {
+                zcFeatures.innerHTML = t.zeroclaw.features.map(f => `
+                    <li class="flex items-center text-sm text-zinc-300"><span class="text-zero mr-3">✓</span>${f}</li>
+                `).join('');
+            }
+
+            // Architecture cards
+            const archCards = document.getElementById('archCards');
+            if (t.zeroclaw?.archCards) {
+                archCards.innerHTML = t.zeroclaw.archCards.map(c => `
+                    <div class="bg-white/5 border border-white/10 rounded-xl p-5">
+                        <h4 class="text-white font-bold mb-2">${c.icon} ${c.title}</h4>
+                        <p class="text-sm text-zinc-400">${c.desc}</p>
+                    </div>
+                `).join('');
+            }
+
+            // Use cases grid
+            const useCasesGrid = document.getElementById('useCasesGrid');
+            if (t.useCases?.items) {
+                const gradients = {
+                    accent: 'from-accent/20 to-accent/5',
+                    magic: 'from-magic/20 to-magic/5',
+                    success: 'from-success/20 to-success/5'
+                };
+                const textColors = {
+                    accent: 'text-accent-light',
+                    magic: 'text-magic-light',
+                    success: 'text-success-light'
+                };
+                useCasesGrid.innerHTML = t.useCases.items.map(item => `
+                    <div class="use-case-card">
+                        <div class="w-14 h-14 rounded-2xl bg-gradient-to-br ${gradients[item.color]} flex items-center justify-center text-3xl mb-6">${item.icon}</div>
+                        <h3 class="font-heading font-bold text-lg mb-3 ${textColors[item.color]}">${item.title}</h3>
+                        <p class="text-zinc-400 text-sm leading-relaxed">${item.desc}</p>
+                    </div>
+                `).join('');
+            }
+        }
+
+        // Override I18n.apply to also render dynamic content
+        const originalApply = I18n.apply.bind(I18n);
+        I18n.apply = function () {
+            originalApply();
+            renderDynamic();
+        };
+        renderDynamic();
+
+        // Mobile menu
+        function toggleMobileMenu() { document.getElementById('mobileMenu').classList.toggle('open'); }
+        function closeMobileMenu() { document.getElementById('mobileMenu').classList.remove('open'); }
+
+        // Scroll reveal
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => { if (entry.isIntersecting) entry.target.classList.add('visible'); });
+        }, { threshold: 0.1, rootMargin: '0px 0px -50px 0px' });
+        document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+
+        // Smooth scroll
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) { e.preventDefault(); target.scrollIntoView({ behavior: 'smooth', block: 'start' }); }
+            });
+        });
+    </script>
+</body>
+
+</html>

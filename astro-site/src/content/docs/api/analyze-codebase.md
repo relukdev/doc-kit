@@ -1,76 +1,64 @@
 ---
-title: "Analyzer — analyze-codebase.md Reference"
-description: "Tham chiếu chi tiết skill phân tích codebase: quét files, detect tech stack, map architecture"
-keywords: ["analyzer", "codebase analysis", "tech stack detection", "DocKit Master"]
+title: "analyze-codebase API Reference"
+description: "API reference for the analyze-codebase skill — inputs, scanning procedure, output schema, and configuration options"
+keywords: ["API", "analyze-codebase", "codebase scanning"]
 robots: "index, follow"
 sidebar:
-  order: 3
+  order: 2
 ---
 
-# Analyzer — analyze-codebase.md
+# analyze-codebase API
 
-> **Tham Khảo Nhanh**
-> - **File**: `skills/analyze-codebase.md` (181 dòng)
-> - **Vai trò**: Quét codebase và tạo metadata cho generators
-> - **Input**: Source code + project root
+> **Quick Reference**
+> - **File**: `skills/analyze-codebase.md` (181 lines)
+> - **Input**: Project root directory
 > - **Output**: `docs/analysis.md`
+> - **Dependencies**: None (first in pipeline)
 
-## Mô Tả
+## Interface
 
-Analyzer thực hiện 8 bước quét tự động để tạo metadata mà các generators (tech, SOP, API) sử dụng làm input. Nó phát hiện tech stack, map kiến trúc, extract routes và database schema.
+| Parameter | Type | Required | Description |
+|-----------|------|----------|-------------|
+| PROJECT_PATH | path | Yes | Absolute path to project root |
+| SCOPE | enum | Yes | `full` (all dirs) or `focused` (specific dir) |
+| FOCUS_TARGET | string | No | Directory name when scope is focused |
 
-## Quy Trình Quét
+## Output Schema
 
-| Bước | Hành động | Output |
-|------|----------|--------|
-| 1 | Scan Project Root | README, package.json, config files |
-| 2 | Detect Tech Stack | Framework signals (xem bảng bên dưới) |
-| 3 | Map Architecture | 6 layers: presentation → testing |
-| 4 | Identify Entry Points | server startup, routes, migrations |
-| 5 | Extract Route Map | Method, path, handler, auth, middleware |
-| 6 | Extract Database Schema | Tables, columns, relationships, indexes |
-| 7 | Analyze Dependencies | Category, package, version, purpose |
-| 8 | Detect Test Coverage | Framework, file count, CI integration |
+The skill generates `docs/analysis.md` with these sections:
 
-## Framework Detection Signals
+| Section | Content |
+|---------|---------|
+| Quick Reference | Project name, type, languages, frameworks, LOC |
+| Architecture | Mermaid graph TB diagram of layers |
+| Directory Structure | Annotated tree of important directories |
+| Dependencies | Table: category, package, version, purpose |
+| Route Map | Table: method, path, handler, auth |
+| Database Schema | Table: table, columns, relationships |
+| Key Files | Table: file, role, lines |
+| Test Coverage | Table: framework, test files, coverage |
 
-| Signal File | Framework |
-|-------------|-----------|
-| `package.json` + `next.config.*` | Next.js |
-| `package.json` + `astro.config.*` | Astro |
-| `package.json` + `vite.config.*` | Vite + React/Vue |
-| `requirements.txt` / `pyproject.toml` | Python |
-| `go.mod` | Go |
-| `Cargo.toml` | Rust |
-| `docker-compose.yml` | Containerized |
-| `deno.json` / `deno.jsonc` | Deno |
+## Scanning Procedure
 
-## Output Format
+1. Read README.md, package.json, Makefile
+2. Detect tech stack from config files (20+ patterns)
+3. Map 6 architecture layers (presentation → data)
+4. Identify entry points (server, routes, CLI)
+5. Extract route map from controllers
+6. Extract database schema from models/migrations
+7. Analyze dependency graph
+8. Detect test framework and coverage
 
-Output là `docs/analysis.md` với cấu trúc:
+## Rules
 
-```
-analysis.md
-├── Quick Reference card
-├── Architecture (Mermaid graph TB)
-├── Directory Structure (tree)
-├── Dependencies (table)
-├── Route Map (table)
-├── Database Schema (table)
-├── Key Files (table)
-└── Test Coverage (table)
-```
+- Trace actual code — never guess from filenames
+- Cite every finding: `(file_path:line_number)`
+- Output file must be named `analysis.md` (not `_analysis.md`)
+- Use Mermaid dark-mode colors
+- Include Quick Reference card at top
 
-## Quy Tắc
+## Related
 
-- **Trace actual code** — không đoán từ filename (`analyze-codebase.md:172-173`)
-- **Cite every finding**: `(file_path:line_number)` (`analyze-codebase.md:173`)
-- **Output filename**: `analysis.md` — KHÔNG dùng `_analysis.md` (`analyze-codebase.md:174`)
-- **Dark-mode Mermaid**: fill `#2d333b`, border `#6d5dfc` (`analyze-codebase.md:175-177`)
-- **Quick Reference card** ở đầu output (`analyze-codebase.md:106-112`)
-
-**Source:** `skills/analyze-codebase.md:1-181`
-
----
-
-> Xem thêm: [Orchestrator](./orchestrator) · [Content Guidelines](./content-guidelines)
+- [Content Guidelines API](./content-guidelines)
+- [Skill Pipeline Workflow](../flows/wf-skill-pipeline)
+- [System Architecture](../architecture)

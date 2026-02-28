@@ -1,51 +1,52 @@
 ---
-title: "Hướng Dẫn Sử Dụng — Tổng Quan"
-description: "Tổng hợp hướng dẫn sử dụng DocKit Master: tạo tài liệu kỹ thuật, SOP, API reference với Astro Starlight output"
+title: "User Guides — Overview"
+description: "Complete index of DocKit Master user guides — step-by-step instructions for generating documentation, using the CLI, and customizing templates"
 keywords: ["user guide", "SOP", "how to", "DocKit Master"]
 robots: "index, follow"
 sidebar:
   order: 1
 ---
 
-# Hướng Dẫn Sử Dụng
+# User Guides
 
-> **Tham Khảo Nhanh**
-> - **Tổng tính năng**: 5 hướng dẫn chính
-> - **Đối tượng**: Developer, Technical Writer
-> - **Thời gian trung bình**: 5-15 phút per guide
-> - **Cập nhật**: 2026-02-27
+> **Quick Reference**
+> - **Total Guides**: 4
+> - **Roles**: Developer, AI Agent, Product Manager
+> - **Last Updated**: 2026-02-28
 
-## Sơ Đồ Tính Năng
+## Persona Navigation
 
-Sơ đồ dưới mô tả các nhóm tính năng chính và mối quan hệ giữa chúng.
+| Persona | Role | Key Guides | JTBD |
+|---------|------|-----------|------|
+| [Developer Dana](../personas/user-developer) | Installer | [Using the CLI](./using-cli), [Customizing Templates](./customizing-templates) | Configure tooling |
+| [AI Agent Alex](../personas/user-ai-agent) | Executor | [Generating Tech Docs](./generating-tech-docs), [Generating SOPs](./generating-sop-guides) | Systematize knowledge |
+| [PM Parker](../personas/user-product-manager) | Consumer | All guides (reader) | Consume documentation |
+
+## Quick Start
 
 ```mermaid
-graph TB
-    style CORE fill:#2d333b,stroke:#6d5dfc,color:#e6edf3
-    style TECH fill:#2d333b,stroke:#6d5dfc,color:#e6edf3
-    style SOP fill:#2d333b,stroke:#6d5dfc,color:#e6edf3
-    style CLI fill:#2d333b,stroke:#3fb950,color:#e6edf3
-    style TPL fill:#2d333b,stroke:#d29922,color:#e6edf3
+graph LR
+    style A fill:#232221,stroke:#3fb950,color:#E8E5DF
+    style B fill:#232221,stroke:#60A5FA,color:#E8E5DF
+    style C fill:#232221,stroke:#60A5FA,color:#E8E5DF
+    style D fill:#232221,stroke:#3fb950,color:#E8E5DF
 
-    CORE["📚 DocKit Master"] --> TECH["📐 Tạo Tech Docs"]
-    CORE --> SOP["📋 Tạo SOP Guides"]
-    CORE --> CLI["💻 Sử Dụng CLI"]
-    CORE --> TPL["🎨 Tuỳ Chỉnh Templates"]
+    A["Install"] --> B["Run CLI"]
+    B --> C["Paste Prompt"]
+    C --> D["Review Docs"]
 ```
 
-## Danh Sách Hướng Dẫn
+## Guide Index
 
-| # | Hướng dẫn | Mô tả | Độ khó | Thời gian |
-|---|-----------|-------|--------|-----------|
-| 1 | [Tạo tài liệu kỹ thuật](./generating-tech-docs) | Sinh architecture, database, deployment, data-flow | 🟡 Trung bình | ~10 phút |
-| 2 | [Tạo hướng dẫn SOP](./generating-sop-guides) | Sinh user guides step-by-step | 🟢 Dễ | ~5 phút |
-| 3 | [Sử dụng CLI](./using-cli) | Chạy script CLI tương tác | 🟢 Dễ | ~3 phút |
-| 4 | [Tuỳ chỉnh templates](./customizing-templates) | Sửa CSS, config, thêm ngôn ngữ | 🟡 Trung bình | ~15 phút |
+| # | Guide | Description | Role | Difficulty |
+|---|-------|-------------|------|------------|
+| 1 | [Using the CLI](./using-cli) | Generate documentation prompts via interactive CLI | Developer | Easy |
+| 2 | [Generating Tech Docs](./generating-tech-docs) | Create architecture, database, and deployment docs | AI Agent | Moderate |
+| 3 | [Generating SOP Guides](./generating-sop-guides) | Create knowledge-enriched user guides | AI Agent | Moderate |
+| 4 | [Customizing Templates](./customizing-templates) | Modify Astro theme, CSS, and sidebar layout | Developer | Advanced |
 
-:::tip[Bắt đầu từ đâu?]
-Nếu bạn mới dùng DocKit Master, hãy bắt đầu với [Sử dụng CLI](./using-cli) — cách nhanh nhất để tạo tài liệu đầu tiên.
-:::
+## Related
 
----
-
-> Xem thêm: [Kiến trúc hệ thống](../architecture) · [Tham chiếu Skill](../api/index)
+- [Personas](../personas/)
+- [System Architecture](../architecture)
+- [Skill pipeline workflow](../flows/wf-skill-pipeline)

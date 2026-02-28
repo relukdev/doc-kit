@@ -1,146 +1,86 @@
 ---
-title: "Tạo Tài Liệu Kỹ Thuật — Hướng Dẫn"
-description: "Hướng dẫn từng bước tạo tài liệu kỹ thuật (architecture, database, deployment, data-flow) với DocKit Master"
-keywords: ["tech docs", "documentation", "how to", "DocKit Master"]
+title: "Generating Tech Docs — User Guide"
+description: "Step-by-step guide to generating technical documentation — architecture, database, deployment, and data flow diagrams"
+keywords: ["tech docs", "architecture", "documentation generation", "how to"]
 robots: "index, follow"
 sidebar:
-  order: 2
+  order: 3
 ---
 
-# Tạo Tài Liệu Kỹ Thuật
+# Generating Technical Documentation
 
-> **Tham Khảo Nhanh**
-> - **Đối tượng**: Developer, Tech Lead
-> - **Đầu ra**: 4 file `.md` (architecture, database, deployment, data-flow)
-> - **Thời gian**: ~10 phút
-> - **Yêu cầu**: Project cần có source code để quét
+> **Quick Reference**
+> - **Who**: AI Agent (via IDE)
+> - **Where**: AI Coding IDE
+> - **Time**: ~5-10 minutes
+> - **Prerequisites**: Project path, SKILL.md access
 
-## Yêu Cầu
+## Persona Context
 
-- [ ] DocKit Master đã cài đặt (xem [Hướng dẫn triển khai](../deployment))
-- [ ] Có source code project cần tạo tài liệu
-- [ ] Đang ở trong session Google Antigravity
+> **This guide is for**: [AI Agent Alex](../personas/user-ai-agent)
+>
+> **Job To Be Done**: [Systematize codebase knowledge](../jtbd/systematize-knowledge)
+> — _"When a codebase lacks documentation, I want to generate it automatically, so that the team has a complete reference."_
 
-## Hướng Dẫn Từng Bước
+## What Gets Generated
 
-### Bước 1: Trigger DocKit Master
+| File | Content | Skill |
+|------|---------|-------|
+| architecture.md | System overview, component diagram, ADRs | tech-docs.md |
+| database.md | Data model, ER diagram, schema tables | tech-docs.md |
+| deployment.md | Installation, config, hosting options | tech-docs.md |
+| data-flow.md | Pipeline diagrams, transformation tables | tech-docs.md |
 
-1. Mở Google Antigravity chat
-2. Gõ một trong các câu sau:
+## Process Flow
 
+```mermaid
+graph TB
+    style S fill:#232221,stroke:#3fb950,color:#E8E5DF
+    style E fill:#232221,stroke:#3fb950,color:#E8E5DF
+
+    S(["Start: analysis.md exists"])
+    A["Read tech-docs.md skill"]
+    B["Scan source for architecture"]
+    C["Generate 4 tech doc files"]
+    D["Apply content guidelines"]
+    E(["4 files in docs/"])
+
+    S --> A --> B --> C --> D --> E
 ```
-Dùng DocKit Master để tạo tài liệu kỹ thuật cho project tại /path/to/project
-```
 
-Hoặc sử dụng CLI:
-```bash
-bash ~/.gemini/antigravity/skills/doc-kit/scripts/doc-gen.sh
-```
+## Step-by-Step Guide
 
-### Bước 2: Trả Lời Cấu Hình
+### Step 1: Ensure Analysis Exists
 
-Agent sẽ hiển thị form 10 câu hỏi. Trả lời ngắn gọn:
+The tech docs skill requires `docs/analysis.md` as input. Run `analyze-codebase.md` first if it does not exist.
 
-| Câu hỏi | Trả lời cho Tech Docs |
-|---------|----------------------|
-| Loại tài liệu | `tech` |
-| Định dạng output | `astro` hoặc `markdown` |
-| Phạm vi quét | `full` |
-| Ngôn ngữ | Auto-detect từ ngôn ngữ bạn chat |
-| SEO | `yes` (khuyến nghị) |
-| LLM optimize | `yes` (khuyến nghị) |
+### Step 2: Invoke Tech Docs Generation
+
+Use DOC_TYPE = `tech` or `all` in the configuration prompt.
+
+### Step 3: Review Generated Files
+
+Check that each file has:
+- YAML frontmatter with title, description, keywords, robots
+- Quick Reference card at the top
+- At least 2 Mermaid diagrams
+- At least 2 internal links to other docs
+- Text descriptions alongside Mermaid diagrams (LLM readability)
 
 :::tip
-Bạn có thể trả lời tất cả trong 1 dòng: `tech, astro, full, yes, yes`
+Architecture docs should include ADRs (Architecture Decision Records) using `<details>` for progressive disclosure.
 :::
 
-### Bước 3: Chờ Quét Code
+## Expected Results
 
-Agent sẽ tự động:
-1. Quét toàn bộ codebase (`skills/analyze-codebase.md`)
-2. Detect tech stack, frameworks, dependencies
-3. Map architecture layers
-4. Extract routes, database schema
-5. Tạo `docs/analysis.md`
+- 4 Markdown files in `docs/`
+- Each file follows content-guidelines.md formatting
+- Mermaid diagrams use dark-mode color palette
+- All claims cite source files with line numbers
 
-<!-- Screenshot: Terminal showing codebase analysis output -->
+## Related
 
-### Bước 4: Review Output
-
-Sau khi hoàn thành, kiểm tra 4 file được tạo:
-
-| File | Nội dung | Check |
-|------|---------|-------|
-| `docs/architecture.md` | Sơ đồ kiến trúc, ADR, components | ≥2 Mermaid diagrams |
-| `docs/database.md` | Database schema, ER diagram | Table schema chi tiết |
-| `docs/deployment.md` | Cài đặt, CI/CD, monitoring | Copy-paste commands |
-| `docs/data-flow.md` | Pipeline, sequence diagrams | ≥3 Mermaid diagrams |
-
-### Bước 5: Build Site (Nếu chọn Astro)
-
-```bash
-cd astro-site
-npm install
-npm run build
-npm run preview -- --port 4321
-```
-
-Mở `http://localhost:4321` để xem kết quả.
-
-## Kết Quả Mong Đợi
-
-- ✅ Mỗi file có Quick Reference card ở đầu
-- ✅ Mỗi file có ≥2 Mermaid diagrams với dark-mode colors
-- ✅ Mỗi claim cite `(file_path:line_number)`
-- ✅ SEO frontmatter đầy đủ (title, description, keywords, robots)
-- ✅ ≥2 internal links per page
-
-## Xử Lý Sự Cố
-
-<details>
-<summary>🔴 Mermaid diagram không render</summary>
-
-**Nguyên nhân:** Astro Starlight không hỗ trợ Mermaid mặc định.
-
-**Giải pháp:**
-1. Cài `remark-mermaidjs`:
-```bash
-cd astro-site && npm install remark-mermaidjs
-```
-2. Thêm vào `astro.config.mjs`:
-```javascript
-import remarkMermaid from 'remark-mermaidjs';
-// ...
-markdown: { remarkPlugins: [remarkMermaid] }
-```
-
-</details>
-
-<details>
-<summary>🔴 Build fail: Missing title in frontmatter</summary>
-
-**Nguyên nhân:** Starlight yêu cầu mọi `.md` file phải có `title` trong frontmatter.
-
-**Giải pháp:** Thêm `title: "..."` vào YAML frontmatter ở đầu file.
-
-</details>
-
-## FAQ
-
-<details>
-<summary>Q: Tech docs có tự cập nhật khi code thay đổi không?</summary>
-
-**A:** Không tự động. Bạn cần chạy lại DocKit Master khi code thay đổi đáng kể. Tuy nhiên, quá trình chạy lại rất nhanh (~5 phút) vì Agent sẽ quét code mới và ghi đè docs cũ.
-
-</details>
-
-<details>
-<summary>Q: Có thể tạo tech docs cho 1 module cụ thể thay vì toàn bộ project?</summary>
-
-**A:** Có. Chọn `focused` ở câu hỏi "Phạm vi quét" và chỉ định tên module/thư mục cụ thể.
-
-</details>
-
----
-
-> Xem thêm: [Tạo SOP guides](./generating-sop-guides) · [Sử dụng CLI](./using-cli)
+- [System Architecture](../architecture)
+- [Data Flow](../data-flow)
+- [Generating SOP Guides](./generating-sop-guides)
+- [Customizing Templates](./customizing-templates)

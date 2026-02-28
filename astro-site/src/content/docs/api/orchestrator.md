@@ -1,74 +1,79 @@
 ---
-title: "Orchestrator — SKILL.md Reference"
-description: "Tham chiếu chi tiết SKILL.md: orchestrator chính của DocKit Master điều phối pipeline 6 bước"
-keywords: ["orchestrator", "SKILL.md", "pipeline", "DocKit Master"]
+title: "SKILL.md Orchestrator API Reference"
+description: "API reference for the SKILL.md orchestrator — routing logic, configuration handling, and pipeline execution"
+keywords: ["API", "orchestrator", "SKILL.md", "pipeline"]
 robots: "index, follow"
 sidebar:
-  order: 2
+  order: 4
 ---
 
-# Orchestrator — SKILL.md
+# SKILL.md Orchestrator API
 
-> **Tham Khảo Nhanh**
-> - **File**: `SKILL.md` (252 dòng)
-> - **Vai trò**: Entry point, điều phối toàn bộ quy trình
-> - **Input**: Câu hỏi cấu hình từ người dùng
-> - **Output**: Gọi các skill con theo thứ tự
+> **Quick Reference**
+> - **File**: `SKILL.md` (295 lines)
+> - **Type**: Main entry point and router
+> - **Input**: 10-parameter config object
+> - **Output**: Routes to appropriate skills
 
-## Mô Tả
+## Interface
 
-`SKILL.md` là file chính của DocKit Master. Khi người dùng trigger skill (chat hoặc CLI), file này:
+The orchestrator accepts a config object with 10 parameters:
 
-1. **Hiển thị form cấu hình** — 10 câu hỏi trong 1 message duy nhất
-2. **Auto-generate execution plan** — Map câu trả lời thành config
-3. **Gọi skill con** — Tuần tự theo pipeline 6 bước
-4. **Tổng hợp kết quả** — Trình bày danh sách file và next steps
+| # | Parameter | Type | Required | Default |
+|---|-----------|------|----------|---------|
+| 1 | DOC_TYPE | enum | Yes | `all` |
+| 2 | FORMAT | enum | Yes | `astro` |
+| 3 | SCOPE | enum | Yes | `full` |
+| 4 | FOCUS_TARGET | string | No | null |
+| 5 | LANGUAGE | string | Yes | auto-detect |
+| 6 | I18N | boolean | No | false |
+| 7 | RECORD | boolean | No | false |
+| 8 | PROJECT_PATH | path | Yes | workspace |
+| 9 | SEO | boolean | No | true |
+| 10 | LLM_OPTIMIZE | boolean | No | true |
 
-## Cấu Hình (Step 1)
-
-Orchestrator thu thập 10 tham số:
-
-| Tham số | Kiểu | Mặc định | Mô tả |
-|---------|------|----------|-------|
-| `DOC_TYPE` | enum | `all` | `tech` · `sop` · `api` · `all` |
-| `FORMAT` | enum | `astro` | `markdown` · `astro` |
-| `SCOPE` | enum | `full` | `full` · `focused` |
-| `FOCUS_TARGET` | string | null | Thư mục/module (nếu focused) |
-| `LANGUAGE` | string | auto | Auto-detect từ ngôn ngữ chat |
-| `I18N` | bool | `no` | Đa ngôn ngữ (astro only) |
-| `RECORD` | bool | `no` | Quay video walkthrough |
-| `PROJECT_PATH` | string | workspace | Đường dẫn project |
-| `SEO` | bool | `yes` | SEO optimization |
-| `LLM_OPTIMIZE` | bool | `yes` | AI/LLM optimization |
-
-## Pipeline Gọi Skill
+## Routing Logic
 
 ```mermaid
-graph LR
-    style S1 fill:#2d333b,stroke:#6d5dfc,color:#e6edf3
-    style S2 fill:#2d333b,stroke:#6d5dfc,color:#e6edf3
-    style S3 fill:#2d333b,stroke:#6d5dfc,color:#e6edf3
-    style S4 fill:#2d333b,stroke:#6d5dfc,color:#e6edf3
-    style S5 fill:#2d333b,stroke:#3fb950,color:#e6edf3
-    style S6 fill:#2d333b,stroke:#3fb950,color:#e6edf3
+graph TB
+    style K fill:#232221,stroke:#60A5FA,color:#E8E5DF
+    style T fill:#232221,stroke:#60A5FA,color:#E8E5DF
+    style S fill:#232221,stroke:#60A5FA,color:#E8E5DF
+    style A fill:#232221,stroke:#60A5FA,color:#E8E5DF
 
-    S1["Step 1<br/>Gather Input"] --> S2["Step 2<br/>analyze-codebase.md"]
-    S2 --> S3["Step 3<br/>content-guidelines.md<br/>+ SEO + LLM"]
-    S3 --> S4["Step 4<br/>tech/sop/api generators"]
-    S4 --> S5["Step 5<br/>setup-astro.md<br/>+ sitemap"]
-    S5 --> S6["Step 6<br/>Summary"]
+    D{"DOC_TYPE?"}
+    K["knowledge\npersona + jtbd + flow"]
+    T["tech\narchitecture + DB + deploy"]
+    S["sop\nknowledge first, then SOPs"]
+    A["api\nendpoint reference"]
+    ALL["all\nknowledge → tech → sop → api"]
+
+    D -->|"knowledge"| K
+    D -->|"tech"| T
+    D -->|"sop"| S
+    D -->|"api"| A
+    D -->|"all"| ALL
 ```
 
-## Quy Tắc Quan Trọng
+**Routing summary:** The orchestrator maps DOC_TYPE to the corresponding skill files. For `all`, it runs all types sequentially: knowledge → tech → sop → api. For `sop`, it auto-runs knowledge first if not already generated.
 
-- **Hỏi tất cả trong 1 message** — không hỏi từng câu
-- **Auto-detect language** — xác định từ ngôn ngữ chat
-- **Auto-proceed** — sau khi lên plan, chạy ngay Step 2 (không chờ approve)
-- **Filename conventions** — kebab-case, no underscore prefix
-- **SEO default on** — `robots: "index, follow"` cho tất cả trang
+## Execution Steps
 
-**Source:** `SKILL.md:41-118` (Step 1), `SKILL.md:120-130` (Step 2)
+| Step | Action | Condition |
+|------|--------|-----------|
+| 1 | Gather input | Always |
+| 1b | Generate execution plan | Always |
+| 2 | Analyze codebase | Always |
+| 3 | Apply content guidelines | Always |
+| 3b | Apply SEO + LLM guidelines | If SEO=yes or LLM=yes |
+| 4 | Generate documents | Based on DOC_TYPE |
+| 5 | Export | Based on FORMAT |
+| 5b | Generate sitemap | If SEO=yes |
+| 5c | Run SEO audit | If SEO=yes |
+| 6 | Summary | Always |
 
----
+## Related
 
-> Xem thêm: [Analyzer](./analyze-codebase) · [Content Guidelines](./content-guidelines)
+- [analyze-codebase API](./analyze-codebase)
+- [Skill pipeline workflow](../flows/wf-skill-pipeline)
+- [System Architecture](../architecture)

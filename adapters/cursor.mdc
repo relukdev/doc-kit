@@ -1,0 +1,56 @@
+---
+description: "DocKit Master — Generate Personas, JTBD, Process Flows, Technical Docs, SOPs, API References from any codebase. Trigger with 'generate docs', 'create documentation', 'SOP', or 'DocKit'."
+globs: ["**/*.md", "docs/**", "SKILL.md"]
+alwaysApply: false
+---
+
+# DocKit Master: Knowledge Systematization Engine
+
+**1 scan = complete knowledge base** — Personas, JTBD, Process Flows, Technical Docs, SOPs, API Reference. Supports Markdown or Astro Starlight output. SEO-optimized, AI/LLM-readable.
+
+## Activation
+
+Trigger when user mentions: "create documentation", "generate docs", "SOP", "user guide", "manual", "DocKit", "technical docs", "API reference".
+
+## Setup Required
+
+DocKit Master skill files must be installed in this project. If not found, instruct the user to run:
+
+```bash
+bash /path/to/doc-kit/scripts/install.sh --cursor
+```
+
+## Core Procedure
+
+Read and follow the **SKILL.md** file in the `doc-kit/` directory (or wherever it was installed). The full 6-step procedure is defined there:
+
+1. **Gather Input** — Present the configuration form (doc type, format, scope, language, SEO, LLM optimization)
+2. **Analyze Codebase** — Follow `skills/analyze-codebase.md`
+3. **Apply Content Guidelines** — Follow `skills/content-guidelines.md`
+4. **Generate Documents** — Based on chosen type:
+   - `knowledge` → `skills/persona-builder.md` + `skills/jtbd-analyzer.md` + `skills/flow-mapper.md`
+   - `tech` → `skills/tech-docs.md`
+   - `sop` → `skills/sop-guide.md` (auto-runs knowledge first)
+   - `api` → `skills/api-reference.md`
+   - `all` → All of the above sequentially
+5. **Export** — Markdown (`workflows/export-markdown.md`) or Astro (`workflows/setup-astro.md`)
+6. **Summary** — Present generated files, instructions
+
+## Document Types
+
+| Type | Output |
+|------|--------|
+| `knowledge` | Personas, JTBD Canvases, Process Flows |
+| `tech` | Architecture, Database, Deployment, Data Flow |
+| `sop` | Step-by-step user guides enriched with personas & flows |
+| `api` | API endpoint reference with multi-language examples |
+| `all` | Full documentation suite ★ |
+
+## Key Constraints
+
+- All `.md` files must have YAML frontmatter with `title`, `description`, `keywords`, `robots`
+- Filenames: kebab-case, no underscores, no dots
+- ≥2 internal cross-links per page
+- Mermaid diagrams use dark-mode colors (fill: `#232221`, border: `#60A5FA`)
+- Every Mermaid diagram has a text fallback for LLM readability
+- Self-contained sections (each H2 readable alone)

@@ -105,6 +105,6 @@ export default defineConfig({
 
 
     // CUSTOMIZE: Deployment
-    site: 'https://relukdev.github.io',
-    base: '/doc-kit/docs',
+    site: 'https://dockit-master.todyai.io',
+    base: '/docs',
 });

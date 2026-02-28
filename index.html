@@ -33,7 +33,9 @@
                         accent: { DEFAULT: '#6d5dfc', light: '#8a7efd', dark: '#5b4cd9', soft: '#ede9fe' },
                         magic: { DEFAULT: '#ec4899', light: '#f472b6', dark: '#db2777' },
                         success: { DEFAULT: '#10b981', light: '#34d399' },
-                        warn: { DEFAULT: '#f59e0b', light: '#fbbf24' }
+                        warn: { DEFAULT: '#f59e0b', light: '#fbbf24' },
+                        claw: { DEFAULT: '#0ea5e9', light: '#38bdf8' },
+                        zero: { DEFAULT: '#f97316', light: '#fb923c' }
                     }
                 }
             }
@@ -57,16 +59,29 @@
             <a href="#" class="text-white transition-colors cursor-pointer">Home</a>
             <a href="#features" class="hover:text-white transition-colors cursor-pointer">Features</a>
             <a href="docs/" class="hover:text-white transition-colors cursor-pointer">Docs Site</a>
-            <div
-                class="lang-switcher-mini flex items-center gap-1 bg-white/5 rounded-lg px-1 py-0.5 border border-white/10">
-                <button onclick="switchLang('en')"
-                    class="lang-btn-mini px-2 py-1 rounded text-xs font-medium text-white bg-white/10">EN</button>
-                <button onclick="switchLang('vi')"
-                    class="lang-btn-mini px-2 py-1 rounded text-xs font-medium text-zinc-500 hover:text-white">VI</button>
-                <button onclick="switchLang('ru')"
-                    class="lang-btn-mini px-2 py-1 rounded text-xs font-medium text-zinc-500 hover:text-white">RU</button>
-                <button onclick="switchLang('zh')"
-                    class="lang-btn-mini px-2 py-1 rounded text-xs font-medium text-zinc-500 hover:text-white">ZH</button>
+            <a href="pages/claw/index.html" class="hover:text-white transition-colors cursor-pointer">Claw</a>
+            <div class="lang-dropdown relative">
+                <button onclick="toggleLangMenu()" id="langTrigger"
+                    class="lang-trigger flex items-center gap-1.5 bg-white/5 hover:bg-white/10 text-zinc-300 text-sm font-medium px-3 h-9 rounded-xl border border-white/10 transition-all cursor-pointer">
+                    <span class="lang-flag">🇺🇸</span>
+                    <span class="lang-code">EN</span>
+                    <span class="text-zinc-500 text-xs ml-0.5">▾</span>
+                </button>
+                <div id="langMenu"
+                    class="lang-menu hidden absolute right-0 top-full mt-2 bg-[#1a1a1a]/95 backdrop-blur-xl border border-white/10 rounded-xl py-1.5 min-w-[160px] shadow-2xl z-50">
+                    <button onclick="switchLang('en')"
+                        class="lang-option w-full flex items-center gap-2.5 px-4 py-2 text-sm text-zinc-300 hover:bg-white/10 transition-colors text-left"
+                        data-lang="en">🇺🇸 English</button>
+                    <button onclick="switchLang('vi')"
+                        class="lang-option w-full flex items-center gap-2.5 px-4 py-2 text-sm text-zinc-300 hover:bg-white/10 transition-colors text-left"
+                        data-lang="vi">🇻🇳 Tiếng Việt</button>
+                    <button onclick="switchLang('ru')"
+                        class="lang-option w-full flex items-center gap-2.5 px-4 py-2 text-sm text-zinc-300 hover:bg-white/10 transition-colors text-left"
+                        data-lang="ru">🇷🇺 Русский</button>
+                    <button onclick="switchLang('zh')"
+                        class="lang-option w-full flex items-center gap-2.5 px-4 py-2 text-sm text-zinc-300 hover:bg-white/10 transition-colors text-left"
+                        data-lang="zh">🇨🇳 中文</button>
+                </div>
             </div>
         </div>
         <div class="flex items-center gap-1.5 sm:gap-3">
@@ -93,16 +108,29 @@
         <a href="#" onclick="closeMobileMenu()" class="text-white py-2">Home</a>
         <a href="#features" onclick="closeMobileMenu()" class="text-zinc-300 hover:text-white py-2">Features</a>
         <a href="docs/" onclick="closeMobileMenu()" class="text-zinc-300 hover:text-white py-2">Docs Site</a>
-        <div
-            class="lang-switcher-mini flex items-center justify-center gap-1 bg-white/5 rounded-lg px-1 py-0.5 border border-white/10">
-            <button onclick="switchLang('en')"
-                class="lang-btn-mini px-2 py-1 rounded text-xs font-medium text-white bg-white/10">EN</button>
-            <button onclick="switchLang('vi')"
-                class="lang-btn-mini px-2 py-1 rounded text-xs font-medium text-zinc-500 hover:text-white">VI</button>
-            <button onclick="switchLang('ru')"
-                class="lang-btn-mini px-2 py-1 rounded text-xs font-medium text-zinc-500 hover:text-white">RU</button>
-            <button onclick="switchLang('zh')"
-                class="lang-btn-mini px-2 py-1 rounded text-xs font-medium text-zinc-500 hover:text-white">ZH</button>
+        <a href="pages/claw/index.html" onclick="closeMobileMenu()" class="text-zinc-300 hover:text-white py-2">Claw</a>
+        <div class="lang-dropdown relative">
+            <button onclick="toggleLangMenu()" id="langTriggerMobile"
+                class="lang-trigger flex items-center justify-center gap-1.5 w-full bg-white/5 hover:bg-white/10 text-zinc-300 text-sm font-medium px-3 py-2 rounded-xl border border-white/10 transition-all cursor-pointer">
+                <span class="lang-flag">🇺🇸</span>
+                <span class="lang-code">EN</span>
+                <span class="text-zinc-500 text-xs ml-0.5">▾</span>
+            </button>
+            <div id="langMenuMobile"
+                class="lang-menu hidden bg-[#1a1a1a]/95 backdrop-blur-xl border border-white/10 rounded-xl py-1.5 mt-2 shadow-2xl z-50">
+                <button onclick="switchLang('en')"
+                    class="lang-option w-full flex items-center gap-2.5 px-4 py-2 text-sm text-zinc-300 hover:bg-white/10 transition-colors text-left"
+                    data-lang="en">🇺🇸 English</button>
+                <button onclick="switchLang('vi')"
+                    class="lang-option w-full flex items-center gap-2.5 px-4 py-2 text-sm text-zinc-300 hover:bg-white/10 transition-colors text-left"
+                    data-lang="vi">🇻🇳 Tiếng Việt</button>
+                <button onclick="switchLang('ru')"
+                    class="lang-option w-full flex items-center gap-2.5 px-4 py-2 text-sm text-zinc-300 hover:bg-white/10 transition-colors text-left"
+                    data-lang="ru">🇷🇺 Русский</button>
+                <button onclick="switchLang('zh')"
+                    class="lang-option w-full flex items-center gap-2.5 px-4 py-2 text-sm text-zinc-300 hover:bg-white/10 transition-colors text-left"
+                    data-lang="zh">🇨🇳 中文</button>
+            </div>
         </div>
         <a href="#start" onclick="closeMobileMenu()"
             class="cta-primary text-white text-center font-semibold px-4 py-2.5 rounded-xl mt-2">Get Started Free</a>
@@ -260,7 +288,7 @@
                     <span class="text-zinc-500 text-xs ml-4 font-mono">~/my-project</span>
                 </div>
                 <div class="terminal-body text-zinc-300">
-                    <span class="text-emerald-400">$</span> <span class="text-white">bash doc-gen.sh</span><br><br>
+                    <span class="text-emerald-400">$</span> <span class="text-white">bash dockit-master.sh</span><br><br>
                     <span class="text-accent font-bold">📚 DocKit Master — Knowledge Systematization
                         Engine</span><br><br>
                     <span class="text-zinc-500">📑 Step 1: Document Type</span><br>
@@ -400,16 +428,20 @@
                 <p class="text-zinc-500 text-xs leading-relaxed">Onboard new devs in days, not weeks. Architecture docs
                     always current.</p>
             </a>
-            <div class="persona-pill rounded-2xl p-6 text-center cursor-pointer">
-                <h4 class="font-heading font-bold text-base mb-1">💻 Developers</h4>
+            <a href="pages/use-cases/developers.html"
+                class="persona-pill rounded-2xl p-6 text-center cursor-pointer block group">
+                <h4 class="font-heading font-bold text-base mb-1 group-hover:text-accent-light transition-colors">💻
+                    Developers</h4>
                 <p class="text-zinc-500 text-xs leading-relaxed">Stop writing docs manually. Let AI trace the code and
                     generate everything.</p>
-            </div>
-            <div class="persona-pill rounded-2xl p-6 text-center cursor-pointer">
-                <h4 class="font-heading font-bold text-base mb-1">📋 Product Managers</h4>
+            </a>
+            <a href="pages/use-cases/product-managers.html"
+                class="persona-pill rounded-2xl p-6 text-center cursor-pointer block group">
+                <h4 class="font-heading font-bold text-base mb-1 group-hover:text-accent-light transition-colors">📋
+                    Product Managers</h4>
                 <p class="text-zinc-500 text-xs leading-relaxed">SOP guides with visual flows. Hand off to support and
                     training teams.</p>
-            </div>
+            </a>
             <a href="pages/use-cases/startup-founders.html"
                 class="persona-pill rounded-2xl p-6 text-center cursor-pointer block group">
                 <h4 class="font-heading font-bold text-base mb-1 group-hover:text-accent-light transition-colors">🚀
@@ -465,7 +497,7 @@
                 <p class="text-zinc-500 text-sm leading-relaxed mb-4">Run the interactive CLI to pick doc type, output
                     format, and language.</p>
                 <div class="bg-zinc-900/80 rounded-xl p-4 text-left">
-                    <code class="text-xs text-accent-light">bash doc-gen.sh</code>
+                    <code class="text-xs text-accent-light">bash dockit-master.sh</code>
                     <p class="text-[10px] text-zinc-600 mt-2">Knowledge · Tech · SOP · API · All — Markdown or Astro</p>
                 </div>
             </div>
@@ -626,6 +658,79 @@
     </section>
     <div class="glow-line max-w-4xl mx-auto"></div>
 
+    <!-- CLAW PLATFORMS -->
+    <section class="max-w-5xl mx-auto px-4 py-24">
+        <div class="text-center mb-16 reveal">
+            <p class="text-claw text-sm font-semibold tracking-widest uppercase mb-3">AI Agent Platforms</p>
+            <h2 class="font-heading font-bold text-3xl sm:text-4xl tracking-tight mb-4">Works with
+                <span class="bg-gradient-to-r from-claw-light to-zero-light bg-clip-text text-transparent">OpenClaw &
+                    ZeroClaw</span>
+            </h2>
+            <p class="text-zinc-500 text-base max-w-xl mx-auto">Generate docs through Telegram chat or Rust-native
+                CLI. Create design systems. Code with them. All from one skill.</p>
+        </div>
+        <div class="grid md:grid-cols-2 gap-6 mb-12 reveal">
+            <!-- OpenClaw -->
+            <div class="glass-card rounded-2xl p-8 border-t-4 border-t-claw/50 relative overflow-hidden group">
+                <div class="absolute top-0 right-0 w-32 h-32 bg-claw/10 rounded-full blur-3xl -mr-10 -mt-10 opacity-50">
+                </div>
+                <div class="flex items-center gap-4 mb-5">
+                    <div
+                        class="w-12 h-12 rounded-xl bg-claw/10 flex items-center justify-center text-2xl border border-claw/20">
+                        🐾</div>
+                    <div>
+                        <h3 class="font-heading font-bold text-xl text-white">OpenClaw</h3>
+                        <p class="text-claw-light text-xs">Telegram Bot Ecosystem</p>
+                    </div>
+                </div>
+                <div class="bg-zinc-900/60 rounded-xl p-4 mb-4 border border-white/5">
+                    <p class="text-xs text-zinc-400 mb-2"><strong class="text-white">You:</strong> Generate full docs
+                        for my project</p>
+                    <p class="text-xs text-claw-light">🐾 OpenClaw: Running DocKit Master... ✅ Personas, JTBD, Process
+                        Flows, Tech Docs, SOPs, API Reference — ready!</p>
+                </div>
+                <ul class="space-y-2 text-sm text-zinc-400">
+                    <li class="flex items-center gap-2"><span class="text-claw">✓</span> Chat to generate docs</li>
+                    <li class="flex items-center gap-2"><span class="text-claw">✓</span> Create design systems via
+                        Telegram</li>
+                    <li class="flex items-center gap-2"><span class="text-claw">✓</span> Code with design tokens</li>
+                </ul>
+            </div>
+            <!-- ZeroClaw -->
+            <div class="glass-card rounded-2xl p-8 border-t-4 border-t-zero/50 relative overflow-hidden group">
+                <div class="absolute top-0 right-0 w-32 h-32 bg-zero/10 rounded-full blur-3xl -mr-10 -mt-10 opacity-50">
+                </div>
+                <div class="flex items-center gap-4 mb-5">
+                    <div
+                        class="w-12 h-12 rounded-xl bg-zero/10 flex items-center justify-center text-2xl border border-zero/20">
+                        ⚡</div>
+                    <div>
+                        <h3 class="font-heading font-bold text-xl text-white">ZeroClaw</h3>
+                        <p class="text-zero-light text-xs">Rust-Native Engine</p>
+                    </div>
+                </div>
+                <div class="bg-zinc-900/60 rounded-xl p-4 mb-4 border border-white/5">
+                    <code class="text-xs text-emerald-400 font-mono">$ zeroclaw skills add ~/skills/doc-kit</code><br>
+                    <code class="text-xs text-zinc-400 font-mono">✅ doc-kit loaded: 11 AI sub-skills, 5 doc
+                        types</code>
+                </div>
+                <ul class="space-y-2 text-sm text-zinc-400">
+                    <li class="flex items-center gap-2"><span class="text-zero">✓</span> Rust-native speed</li>
+                    <li class="flex items-center gap-2"><span class="text-zero">✓</span> 100% local processing</li>
+                    <li class="flex items-center gap-2"><span class="text-zero">✓</span> Zero latency skill loading
+                    </li>
+                </ul>
+            </div>
+        </div>
+        <div class="text-center reveal">
+            <a href="pages/claw/index.html"
+                class="inline-flex items-center gap-2 bg-white/5 hover:bg-white/10 text-zinc-300 font-medium px-8 py-3 rounded-2xl border border-white/10 transition-all cursor-pointer text-sm">
+                🐾 ⚡ View Full Claw Integration Guide →
+            </a>
+        </div>
+    </section>
+    <div class="glow-line max-w-4xl mx-auto"></div>
+
     <!-- INSTALL CTA -->
     <section id="start" class="max-w-5xl mx-auto px-4 py-24">
         <div class="text-center mb-16 reveal">
@@ -653,7 +758,7 @@
                         ~/.gemini/antigravity/skills/</span><br><br>
                     <span class="text-zinc-600"># Generate your docs prompt</span><br>
                     <span class="text-emerald-400">$</span> <span class="text-white">bash
-                        ~/.gemini/antigravity/skills/doc-kit/scripts/doc-gen.sh</span><br><br>
+                        ~/.gemini/antigravity/skills/doc-kit/scripts/dockit-master.sh</span><br><br>
                     <span class="text-accent-light font-bold">✅ Done! Paste the prompt into your AI session.</span>
                 </div>
             </div>
@@ -740,6 +845,7 @@
             <div class="flex items-center gap-6 text-sm text-zinc-500">
                 <a href="README.md" class="hover:text-white transition-colors cursor-pointer">README</a>
                 <a href="docs/" class="hover:text-white transition-colors cursor-pointer">Docs Site</a>
+                <a href="pages/claw/index.html" class="hover:text-white transition-colors cursor-pointer">Claw</a>
                 <a href="https://github.com/relukdev/doc-kit" target="_blank"
                     class="hover:text-white transition-colors cursor-pointer">GitHub</a>
             </div>
@@ -748,19 +854,49 @@
     </footer>
 
     <script>
+        // Language data
+        const langData = {
+            en: { flag: '🇺🇸', code: 'EN', name: 'English' },
+            vi: { flag: '🇻🇳', code: 'VI', name: 'Tiếng Việt' },
+            ru: { flag: '🇷🇺', code: 'RU', name: 'Русский' },
+            zh: { flag: '🇨🇳', code: 'ZH', name: '中文' }
+        };
+
+        // Toggle language dropdown
+        function toggleLangMenu() {
+            document.getElementById('langMenu').classList.toggle('hidden');
+            const mobile = document.getElementById('langMenuMobile');
+            if (mobile) mobile.classList.toggle('hidden');
+        }
+
+        // Close lang menu when clicking outside
+        document.addEventListener('click', function (e) {
+            if (!e.target.closest('.lang-dropdown')) {
+                document.querySelectorAll('.lang-menu').forEach(m => m.classList.add('hidden'));
+            }
+        });
+
         // Language switcher — persists to localStorage for sub-pages
         function switchLang(lang) {
             localStorage.setItem('dockit-lang', lang);
-            document.querySelectorAll('.lang-btn-mini').forEach(btn => {
-                if (btn.textContent.trim() === lang.toUpperCase()) {
-                    btn.classList.add('text-white', 'bg-white/10');
-                    btn.classList.remove('text-zinc-500');
+            const data = langData[lang] || langData.en;
+            // Update all trigger buttons
+            document.querySelectorAll('.lang-trigger').forEach(trigger => {
+                trigger.querySelector('.lang-flag').textContent = data.flag;
+                trigger.querySelector('.lang-code').textContent = data.code;
+            });
+            // Update active state in dropdown options
+            document.querySelectorAll('.lang-option').forEach(opt => {
+                if (opt.dataset.lang === lang) {
+                    opt.classList.add('bg-white/10', 'text-white');
                 } else {
-                    btn.classList.remove('text-white', 'bg-white/10');
-                    btn.classList.add('text-zinc-500');
+                    opt.classList.remove('bg-white/10', 'text-white');
                 }
             });
+            // Close menus
+            document.querySelectorAll('.lang-menu').forEach(m => m.classList.add('hidden'));
         }
+
         // Auto-highlight saved lang on load
         (function () {
             const saved = localStorage.getItem('dockit-lang');

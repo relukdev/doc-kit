@@ -5,6 +5,7 @@ const sharedTranslations = {
             features: "Features",
             how: "How It Works",
             docs: "Docs Site",
+            claw: "Claw",
             getStarted: "Get Started Free"
         },
         footer: {
@@ -28,6 +29,7 @@ const sharedTranslations = {
             features: "Tính Năng",
             how: "Cách Hoạt Động",
             docs: "Tài Liệu",
+            claw: "Claw",
             getStarted: "Bắt Đầu Miễn Phí"
         },
         footer: {
@@ -51,6 +53,7 @@ const sharedTranslations = {
             features: "Функции",
             how: "Как это работает",
             docs: "Документация",
+            claw: "Claw",
             getStarted: "Начать бесплатно"
         },
         footer: {
@@ -74,6 +77,7 @@ const sharedTranslations = {
             features: "功能",
             how: "运作方式",
             docs: "文档网站",
+            claw: "Claw",
             getStarted: "免费开始"
         },
         footer: {

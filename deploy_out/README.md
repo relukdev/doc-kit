@@ -7,7 +7,7 @@
 A professional knowledge systematization engine powered by codebase analysis.
 **1 scan = 1 complete knowledge base** — Personas, JTBD, Process Flows, Technical Docs, SOPs, API Reference.
 
-🌐 **[Landing Page](https://relukdev.github.io/doc-kit/deploy_out/index.html)** · 📖 **[Documentation](https://relukdev.github.io/doc-kit/deploy_out/docs/)** · ⭐ **[GitHub](https://github.com/relukdev/doc-kit)**
+🌐 **[Landing Page](https://dockit-master.todyai.io)** · 📖 **[Documentation](https://dockit-master.todyai.io/docs/)** · ⭐ **[GitHub](https://github.com/relukdev/doc-kit)**
 
 ---
 
@@ -48,7 +48,7 @@ cp -r doc-kit ~/.gemini/antigravity/skills/
 ### Interactive CLI
 
 ```bash
-bash ~/.gemini/antigravity/skills/doc-kit/scripts/doc-gen.sh
+bash ~/.gemini/antigravity/skills/doc-kit/scripts/dockit-master.sh
 ```
 
 ### Direct Trigger
@@ -83,7 +83,7 @@ doc-kit/
 │   ├── astro-premium/           # Astro Starlight config + CSS template
 │   └── markdown/                # Markdown structure template
 ├── scripts/
-│   └── doc-gen.sh               # Interactive CLI prompt generator
+│   └── dockit-master.sh               # Interactive CLI prompt generator
 ├── index.html                   # Landing page
 └── astro-site/                  # Live documentation site
 ```

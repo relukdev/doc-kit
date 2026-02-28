@@ -1,64 +1,78 @@
 ---
-title: "Tham Chiếu Skill — Tổng Quan"
-description: "Tổng hợp tham chiếu tất cả skill files của DocKit Master: orchestrator, analyzer, generators, và support skills"
-keywords: ["API reference", "skill files", "DocKit Master"]
+title: "Skill API Reference — Overview"
+description: "Complete API reference for DocKit Master skills — inputs, outputs, configuration, and rules for each skill file"
+keywords: ["API", "reference", "skills", "DocKit Master"]
 robots: "index, follow"
 sidebar:
   order: 1
 ---
 
-# Tham Chiếu Skill
+# Skill API Reference
 
-> **Tham Khảo Nhanh**
-> - **Tổng skills**: 8 skill files + 5 workflow files
-> - **Entry point**: `SKILL.md` (Orchestrator)
-> - **Format**: Markdown prompt files
-> - **Invocation**: Chat trực tiếp hoặc CLI
+> **Quick Reference**
+> - **Total Skills**: 11 (4 knowledge + 3 docs + 4 quality)
+> - **Total Workflows**: 5
+> - **Input Format**: Markdown + YAML frontmatter
+> - **Output Format**: Markdown files in docs/
 
-## Tổng Quan
+DocKit Master skills function as an API — each skill file defines inputs, processing rules, and outputs. This reference documents the interface of each skill.
 
-DocKit Master sử dụng hệ thống skill files — mỗi file Markdown chứa hướng dẫn chi tiết để AI agent thực hiện một nhiệm vụ cụ thể. Orchestrator (`SKILL.md`) gọi từng skill theo thứ tự pipeline.
+## Skills Overview
 
-## Danh Sách Skills
+| Skill | Input | Output | Category |
+|-------|-------|--------|----------|
+| [analyze-codebase](./analyze-codebase) | Project files | analysis.md | Foundation |
+| persona-builder | analysis.md, source code | personas/ | Knowledge |
+| jtbd-analyzer | analysis.md, personas/ | jtbd/ | Knowledge |
+| flow-mapper | analysis.md, personas/, jtbd/ | flows/ | Knowledge |
+| tech-docs | analysis.md | architecture.md, database.md, etc. | Documentation |
+| sop-guide | analysis.md, knowledge layer | sop/ | Documentation |
+| api-reference | analysis.md | api/ | Documentation |
+| [content-guidelines](./content-guidelines) | N/A (rules only) | N/A | Quality |
+| content-writing | N/A (rules only) | N/A | Quality |
+| llm-optimization | N/A (rules only) | N/A | Quality |
+| seo-checklist | Generated docs | Audit report | Quality |
 
-### Core Skills (Generation)
+## Dependency Graph
 
-| Skill | File | Vai trò |
-|-------|------|---------|
-| [Orchestrator](./orchestrator) | `SKILL.md` | Điều phối pipeline 6 bước |
-| [Analyzer](./analyze-codebase) | `skills/analyze-codebase.md` | Quét codebase, phát hiện tech stack |
-| [Content Guidelines](./content-guidelines) | `skills/content-guidelines.md` | Quy tắc chất lượng nội dung |
+```mermaid
+graph LR
+    style A fill:#232221,stroke:#60A5FA,color:#E8E5DF
+    style B fill:#232221,stroke:#60A5FA,color:#E8E5DF
+    style C fill:#232221,stroke:#60A5FA,color:#E8E5DF
+    style D fill:#232221,stroke:#60A5FA,color:#E8E5DF
+    style E fill:#232221,stroke:#3fb950,color:#E8E5DF
+    style F fill:#232221,stroke:#3fb950,color:#E8E5DF
+    style G fill:#232221,stroke:#3fb950,color:#E8E5DF
 
-### Generator Skills
+    A["analyze-codebase"] --> B["persona-builder"]
+    A --> C["jtbd-analyzer"]
+    B --> C
+    A --> D["flow-mapper"]
+    B --> D
+    C --> D
+    A --> E["tech-docs"]
+    D --> F["sop-guide"]
+    A --> G["api-reference"]
+```
 
-| Skill | File | Output |
-|-------|------|--------|
-| Tech Docs | `skills/tech-docs.md` | `architecture.md`, `database.md`, `deployment.md`, `data-flow.md` |
-| SOP Guide | `skills/sop-guide.md` | `sop/[feature].md` per module |
-| API Reference | `skills/api-reference.md` | `api/[resource].md` per resource |
+**Dependency summary:** analyze-codebase is the root dependency. Knowledge skills chain: personas → JTBD → flows. Tech docs depend only on analysis. SOPs depend on the full knowledge layer.
 
-### Support Skills (SEO + LLM)
+## Common Configuration
 
-| Skill | File | Vai trò |
-|-------|------|---------|
-| SEO Checklist | `skills/seo-checklist.md` | Per-page SEO audit |
-| Content Writing | `skills/content-writing.md` | SEO copywriting rules |
-| LLM Optimization | `skills/llm-optimization.md` | AI-readable structure |
+All skills accept the global config object defined in Step 1:
 
-### Workflow Files
+```
+DOC_TYPE     = knowledge | tech | sop | api | all
+FORMAT       = markdown | astro
+SCOPE        = full | focused
+LANGUAGE     = en | vi | zh | ja
+SEO          = yes | no
+LLM_OPTIMIZE = yes | no
+```
 
-| Workflow | File | Vai trò |
-|----------|------|---------|
-| Generate Docs | `workflows/generate-docs.md` | Quy trình tổng |
-| Setup Astro | `workflows/setup-astro.md` | Scaffold Astro Starlight ★ |
-| Export Markdown | `workflows/export-markdown.md` | Xuất plain Markdown |
-| Generate Sitemap | `workflows/generate-sitemap.md` | XML sitemap + NotebookLM URLs |
-| Setup Docusaurus | `workflows/setup-docusaurus.md` | Legacy — Docusaurus scaffolding |
+## Related
 
-:::note
-`setup-docusaurus.md` vẫn được giữ lại cho backward compatibility, nhưng **Astro Starlight** là output format mặc định và khuyến nghị.
-:::
-
----
-
-> Xem thêm: [Kiến trúc hệ thống](../architecture) · [Hướng dẫn sử dụng](../sop/index)
+- [System Architecture](../architecture)
+- [Data Flow](../data-flow)
+- [Skill pipeline workflow](../flows/wf-skill-pipeline)

@@ -24,7 +24,7 @@ const ctoTranslations = {
             title: "AI-generated docs that<br>stay in sync with your code.",
             subtitle: "DocKit Master traces actual code paths, maps architecture, and generates verifiable documentation — automatically.",
             terminal: {
-                cmd: "bash doc-gen.sh --scope full --format astro",
+                cmd: "bash dockit-master.sh --scope full --format astro",
                 output: [
                     "✓ Scanning 847 files across 12 modules...",
                     "✓ Architecture mapped: 4 layers, 23 services",
@@ -51,7 +51,7 @@ const ctoTranslations = {
             label: "How It Works",
             title: "3 steps. Done.",
             s1: { title: "Install", desc: "Copy doc-kit into your AI agent's skills folder.", code: "cp -r doc-kit ~/.gemini/antigravity/skills/" },
-            s2: { title: "Scan", desc: "Run the CLI — pick doc type, output format, scope.", code: "bash doc-gen.sh" },
+            s2: { title: "Scan", desc: "Run the CLI — pick doc type, output format, scope.", code: "bash dockit-master.sh" },
             s3: { title: "Deploy", desc: "Paste the prompt. AI generates everything. Ship it.", result: "Complete architecture, DB, API, SOP docs — ready to deploy." }
         },
         related: {
@@ -89,7 +89,7 @@ const ctoTranslations = {
             title: "Tài liệu AI tự động<br>luôn đồng bộ với code.",
             subtitle: "DocKit Master trace actual code paths, map kiến trúc, và tạo tài liệu có thể verify — tự động.",
             terminal: {
-                cmd: "bash doc-gen.sh --scope full --format astro",
+                cmd: "bash dockit-master.sh --scope full --format astro",
                 output: [
                     "✓ Quét 847 files trong 12 modules...",
                     "✓ Kiến trúc: 4 layers, 23 services",
@@ -116,7 +116,7 @@ const ctoTranslations = {
             label: "Cách Hoạt Động",
             title: "3 bước. Xong.",
             s1: { title: "Cài Đặt", desc: "Copy doc-kit vào thư mục skills.", code: "cp -r doc-kit ~/.gemini/antigravity/skills/" },
-            s2: { title: "Quét", desc: "Chạy CLI — chọn loại docs, format, scope.", code: "bash doc-gen.sh" },
+            s2: { title: "Quét", desc: "Chạy CLI — chọn loại docs, format, scope.", code: "bash dockit-master.sh" },
             s3: { title: "Deploy", desc: "Paste prompt. AI tạo mọi thứ. Ship thôi.", result: "Kiến trúc, DB, API, SOP docs — sẵn sàng deploy." }
         },
         related: {
@@ -154,7 +154,7 @@ const ctoTranslations = {
             title: "ИИ-документация,<br>всегда синхронизирована с кодом.",
             subtitle: "DocKit Master отслеживает реальные пути кода, строит карту архитектуры и генерирует верифицируемую документацию — автоматически.",
             terminal: {
-                cmd: "bash doc-gen.sh --scope full --format astro",
+                cmd: "bash dockit-master.sh --scope full --format astro",
                 output: [
                     "✓ Сканирование 847 файлов в 12 модулях...",
                     "✓ Архитектура: 4 слоя, 23 сервиса",
@@ -181,7 +181,7 @@ const ctoTranslations = {
             label: "Как это работает",
             title: "3 шага. Готово.",
             s1: { title: "Установка", desc: "Скопируйте doc-kit в папку skills.", code: "cp -r doc-kit ~/.gemini/antigravity/skills/" },
-            s2: { title: "Сканирование", desc: "Запустите CLI — выберите тип, формат, область.", code: "bash doc-gen.sh" },
+            s2: { title: "Сканирование", desc: "Запустите CLI — выберите тип, формат, область.", code: "bash dockit-master.sh" },
             s3: { title: "Деплой", desc: "Вставьте промпт. ИИ генерирует всё. Отправляйте.", result: "Архитектура, БД, API, SOP документация готова." }
         },
         related: {
@@ -219,7 +219,7 @@ const ctoTranslations = {
             title: "AI 生成的文档<br>始终与代码同步。",
             subtitle: "DocKit Master 追踪实际代码路径，映射架构，自动生成可验证的文档。",
             terminal: {
-                cmd: "bash doc-gen.sh --scope full --format astro",
+                cmd: "bash dockit-master.sh --scope full --format astro",
                 output: [
                     "✓ 扫描 12 个模块中的 847 个文件...",
                     "✓ 架构：4 层，23 个服务",
@@ -246,7 +246,7 @@ const ctoTranslations = {
             label: "运作方式",
             title: "3 步完成。",
             s1: { title: "安装", desc: "将 doc-kit 复制到 skills 文件夹。", code: "cp -r doc-kit ~/.gemini/antigravity/skills/" },
-            s2: { title: "扫描", desc: "运行 CLI — 选择文档类型、格式、范围。", code: "bash doc-gen.sh" },
+            s2: { title: "扫描", desc: "运行 CLI — 选择文档类型、格式、范围。", code: "bash dockit-master.sh" },
             s3: { title: "部署", desc: "粘贴提示词。AI 生成一切。发布吧。", result: "架构、数据库、API、SOP 文档 — 准备部署。" }
         },
         related: {

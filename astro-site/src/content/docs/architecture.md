@@ -1,172 +1,147 @@
 ---
-title: "Kiến Trúc Hệ Thống — DocKit Master"
-description: "Tổng quan kiến trúc DocKit Master: pipeline 6 bước, skill orchestration, và các quyết định thiết kế chính"
-keywords: ["architecture", "system design", "DocKit Master", "pipeline"]
+title: "System Architecture — DocKit Master"
+description: "Architecture overview of DocKit Master — skill-based AI documentation engine with multi-IDE support and SEO optimization"
+keywords: ["architecture", "system design", "skill engine", "DocKit Master"]
 robots: "index, follow"
 sidebar:
   order: 2
 ---
 
-# Kiến Trúc Hệ Thống
+# System Architecture
 
-> **Tham Khảo Nhanh**
-> - **Loại**: Skill-based Pipeline (không phải microservices)
-> - **Stack**: Markdown, Bash, CSS, Astro Starlight
-> - **Modules chính**: Orchestrator, Analyzer, Generators (3), Exporters (2)
-> - **Deployment**: Copy vào `~/.gemini/antigravity/skills/`
+> **Quick Reference**
+> - **Type**: Skill-based AI documentation engine
+> - **Stack**: Markdown (skills), Bash (CLI), Astro Starlight (output)
+> - **Key Modules**: 11 skills, 5 workflows, 6 adapters, 2 scripts
+> - **Deployment**: Static site (Astro) / Plain files (Markdown)
 
-## Tổng Quan
+## Overview
 
-DocKit Master là một **AI skill toolkit** chạy bên trong Google Antigravity. Nó không phải web app hay API server — mà là tập hợp các file Markdown hướng dẫn AI agent cách đọc code, phân tích kiến trúc, và sinh tài liệu chuyên nghiệp.
+DocKit Master is a knowledge systematization engine that transforms codebases into comprehensive documentation. Unlike traditional doc generators, it produces a complete knowledge base — personas, jobs-to-be-done, process flows, technical docs, SOPs, and API references — all from a single codebase scan.
 
-Kiến trúc dựa trên mô hình **orchestrator-worker**: `SKILL.md` điều phối toàn bộ quy trình, gọi từng skill con theo thứ tự.
-
-## Sơ Đồ Kiến Trúc
-
-Sơ đồ dưới mô tả luồng dữ liệu chính của DocKit Master, từ input người dùng đến output cuối cùng.
+## Architecture Diagram
 
 ```mermaid
 graph TB
-    style INPUT fill:#2d333b,stroke:#6d5dfc,color:#e6edf3
-    style ORCH fill:#2d333b,stroke:#6d5dfc,color:#e6edf3
-    style ANALYZE fill:#2d333b,stroke:#6d5dfc,color:#e6edf3
-    style CONTENT fill:#2d333b,stroke:#8b949e,color:#e6edf3
-    style TECH fill:#2d333b,stroke:#6d5dfc,color:#e6edf3
-    style SOP fill:#2d333b,stroke:#6d5dfc,color:#e6edf3
-    style API fill:#2d333b,stroke:#6d5dfc,color:#e6edf3
-    style ASTRO fill:#2d333b,stroke:#3fb950,color:#e6edf3
-    style MD fill:#2d333b,stroke:#3fb950,color:#e6edf3
-    style SEO fill:#2d333b,stroke:#d29922,color:#e6edf3
+    style Entry fill:#232221,stroke:#3fb950,color:#E8E5DF
+    style Engine fill:#232221,stroke:#60A5FA,color:#E8E5DF
+    style Quality fill:#232221,stroke:#d29922,color:#E8E5DF
+    style Export fill:#232221,stroke:#f78166,color:#E8E5DF
+    style Output fill:#232221,stroke:#3fb950,color:#E8E5DF
 
-    INPUT["📥 User Input<br/>doc type, format, scope"] --> ORCH["📋 SKILL.md<br/>Orchestrator"]
-    ORCH --> ANALYZE["🔍 analyze-codebase.md<br/>Step 2"]
-    ANALYZE --> CONTENT["📝 content-guidelines.md<br/>+ SEO + LLM rules"]
-    CONTENT --> TECH["📐 tech-docs.md"]
-    CONTENT --> SOP["📋 sop-guide.md"]
-    CONTENT --> API["🔌 api-reference.md"]
-    TECH --> ASTRO["🚀 Astro Starlight<br/>setup-astro.md"]
-    SOP --> ASTRO
-    API --> ASTRO
-    TECH --> MD["📄 Markdown<br/>export-markdown.md"]
-    SOP --> MD
-    API --> MD
-    ASTRO --> SEO["🔍 SEO Audit<br/>+ Sitemap"]
-    MD --> SEO
+    subgraph Entry["Entry Points"]
+        CLI["CLI Script\ndockit-master.sh"]
+        ADP["IDE Adapters\n6 IDEs"]
+        MAIN["SKILL.md\nOrchestrator"]
+    end
+
+    subgraph Engine["Knowledge Engine"]
+        S1["analyze-codebase"]
+        S2["persona-builder"]
+        S3["jtbd-analyzer"]
+        S4["flow-mapper"]
+        S5["tech-docs"]
+        S6["sop-guide"]
+        S7["api-reference"]
+    end
+
+    subgraph Quality["Quality Layer"]
+        Q1["content-guidelines"]
+        Q2["content-writing"]
+        Q3["llm-optimization"]
+        Q4["seo-checklist"]
+    end
+
+    subgraph Export["Export Pipeline"]
+        E1["setup-astro"]
+        E2["export-markdown"]
+        E3["generate-sitemap"]
+    end
+
+    subgraph Output["Output"]
+        O1["Astro Starlight\nPremium site"]
+        O2["Markdown\nPlain files"]
+    end
+
+    CLI --> MAIN
+    ADP --> MAIN
+    MAIN --> S1 --> S2 --> S3 --> S4 --> S5 --> S6 --> S7
+    S2 -.-> Q1
+    S5 -.-> Q2
+    S6 -.-> Q3
+    S7 -.-> Q4
+    S7 --> E1
+    S7 --> E2
+    E1 --> O1
+    E2 --> O2
+    E1 --> E3
 ```
 
-## Thành Phần Cốt Lõi
+**Architecture summary:** Entry points (CLI, IDE adapters) feed into the SKILL.md orchestrator, which sequentially runs the knowledge engine skills. The quality layer provides guidelines applied during generation. The export pipeline produces either a premium Astro Starlight site or plain Markdown files.
 
-| Thành phần | File | Vai trò |
-|------------|------|---------|
-| **Orchestrator** | `SKILL.md` | Điều phối quy trình 6 bước, quản lý config |
-| **Analyzer** | `skills/analyze-codebase.md` | Quét codebase, phát hiện tech stack, trích xuất schema |
-| **Content Engine** | `skills/content-guidelines.md` | Quy tắc chất lượng: UX laws, Mermaid, frontmatter |
-| **SEO Engine** | `skills/content-writing.md` + `seo-checklist.md` | SEO copywriting + per-page audit |
-| **LLM Engine** | `skills/llm-optimization.md` | AI-readable structure, NotebookLM support |
-| **Tech Generator** | `skills/tech-docs.md` | Sinh architecture, database, deployment, data-flow |
-| **SOP Generator** | `skills/sop-guide.md` | Sinh hướng dẫn sử dụng từng bước |
-| **API Generator** | `skills/api-reference.md` | Sinh tài liệu API/skill reference |
-| **Astro Exporter** | `workflows/setup-astro.md` | Scaffold Astro Starlight site ★ |
-| **Markdown Exporter** | `workflows/export-markdown.md` | Xuất Markdown thuần |
-| **Sitemap Generator** | `workflows/generate-sitemap.md` | XML sitemap + robots.txt + NotebookLM URLs |
-| **CLI** | `scripts/doc-gen.sh` | Giao diện dòng lệnh tương tác |
+## Core Components
 
-## Luồng Xử Lý Chi Tiết
+| Component | Files | Purpose |
+|-----------|-------|---------|
+| **Orchestrator** | `SKILL.md` (295 lines) | Routes to skills based on doc type, manages pipeline |
+| **Knowledge Skills** | 3 skills (28.5 KB) | Personas, JTBD, Process Flows |
+| **Documentation Skills** | 3 skills (21.7 KB) | Tech docs, SOP guides, API reference |
+| **Quality Skills** | 4 skills (28 KB) | Content guidelines, SEO, LLM optimization |
+| **Workflows** | 5 files (21.5 KB) | Export, sitemap, Astro setup |
+| **CLI** | 2 scripts (16.1 KB) | Interactive prompt generator, multi-IDE installer |
+| **Adapters** | 6 files (14.4 KB) | Cursor, Claude, Gemini, OpenCode, Windsurf, AGENTS |
 
-Quy trình 6 bước được mô tả chi tiết dưới đây:
-
-```mermaid
-sequenceDiagram
-    participant U as 👤 User
-    participant O as 📋 Orchestrator
-    participant A as 🔍 Analyzer
-    participant C as 📝 Content Rules
-    participant G as ⚙️ Generators
-    participant E as 📤 Exporter
-    participant S as 🔍 SEO
-
-    Note over O: Step 1: Gather Input
-    O->>U: Hiển thị form cấu hình (10 câu hỏi)
-    U->>O: Trả lời cấu hình
-    O->>O: Auto-generate execution plan
-
-    Note over A: Step 2: Analyze Codebase
-    O->>A: Quét project root
-    A->>A: Detect tech stack, map architecture
-    A->>A: Extract routes, schema, dependencies
-
-    Note over C: Step 3: Apply Guidelines
-    O->>C: Áp dụng content-guidelines + SEO + LLM
-
-    Note over G: Step 4: Generate Documents
-    O->>G: Sinh tech/sop/api docs
-    G->>G: Mỗi file có frontmatter, Quick Ref, Mermaid
-
-    Note over E: Step 5: Export
-    O->>E: Scaffold Astro site hoặc export Markdown
-    E->>S: Generate sitemap + SEO audit
-
-    Note over U: Step 6: Summary
-    O->>U: Danh sách file, hướng dẫn xem docs
-```
-
-## Quyết Định Kiến Trúc (ADR)
-
-| # | Quyết định | Bối cảnh | Trạng thái |
-|---|-----------|----------|------------|
-| 1 | Chuyển từ Docusaurus sang Astro Starlight | Docusaurus nặng (1.5GB node_modules), cần MDX escaping, sidebar thủ công | ✅ Accepted |
-| 2 | Thêm SEO + LLM optimization | Documentation cần tối ưu cho cả search engines và AI agents | ✅ Accepted |
-| 3 | Sitemap + NotebookLM support | Cho phép import docs vào NotebookLM để nghiên cứu | ✅ Accepted |
-| 4 | Skill-based architecture (không phải code) | DocKit Master là AI prompt toolkit, không phải software | ✅ Accepted |
+## Architecture Decision Records
 
 <details>
-<summary>ADR-001: Chuyển từ Docusaurus sang Astro Starlight</summary>
+<summary>ADR-001: Markdown-based skills over code</summary>
 
-**Bối cảnh:** Docusaurus 3 yêu cầu MDX escaping (`<`, `{`, `}`), sidebar thủ công (`sidebars.ts`), và node_modules nặng ~1.5GB. Build time ~30s.
+**Context:** Skills need to work across 7+ AI IDEs with different runtimes.
 
-**Quyết định:** Chuyển sang Astro Starlight với pure Markdown, auto-sidebar, built-in search (Pagefind), và node_modules chỉ ~50MB. Build time ~5s.
+**Decision:** Use pure Markdown instruction files instead of executable code.
 
-**Hệ quả:**
-- ✅ Không cần escaping — Markdown thuần
-- ✅ Auto-sidebar từ folder structure
-- ✅ Built-in search, dark mode, i18n
-- ✅ Build size giảm 30x
-- ⚠️ Cần migration template mới
+**Consequences:**
+- Portable across any AI agent that reads Markdown
+- Version-controllable with Git
+- No runtime dependencies
+- Cannot enforce rules programmatically (relies on AI compliance)
 
 </details>
 
 <details>
-<summary>ADR-002: Tích hợp SEO + LLM Optimization</summary>
+<summary>ADR-002: Astro Starlight over Docusaurus</summary>
 
-**Bối cảnh:** Documentation cần phục vụ cả người đọc, search engines, và AI agents.
+**Context:** Need a fast, modern documentation framework with search and dark mode.
 
-**Quyết định:** Thêm 3 skill files mới: `content-writing.md` (SEO copywriting), `seo-checklist.md` (per-page audit), `llm-optimization.md` (AI-readable rules).
+**Decision:** Migrate from Docusaurus to Astro Starlight.
 
-**Hệ quả:**
-- ✅ Mỗi trang có SEO frontmatter (title, description, keywords, robots)
-- ✅ Sitemap XML + `sitemap-urls.txt` cho NotebookLM
-- ✅ Self-contained sections cho LLM chunking
-- ⚠️ Tăng thời gian generation do thêm bước audit
+**Consequences:**
+- 50MB vs 1.5GB node_modules
+- Auto-generated sidebar (no manual sidebars.ts)
+- Native Markdown (no MDX escaping issues)
+- Built-in Pagefind search
+- 5s vs 30s build time
 
 </details>
 
-## Bảo Mật
+<details>
+<summary>ADR-003: Knowledge layer before documentation</summary>
 
-DocKit Master không có vấn đề bảo mật đặc biệt vì:
-- Là tập hợp file Markdown prompt — không chạy server
-- Không lưu trữ dữ liệu người dùng
-- CLI script (`doc-gen.sh`) chỉ tạo prompt text và copy vào clipboard
-- Output là static HTML site — không có backend
+**Context:** SOPs and API docs lack context without user understanding.
 
-## Khả Năng Mở Rộng
+**Decision:** Generate Personas, JTBD, and Flows before tech/SOP/API docs.
 
-| Khía cạnh | Chiến lược |
-|-----------|-----------|
-| Thêm doc type mới | Tạo file `skills/[new-type].md` và thêm vào bảng trong `SKILL.md` |
-| Thêm output format | Tạo file `workflows/setup-[format].md` và template tương ứng |
-| Thêm ngôn ngữ | Thêm locale vào `astro.config.mjs` và tạo thư mục dịch |
-| Thêm SEO rules | Cập nhật `skills/seo-checklist.md` và `skills/content-writing.md` |
+**Consequences:**
+- SOPs include "who this guide is for" context
+- Flows provide visual process understanding
+- JTBD aligns docs with user goals
+- Increases total generation time by ~30%
 
----
+</details>
 
-> Xem thêm: [Luồng dữ liệu](./data-flow) · [Hướng dẫn triển khai](./deployment)
+## Related
+
+- [Database and Data Model](./database)
+- [Deployment Guide](./deployment)
+- [Data Flow](./data-flow)
+- [Personas](./personas/)

@@ -1,208 +1,121 @@
 ---
-title: "Hướng Dẫn Triển Khai — DocKit Master"
-description: "Cài đặt, cấu hình, chạy CLI và deploy docs site cho DocKit Master. Hỗ trợ Astro Starlight và Markdown output."
-keywords: ["deployment", "installation", "DocKit Master", "Astro Starlight"]
+title: "Deployment Guide — DocKit Master"
+description: "Installation, configuration, and deployment guide for DocKit Master across AI coding IDEs and static hosting"
+keywords: ["deployment", "installation", "infrastructure", "DocKit Master"]
 robots: "index, follow"
 sidebar:
   order: 4
 ---
 
-# Hướng Dẫn Triển Khai
+# Deployment Guide
 
-> **Tham Khảo Nhanh**
-> - **Platform**: macOS (CLI), mọi OS (chat mode)
-> - **Yêu cầu**: Node.js 18+, Google Antigravity
-> - **Cài đặt**: Copy folder vào `~/.gemini/antigravity/skills/`
-> - **Output**: Static Astro site hoặc Markdown files
+> **Quick Reference**
+> - **Platform**: Any AI coding IDE + Node.js 18+ (for Astro)
+> - **Min Requirements**: Node.js 18, npm 9+
+> - **Install Time**: ~2 minutes
+> - **Build Time**: ~5 seconds (Astro)
 
-## Yêu Cầu Hệ Thống
+## System Requirements
 
-| Thành phần | Tối thiểu | Khuyến nghị |
+| Component | Minimum | Recommended |
 |-----------|---------|-------------|
-| Node.js | 18.x | 20.x LTS |
-| npm | 9.x | 10.x |
-| Disk | 100MB (skill files) | 500MB (khi build Astro site) |
-| OS (CLI) | macOS (pbcopy) | macOS |
-| OS (Chat) | Bất kỳ | Bất kỳ |
+| Node.js | 18.x | 20.x+ |
+| npm | 9.x | 10.x+ |
+| Disk | 100 MB | 500 MB |
+| Bash | 4.x (for CLI) | 5.x |
 
-## Cài Đặt
+## Installation Methods
 
-### Bước 1: Copy Skill vào Antigravity
-
-```bash
-# Copy toàn bộ doc-kit vào skills directory
-cp -r doc-kit ~/.gemini/antigravity/skills/
-
-# Cấp quyền thực thi cho CLI
-chmod +x ~/.gemini/antigravity/skills/doc-kit/scripts/doc-gen.sh
-```
-
-### Bước 2: Kiểm Tra Cài Đặt
+### Method 1: Interactive Installer
 
 ```bash
-# Verify skill tồn tại
-ls ~/.gemini/antigravity/skills/doc-kit/SKILL.md
-
-# Verify CLI hoạt động
-bash ~/.gemini/antigravity/skills/doc-kit/scripts/doc-gen.sh
+bash scripts/install.sh
 ```
 
-:::tip[Cài đặt 1 lầp duy nhất]
-Sau khi copy xong, DocKit Master sẵn sàng cho mọi project. Không cần cài thêm dependencies trừ khi bạn chọn output Astro.
+Presents a menu to choose target IDE(s). Supports: Antigravity, Cursor, Claude Code, Gemini CLI, OpenCode, Windsurf, Generic.
+
+### Method 2: Install for All IDEs
+
+```bash
+bash scripts/install.sh --all
+```
+
+### Method 3: Specific IDE
+
+```bash
+bash scripts/install.sh --cursor
+bash scripts/install.sh --claude
+bash scripts/install.sh --gemini
+```
+
+### Method 4: Manual Copy
+
+```bash
+# For Antigravity (default)
+cp -r . ~/.gemini/antigravity/skills/doc-kit/
+
+# For Cursor
+cp adapters/cursor.mdc .cursor/rules/dockit-master.mdc
+
+# For Claude Code
+cp adapters/claude.md CLAUDE.md
+```
+
+:::tip
+Use `--copy-skills` flag to embed all skill files into the target project for fully portable offline usage.
 :::
 
-## Sử Dụng
+## Building the Docs Site
 
-### Cách 1: Chat Mode (Khuyến nghị)
-
-Gõ trực tiếp trong Google Antigravity session:
-
-```
-Dùng DocKit Master để tạo tài liệu cho project tại /đường/dẫn/project
-```
-
-Hoặc trigger ngắn:
-
-```
-/DocKit Master
-```
-
-Agent sẽ hỏi 10 câu hỏi cấu hình → tự động lên plan → bắt đầu quét code và sinh tài liệu.
-
-### Cách 2: CLI Script
+After generating documentation with DocKit Master:
 
 ```bash
-bash ~/.gemini/antigravity/skills/doc-kit/scripts/doc-gen.sh
-```
-
-CLI hỏi 4 câu hỏi:
-1. **Document Type**: tech / sop / api / all
-2. **Output Format**: astro (★) / markdown
-3. **Source Code Path**: đường dẫn project
-4. **Language**: English / Vietnamese
-
-→ Tạo prompt tối ưu và tự copy vào clipboard. Paste vào Antigravity.
-
-## Build Astro Site
-
-Sau khi DocKit Master sinh docs vào `docs/`, build Astro site:
-
-```bash
-# Scaffold Astro Starlight (từ setup-astro.md workflow)
-cd [project_root]
-npm create astro@latest ./astro-site -- --template starlight --no-install --no-git --yes
-
-# Copy premium template
-cp ~/.gemini/antigravity/skills/doc-kit/templates/astro-premium/astro.config.mjs \
-   astro-site/astro.config.mjs
-mkdir -p astro-site/src/styles
-cp ~/.gemini/antigravity/skills/doc-kit/templates/astro-premium/src/styles/custom.css \
-   astro-site/src/styles/custom.css
-
-# Copy generated docs
-rm -rf astro-site/src/content/docs/*
-cp -r docs/*.md astro-site/src/content/docs/
-[ -d docs/sop ] && cp -r docs/sop astro-site/src/content/docs/
-[ -d docs/api ] && cp -r docs/api astro-site/src/content/docs/
-
-# Build
+# Navigate to the Astro site
 cd astro-site
+
+# Install dependencies
 npm install
+
+# Build for production
 npm run build
+
+# Preview locally
+npm run preview -- --port 4321
 ```
 
-:::caution[Tuỳ chỉnh cấu hình]
-Nhớ thay thế các `[PLACEHOLDER]` trong `astro.config.mjs`: `[Project Name]`, `[GITHUB_URL]`, `site` URL.
+## Deploy to Static Hosting
+
+The built output in `astro-site/dist/` can be deployed to any static host:
+
+| Host | Command |
+|------|---------|
+| GitHub Pages | Push `dist/` to `gh-pages` branch |
+| Cloudflare Pages | Connect repo, build cmd: `npm run build`, output: `dist/` |
+| Netlify | Connect repo, build cmd: `npm run build`, publish: `dist/` |
+| Vercel | `npx vercel deploy dist/` |
+
+:::warning
+Update the `site` field in `astro.config.mjs` with your actual deployment URL before building. This is required for correct sitemap generation.
 :::
 
 ## CI/CD Pipeline
 
-Luồng CI/CD cho deploy documentation site:
-
 ```mermaid
 graph LR
-    style A fill:#2d333b,stroke:#6d5dfc,color:#e6edf3
-    style B fill:#2d333b,stroke:#6d5dfc,color:#e6edf3
-    style C fill:#2d333b,stroke:#3fb950,color:#e6edf3
-    style D fill:#2d333b,stroke:#3fb950,color:#e6edf3
+    style A fill:#232221,stroke:#60A5FA,color:#E8E5DF
+    style B fill:#232221,stroke:#60A5FA,color:#E8E5DF
+    style C fill:#232221,stroke:#60A5FA,color:#E8E5DF
+    style D fill:#232221,stroke:#3fb950,color:#E8E5DF
 
-    A["🔀 Push docs/"] --> B["🧪 npm run build"]
-    B --> C["📦 Output dist/"]
-    C --> D["🚀 Deploy"]
+    A["Push to main"] --> B["npm install"]
+    B --> C["npm run build"]
+    C --> D["Deploy dist/"]
 ```
 
-### Deploy lên GitHub Pages
+**Pipeline summary:** On push, install dependencies, build the Astro site, and deploy the dist/ output to static hosting. Total pipeline time is under 60 seconds.
 
-```bash
-cd astro-site
-npm run build
-# Output trong dist/ — upload lên GitHub Pages
-```
+## Related
 
-### Deploy lên Cloudflare Pages
-
-Trong Cloudflare dashboard:
-- **Build command**: `npm run build`
-- **Output directory**: `dist/`
-- **Node.js version**: `18`
-
-### Deploy lên Vercel
-
-```bash
-cd astro-site
-npx vercel --prod
-```
-
-## Cấu Trúc Output
-
-### Astro Output
-
-```
-astro-site/
-├── astro.config.mjs        # Cấu hình Starlight
-├── src/
-│   ├── content/docs/        # Markdown content
-│   │   ├── index.md
-│   │   ├── architecture.md
-│   │   ├── database.md
-│   │   ├── deployment.md
-│   │   ├── data-flow.md
-│   │   ├── sop/
-│   │   └── api/
-│   └── styles/
-│       └── custom.css       # Premium CSS
-├── public/
-│   └── robots.txt
-└── dist/                    # Build output (static HTML)
-```
-
-### Markdown Output
-
-```
-docs/
-├── index.md                 # Trang chủ
-├── architecture.md
-├── database.md
-├── deployment.md
-├── data-flow.md
-├── analysis.md
-├── sop/
-│   ├── index.md
-│   └── [feature].md
-└── api/
-    ├── index.md
-    └── [resource].md
-```
-
-## Xử Lý Lỗi Phổ Biến
-
-| Lỗi | Nguyên nhân | Cách sửa |
-|------|------------|----------|
-| Missing `title` in frontmatter | Starlight yêu cầu `title` | Thêm `title: "..."` vào frontmatter |
-| Duplicate slugs | Hai file cùng tên | Đổi tên một file |
-| Build fails on Mermaid | Starlight không hỗ trợ Mermaid mặc định | `npm install remark-mermaidjs` và thêm vào config |
-| `_analysis.md` not found | Underscore prefix bị auto-sidebar bỏ qua | Dùng `analysis.md` thay vì `_analysis.md` |
-
----
-
-> Xem thêm: [Kiến trúc hệ thống](./architecture) · [Sử dụng CLI](./sop/using-cli)
+- [System Architecture](./architecture)
+- [Data Flow](./data-flow)
+- [Using the CLI](./sop/using-cli)

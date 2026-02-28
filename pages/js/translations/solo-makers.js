@@ -24,7 +24,7 @@ const soloTranslations = {
             title: "AI scans your code.<br>Docs appear like magic.",
             subtitle: "DocKit Master generates technical docs, SOPs, API references, and a premium Astro Starlight site — all from your codebase.",
             terminal: {
-                cmd: "bash doc-gen.sh --type all --format astro",
+                cmd: "bash dockit-master.sh --type all --format astro",
                 output: [
                     "✓ Scanning your entire project...",
                     "✓ Generating Personas & JTBD Canvases...",
@@ -51,7 +51,7 @@ const soloTranslations = {
             label: "How It Works",
             title: "3 steps. Done.",
             s1: { title: "Install", desc: "Clone and copy to your AI agent.", code: "cp -r doc-kit ~/.gemini/antigravity/skills/" },
-            s2: { title: "Generate", desc: "Pick your options — all types, Astro format.", code: "bash doc-gen.sh" },
+            s2: { title: "Generate", desc: "Pick your options — all types, Astro format.", code: "bash dockit-master.sh" },
             s3: { title: "Ship", desc: "Paste prompt, AI builds everything.", result: "Full knowledge base + premium docs site — deploy anywhere." }
         },
         related: {
@@ -89,7 +89,7 @@ const soloTranslations = {
             title: "AI quét code.<br>Docs xuất hiện như phép thuật.",
             subtitle: "DocKit Master tạo tech docs, SOPs, API reference, và Astro Starlight site — tất cả từ codebase.",
             terminal: {
-                cmd: "bash doc-gen.sh --type all --format astro",
+                cmd: "bash dockit-master.sh --type all --format astro",
                 output: ["✓ Đang quét toàn bộ project...", "✓ Tạo Personas & JTBD...", "✓ Architecture + Database docs", "✓ SOP user guides", "✓ API reference cURL/JS/Python", "✅ Astro Starlight site sẵn sàng!"]
             }
         },
@@ -108,7 +108,7 @@ const soloTranslations = {
         steps: {
             label: "Cách Hoạt Động", title: "3 bước. Xong.",
             s1: { title: "Cài Đặt", desc: "Clone và copy vào AI agent.", code: "cp -r doc-kit ~/.gemini/antigravity/skills/" },
-            s2: { title: "Tạo Prompt", desc: "Chọn options — all types, Astro format.", code: "bash doc-gen.sh" },
+            s2: { title: "Tạo Prompt", desc: "Chọn options — all types, Astro format.", code: "bash dockit-master.sh" },
             s3: { title: "Ship", desc: "Paste prompt, AI build mọi thứ.", result: "Knowledge base + docs site premium — deploy bất kỳ đâu." }
         },
         related: {
@@ -131,7 +131,7 @@ const soloTranslations = {
             label: "Невозможный выбор", title: "Разрабатывать или документировать?<br>В одиночку невозможно.", subtitle: "Соло-разработчики сталкиваются с болезненным выбором каждый день.",
             items: ["Вы — разработчик, дизайнер, маркетолог И техписатель", "\"Напишу документацию позже\" — позже <strong class='text-white'>никогда не наступает</strong>", "Продукт выглядит непрофессионально без документации", "Инвесторы судят о зрелости по документации", "Техписатель стоит <strong class='text-white'>$5,000+</strong> — это весь ваш бюджет"]
         },
-        solution: { label: "Ваше секретное оружие", title: "ИИ сканирует код.<br>Документация появляется как магия.", subtitle: "DocKit Master генерирует техдокументацию, SOP, API-справочники и премиум Astro Starlight сайт.", terminal: { cmd: "bash doc-gen.sh --type all --format astro", output: ["✓ Сканирование проекта...", "✓ Генерация персон и JTBD...", "✓ Архитектура + БД", "✓ SOP руководства", "✓ API справочник", "✅ Astro Starlight сайт готов!"] } },
+        solution: { label: "Ваше секретное оружие", title: "ИИ сканирует код.<br>Документация появляется как магия.", subtitle: "DocKit Master генерирует техдокументацию, SOP, API-справочники и премиум Astro Starlight сайт.", terminal: { cmd: "bash dockit-master.sh --type all --format astro", output: ["✓ Сканирование проекта...", "✓ Генерация персон и JTBD...", "✓ Архитектура + БД", "✓ SOP руководства", "✓ API справочник", "✅ Astro Starlight сайт готов!"] } },
         benefits: {
             label: "Для мейкеров", title: "Профессиональные документы.<br>Без дополнительного времени.",
             items: [
@@ -146,7 +146,7 @@ const soloTranslations = {
         steps: {
             label: "Как это работает", title: "3 шага. Готово.",
             s1: { title: "Установка", desc: "Скопируйте doc-kit.", code: "cp -r doc-kit ~/.gemini/antigravity/skills/" },
-            s2: { title: "Генерация", desc: "Запустите CLI.", code: "bash doc-gen.sh" },
+            s2: { title: "Генерация", desc: "Запустите CLI.", code: "bash dockit-master.sh" },
             s3: { title: "Деплой", desc: "Вставьте промпт. ИИ создаст всё.", result: "Полная документация — готова к деплою." }
         },
         related: {
@@ -168,7 +168,7 @@ const soloTranslations = {
             label: "不可能的选择", title: "开发还是写文档？<br>一个人无法兼顾。", subtitle: "独立开发者每天都面临痛苦的取舍。",
             items: ["你是开发者、设计师、营销人员，还得写文档", "\"以后再写文档\" — 以后<strong class='text-white'>永远不会来</strong>", "没有文档的产品看起来不专业", "投资者和用户通过文档判断专业度", "技术文档写手要 <strong class='text-white'>$5,000+</strong> — 那是你全部预算"]
         },
-        solution: { label: "你的秘密武器", title: "AI 扫描代码。<br>文档如魔法般出现。", subtitle: "DocKit Master 自动生成技术文档、SOP、API 参考和 Astro Starlight 网站。", terminal: { cmd: "bash doc-gen.sh --type all --format astro", output: ["✓ 扫描整个项目...", "✓ 生成用户画像和 JTBD...", "✓ 架构 + 数据库文档", "✓ SOP 用户指南", "✓ API 参考 cURL/JS/Python", "✅ Astro Starlight 网站就绪！"] } },
+        solution: { label: "你的秘密武器", title: "AI 扫描代码。<br>文档如魔法般出现。", subtitle: "DocKit Master 自动生成技术文档、SOP、API 参考和 Astro Starlight 网站。", terminal: { cmd: "bash dockit-master.sh --type all --format astro", output: ["✓ 扫描整个项目...", "✓ 生成用户画像和 JTBD...", "✓ 架构 + 数据库文档", "✓ SOP 用户指南", "✓ API 参考 cURL/JS/Python", "✅ Astro Starlight 网站就绪！"] } },
         benefits: {
             label: "为创客打造", title: "发布专业文档。<br>零额外时间。",
             items: [
@@ -183,7 +183,7 @@ const soloTranslations = {
         steps: {
             label: "运作方式", title: "3 步完成。",
             s1: { title: "安装", desc: "复制 doc-kit。", code: "cp -r doc-kit ~/.gemini/antigravity/skills/" },
-            s2: { title: "生成", desc: "运行 CLI。", code: "bash doc-gen.sh" },
+            s2: { title: "生成", desc: "运行 CLI。", code: "bash dockit-master.sh" },
             s3: { title: "部署", desc: "粘贴提示词。AI 创建一切。", result: "完整知识库 + 文档网站 — 准备部署。" }
         },
         related: {

@@ -228,7 +228,7 @@ Present to user:
 For a fast interactive experience, users can run:
 
 ```bash
-bash ~/.gemini/antigravity/skills/doc-kit/scripts/doc-gen.sh
+bash ~/.gemini/antigravity/skills/doc-kit/scripts/dockit-master.sh
 ```
 
 ## UX Principles Applied
@@ -241,6 +241,42 @@ bash ~/.gemini/antigravity/skills/doc-kit/scripts/doc-gen.sh
 | **Jakob's Law** | Standard doc layout (sidebar + content + TOC) |
 | **Fitts's Law** | Touch-friendly navbar links (≥44px) |
 | **WCAG 2.1 AA** | Focus-visible rings, high contrast, reduced motion |
+
+## Platform Support
+
+| Platform | Install Method | How It Works |
+|----------|---------------|--------------|
+| **Google Antigravity** | `cp -r doc-kit ~/.gemini/antigravity/skills/` | Default — SKILL.md auto-detected |
+| **Claude Code** | Copy to `.claude/skills/` | SKILL.md auto-detected |
+| **Cursor / Windsurf** | Copy to `.cursor/skills/` or `.windsurf/skills/` | SKILL.md auto-detected |
+| **OpenClaw** | `openclaw skills install relukdev/doc-kit` | Chat to generate docs via Telegram |
+| **ZeroClaw** | `zeroclaw skills add ~/skills/doc-kit` | CLI-driven, Rust-native, local-first |
+
+> **Tip**: DocKit Master uses the standard `agentskills.io` SKILL.md format. It works with any AI agent that supports this standard.
+
+## Multi-IDE Support
+
+DocKit Master works across all major AI coding IDEs. Install with one command:
+
+```bash
+bash scripts/install.sh            # Interactive menu
+bash scripts/install.sh --all      # Install for all IDEs
+bash scripts/install.sh --cursor   # Cursor only
+```
+
+| IDE | Adapter File | Install Location |
+|-----|-------------|-----------------|
+| **Cursor** | `adapters/cursor.mdc` | `.cursor/rules/dockit-master.mdc` |
+| **Claude Code** | `adapters/claude.md` | `CLAUDE.md` |
+| **Gemini CLI** | `adapters/gemini.md` | `GEMINI.md` |
+| **OpenCode** | `adapters/opencode.md` | `.opencode/rules/dockit-master.md` |
+| **Windsurf** | `adapters/windsurf.md` | `.windsurf/rules/dockit-master.md` |
+| **Generic** | `adapters/agents.md` | `AGENTS.md` (Kimi, Copilot, etc.) |
+| **Antigravity** | `SKILL.md` (native) | `~/.gemini/antigravity/skills/doc-kit/` |
+
+Each adapter is a lightweight entry point that references `SKILL.md` and the skill files. The Gemini CLI adapter uses `@file` import syntax for modular context loading.
+
+Use `--copy-skills` flag to embed all skill files into the target project for fully portable/offline usage.
 
 ## Constraints
 

@@ -1,196 +1,95 @@
 ---
-title: "Luồng Dữ Liệu — DocKit Master"
-description: "Luồng xử lý 6 bước của DocKit Master: từ input người dùng đến output tài liệu hoàn chỉnh"
-keywords: ["data flow", "pipeline", "workflow", "DocKit Master"]
+title: "Data Flow — DocKit Master"
+description: "Data flow diagrams showing how information transforms from codebase scan to final documentation output"
+keywords: ["data flow", "integration", "pipeline", "DocKit Master"]
 robots: "index, follow"
 sidebar:
   order: 5
 ---
 
-# Luồng Dữ Liệu
+# Data Flow
 
-> **Tham Khảo Nhanh**
-> - **Pattern**: Sequential Pipeline (6 bước)
-> - **Input**: Câu trả lời cấu hình + source code
-> - **Output**: Astro Starlight site hoặc Markdown files
-> - **Serialization**: Markdown + YAML frontmatter
+> **Quick Reference**
+> - **Pattern**: Sequential pipeline (each step reads previous output)
+> - **Protocol**: File system (Markdown read/write)
+> - **Serialization**: YAML frontmatter + Markdown body
 
-## Pipeline Tổng Quan
-
-DocKit Master xử lý dữ liệu theo pipeline 6 bước tuần tự. Mỗi bước nhận output của bước trước làm input.
+## End-to-End Data Flow
 
 ```mermaid
 graph TB
-    style S1 fill:#2d333b,stroke:#6d5dfc,color:#e6edf3
-    style S2 fill:#2d333b,stroke:#6d5dfc,color:#e6edf3
-    style S3 fill:#2d333b,stroke:#8b949e,color:#e6edf3
-    style S4 fill:#2d333b,stroke:#6d5dfc,color:#e6edf3
-    style S5 fill:#2d333b,stroke:#3fb950,color:#e6edf3
-    style S6 fill:#2d333b,stroke:#3fb950,color:#e6edf3
+    style Input fill:#232221,stroke:#60A5FA,color:#E8E5DF
+    style Process fill:#232221,stroke:#d29922,color:#E8E5DF
+    style Output fill:#232221,stroke:#3fb950,color:#E8E5DF
 
-    S1["📥 Step 1<br/>Gather Input"] --> S2["🔍 Step 2<br/>Analyze Codebase"]
-    S2 --> S3["📝 Step 3<br/>Apply Guidelines"]
-    S3 --> S4["⚙️ Step 4<br/>Generate Documents"]
-    S4 --> S5["📤 Step 5<br/>Export + Sitemap"]
-    S5 --> S6["✅ Step 6<br/>Summary"]
+    Input["Source Code\nProject files, README,\npackage.json, routes"]
+    Process["Skill Pipeline\n11 skills process\nsequentially"]
+    Output["Documentation\ndocs/ or\nastro-site/dist/"]
+
+    Input --> Process --> Output
 ```
 
-## Step 1: Gather Input
+**Flow summary:** Source code enters the pipeline, is processed by 11 skills sequentially, and exits as structured documentation files.
 
-Orchestrator (`SKILL.md:41-118`) hiển thị form 10 câu hỏi cho người dùng. Output là execution config.
-
-```mermaid
-sequenceDiagram
-    participant U as 👤 User
-    participant O as 📋 SKILL.md
-
-    O->>U: Hiển thị form cấu hình
-    Note over U: Trả lời: "all, astro, full, yes, yes"
-    U->>O: Cấu hình
-
-    Note over O: Auto-detect language<br/>từ ngôn ngữ chat
-    Note over O: Generate execution plan<br/>DOC_TYPE=all, FORMAT=astro...
-
-    O->>U: Hiển thị kế hoạch triển khai
-    Note over O: Proceed to Step 2
-```
-
-**Input:** Câu trả lời người dùng (text)
-**Output:** Execution config object (10 fields)
-
-## Step 2: Analyze Codebase
-
-Analyzer (`skills/analyze-codebase.md`) quét toàn bộ codebase và tạo metadata.
+## Detailed Pipeline Flow
 
 ```mermaid
 graph LR
-    style SCAN fill:#2d333b,stroke:#6d5dfc,color:#e6edf3
-    style DETECT fill:#2d333b,stroke:#6d5dfc,color:#e6edf3
-    style MAP fill:#2d333b,stroke:#6d5dfc,color:#e6edf3
-    style OUTPUT fill:#2d333b,stroke:#3fb950,color:#e6edf3
+    style A fill:#232221,stroke:#60A5FA,color:#E8E5DF
+    style B fill:#232221,stroke:#60A5FA,color:#E8E5DF
+    style C fill:#232221,stroke:#60A5FA,color:#E8E5DF
+    style D fill:#232221,stroke:#60A5FA,color:#E8E5DF
+    style E fill:#232221,stroke:#60A5FA,color:#E8E5DF
+    style F fill:#232221,stroke:#3fb950,color:#E8E5DF
 
-    SCAN["📂 Scan Files<br/>root, dirs, extensions"] --> DETECT["🔎 Detect Stack<br/>frameworks, languages"]
-    DETECT --> MAP["🗺️ Map Architecture<br/>layers, entry points"]
-    MAP --> OUTPUT["📄 analysis.md<br/>structured metadata"]
+    A["Source Code"] -->|"scan"| B["analysis.md"]
+    B -->|"extract roles"| C["personas/"]
+    B -->|"extract jobs"| D["jtbd/"]
+    C -->|"enrich"| E["sop/"]
+    D -->|"enrich"| E
+    B -->|"arch + deploy"| F["tech docs"]
 ```
 
-**Quy trình quét:**
-1. Đọc `README.md`, `package.json`, config files
-2. Đếm files theo extension → detect languages
-3. Detect frameworks từ signal files
-4. Map 6 architecture layers (presentation, business, data, infra, integrations, testing)
-5. Extract routes, database schema, dependencies
+**Pipeline data flow:** Source code is scanned into analysis.md. From analysis, roles are extracted into personas and jobs into JTBD canvases. These knowledge artifacts then enrich the SOP guides. Technical docs are generated directly from the analysis.
 
-**Input:** Source code files
-**Output:** `docs/analysis.md` với Quick Reference, Architecture diagram, tables
+## Data Transformation Details
 
-## Step 3: Apply Content Guidelines
+| Stage | Input | Transform | Output | Size |
+|-------|-------|-----------|--------|------|
+| Analysis | Project files | Scan, detect, map | analysis.md | ~8 KB |
+| Personas | analysis.md + source code | Extract roles, build profiles | 5 files | ~15 KB |
+| JTBD | analysis.md + personas | Extract jobs, build canvases | 4 files | ~10 KB |
+| Flows | analysis.md + personas + JTBD | Map processes, draw diagrams | 6 files | ~12 KB |
+| Tech Docs | analysis.md | Generate architecture, DB, deploy | 4 files | ~20 KB |
+| SOPs | All above | Enrich with knowledge context | 5+ files | ~15 KB |
+| API Ref | analysis.md | Document skill interfaces | 4+ files | ~10 KB |
+| Export | All docs | Copy + build | astro-site/dist/ | ~5 MB |
 
-Content engine áp dụng 3 bộ quy tắc song song:
-
-| Bộ quy tắc | File | Mục đích |
-|------------|------|---------|
-| Content Guidelines | `skills/content-guidelines.md` | UX laws, Markdown rules, frontmatter schema |
-| SEO Writing | `skills/content-writing.md` | Keyword placement, inverted pyramid, active voice |
-| LLM Optimization | `skills/llm-optimization.md` | AI-readable heading, self-contained sections |
-
-Các quy tắc này **không tạo output file** — chúng là constraints cho Step 4.
-
-## Step 4: Generate Documents
-
-3 generators chạy tuần tự, mỗi generator đọc `analysis.md` + source code:
+## Quality Layer Data Flow
 
 ```mermaid
 graph TB
-    style ANALYSIS fill:#2d333b,stroke:#8b949e,color:#e6edf3
-    style TECH fill:#2d333b,stroke:#6d5dfc,color:#e6edf3
-    style SOP fill:#2d333b,stroke:#6d5dfc,color:#e6edf3
-    style API fill:#2d333b,stroke:#6d5dfc,color:#e6edf3
-    style OUT1 fill:#2d333b,stroke:#3fb950,color:#e6edf3
-    style OUT2 fill:#2d333b,stroke:#3fb950,color:#e6edf3
-    style OUT3 fill:#2d333b,stroke:#3fb950,color:#e6edf3
+    style S fill:#232221,stroke:#60A5FA,color:#E8E5DF
+    style Q1 fill:#232221,stroke:#d29922,color:#E8E5DF
+    style Q2 fill:#232221,stroke:#d29922,color:#E8E5DF
+    style Q3 fill:#232221,stroke:#d29922,color:#E8E5DF
+    style Q4 fill:#232221,stroke:#d29922,color:#E8E5DF
+    style O fill:#232221,stroke:#3fb950,color:#E8E5DF
 
-    ANALYSIS["📄 analysis.md"] --> TECH["📐 tech-docs.md"]
-    ANALYSIS --> SOP["📋 sop-guide.md"]
-    ANALYSIS --> API["🔌 api-reference.md"]
+    S["Generated Docs\nRaw content"]
+    Q1["content-guidelines\nStructure, UX laws"]
+    Q2["content-writing\nSEO keywords, voice"]
+    Q3["llm-optimization\nAI-readable structure"]
+    Q4["seo-checklist\nPer-page audit"]
+    O["Final Docs\nSEO + LLM optimized"]
 
-    TECH --> OUT1["architecture.md<br/>database.md<br/>deployment.md<br/>data-flow.md"]
-    SOP --> OUT2["sop/index.md<br/>sop/[feature].md"]
-    API --> OUT3["api/index.md<br/>api/[resource].md"]
+    S --> Q1 --> Q2 --> Q3 --> Q4 --> O
 ```
 
-### Tech Docs Generator
+**Quality flow summary:** Raw documentation passes through four quality filters: structural guidelines, SEO writing rules, LLM optimization, and a final SEO audit before export.
 
-Sinh 4 file kỹ thuật với ≥2 Mermaid diagrams mỗi file:
-- `architecture.md` — Sơ đồ kiến trúc, ADR
-- `database.md` — Schema, ER diagram, indexes
-- `deployment.md` — Cài đặt, cấu hình, CI/CD
-- `data-flow.md` — Pipeline, sequence diagrams
+## Related
 
-### SOP Generator
-
-Quét UI routes/components → nhóm theo module → sinh 1 file SOP per feature:
-- Quick Reference card
-- Step-by-step numbered guide
-- Form field tables
-- Troubleshooting (progressive disclosure)
-- FAQ (schema-ready)
-
-### API Generator
-
-Quét route files → nhóm theo resource → sinh 1 file per resource:
-- Endpoints overview table
-- Parameters + response schemas
-- Multi-language examples (cURL, Python, JS, Go)
-- Error codes + rate limiting
-
-## Step 5: Export
-
-Tuỳ theo `FORMAT`, exporter scaffold output:
-
-### Astro Path
-
-```mermaid
-graph LR
-    style DOCS fill:#2d333b,stroke:#6d5dfc,color:#e6edf3
-    style SCAFFOLD fill:#2d333b,stroke:#6d5dfc,color:#e6edf3
-    style TEMPLATE fill:#2d333b,stroke:#8b949e,color:#e6edf3
-    style BUILD fill:#2d333b,stroke:#3fb950,color:#e6edf3
-    style SEO fill:#2d333b,stroke:#d29922,color:#e6edf3
-
-    DOCS["📄 docs/*.md"] --> SCAFFOLD["🚀 npm create astro"]
-    TEMPLATE["🎯 templates/<br/>config + CSS"] --> SCAFFOLD
-    SCAFFOLD --> BUILD["📦 npm run build<br/>→ dist/"]
-    BUILD --> SEO["🔍 SEO Audit<br/>+ Sitemap"]
-```
-
-1. `npm create astro@latest` — scaffold Starlight project
-2. Copy premium template (config + CSS)
-3. Copy docs into `src/content/docs/`
-4. `npm install && npm run build`
-5. Generate `sitemap-urls.txt` + `robots.txt`
-6. Run SEO checklist trên mọi trang
-
-### Markdown Path
-
-Copy docs trực tiếp, tạo `docs/README.md` làm index.
-
-## Step 6: Summary
-
-Orchestrator hiển thị cho người dùng:
-- Danh sách file đã tạo + kích thước
-- Hướng dẫn xem/serve docs
-- Next steps (customize, deploy)
-
-## Tích Hợp Bên Ngoài
-
-| Dịch vụ | Protocol | Hướng | Dữ liệu |
-|---------|----------|-------|---------|
-| Google Antigravity | Prompt/Response | Bidirectional | Markdown text |
-| Clipboard (macOS) | `pbcopy` | Output only | Prompt text |
-| npm Registry | HTTP | Download | Astro packages |
-| NotebookLM | URL paste | Output only | `sitemap-urls.txt` |
-
----
-
-> Xem thêm: [Kiến trúc hệ thống](./architecture) · [Phân tích mã nguồn](./analysis)
+- [System Architecture](./architecture)
+- [Skill pipeline workflow](./flows/wf-skill-pipeline)
+- [Deployment Guide](./deployment)

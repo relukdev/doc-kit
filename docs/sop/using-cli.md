@@ -1,109 +1,122 @@
 ---
-title: "Sử Dụng CLI — Hướng Dẫn"
-description: "Hướng dẫn sử dụng CLI script doc-gen.sh để tạo tài liệu nhanh chóng với DocKit Master"
-keywords: ["CLI", "doc-gen", "command line", "DocKit Master"]
+title: "Using the CLI — User Guide"
+description: "Step-by-step guide to using dockit-master.sh CLI for generating documentation prompts across 7 AI coding IDEs"
+keywords: ["CLI", "dockit-master", "user guide", "how to"]
 robots: "index, follow"
 sidebar:
-  order: 4
+  order: 2
 ---
 
-# Sử Dụng CLI
+# Using the CLI
 
-> **Tham Khảo Nhanh**
-> - **Đối tượng**: Developer
-> - **Công cụ**: `doc-gen.sh` (Bash script)
-> - **Thời gian**: ~3 phút
-> - **OS**: macOS (hỗ trợ `pbcopy`)
+> **Quick Reference**
+> - **Who**: Developer (any skill level)
+> - **Where**: Terminal / Shell
+> - **Time**: ~2 minutes to complete
+> - **Prerequisites**: Bash 4+, target project path
 
-## Yêu Cầu
+## Persona Context
 
-- [ ] macOS (CLI sử dụng `pbcopy` để copy vào clipboard)
-- [ ] DocKit Master đã cài đặt
-- [ ] `doc-gen.sh` có quyền thực thi
+> **This guide is for**: [Developer Dana](../personas/user-developer)
+>
+> **Job To Be Done**: [Configure documentation tooling for team](../jtbd/configure-tooling)
+> — _"When my team adopts DocKit Master, I want to generate prompts quickly, so that I can paste them into any IDE."_
 
-## Hướng Dẫn Từng Bước
+## Process Flow
 
-### Bước 1: Chạy Script
+```mermaid
+graph TB
+    style S fill:#232221,stroke:#3fb950,color:#E8E5DF
+    style E fill:#232221,stroke:#3fb950,color:#E8E5DF
+    style A fill:#232221,stroke:#60A5FA,color:#E8E5DF
+    style B fill:#232221,stroke:#60A5FA,color:#E8E5DF
+    style C fill:#232221,stroke:#60A5FA,color:#E8E5DF
+
+    S(["Start"])
+    A["Choose IDE + config"]
+    B["CLI generates prompt"]
+    C["Paste into IDE"]
+    E(["Documentation generated"])
+
+    S --> A --> B --> C --> E
+```
+
+## Prerequisites
+
+- [ ] Bash 4+ installed (macOS: `brew install bash`)
+- [ ] Know the absolute path to your target project
+- [ ] AI IDE installed (Antigravity, Cursor, Claude, etc.)
+
+## Step-by-Step Guide
+
+### Step 1: Run the CLI
 
 ```bash
-bash ~/.gemini/antigravity/skills/doc-kit/scripts/doc-gen.sh
+bash scripts/dockit-master.sh
 ```
 
-Bạn sẽ thấy menu tương tác:
+The CLI displays an interactive menu with 6 configuration steps.
 
-```
-╔══════════════════════════════════════════════╗
-║  📚 DocKit Master — Documentation Generator ║
-║  Powered by Google Antigravity               ║
-╚══════════════════════════════════════════════╝
-```
+### Step 2: Choose Your IDE
 
-### Bước 2: Trả Lời 4 Câu Hỏi
+Select your target AI coding IDE (1–7). Default is Antigravity.
 
-| # | Câu hỏi | Lựa chọn | Gợi ý |
-|---|---------|----------|-------|
-| 1 | Document Type | `1` tech · `2` sop · `3` api · `4` all | Chọn `4` nếu muốn full suite |
-| 2 | Output Format | `1` astro ★ · `2` markdown | Astro khuyến nghị |
-| 3 | Source Code Path | `/đường/dẫn/project` | Đường dẫn tuyệt đối |
-| 4 | Output Language | `1` English · `2` Vietnamese | Chọn ngôn ngữ output |
+### Step 3: Choose Document Type
 
-### Bước 3: Copy Prompt
+| Option | Description |
+|--------|-------------|
+| 1 — knowledge | Personas, JTBD, Process Flows |
+| 2 — tech | Architecture, Database, Deployment |
+| 3 — sop | Step-by-step user guides |
+| 4 — api | API endpoint reference |
+| 5 — all | Complete documentation suite (recommended) |
 
-Script tự động:
-1. Tạo prompt tối ưu từ câu trả lời
-2. Copy vào clipboard (macOS)
-3. Hiển thị prompt trên terminal
+### Step 4: Enter Project Path
 
-```
-✅ Prompt successfully generated!
-📋 Copied to clipboard! Paste (Cmd+V) into Antigravity.
-```
+Provide the absolute path to the project you want to document.
 
-### Bước 4: Paste vào Antigravity
-
-1. Mở Google Antigravity session
-2. Nhấn **Cmd+V** để paste prompt
-3. Agent sẽ tự động bắt đầu từ Step 2 (Analyze Codebase)
-
-:::tip[Nhanh hơn nữa]
-Thay vì dùng CLI, bạn có thể gõ trực tiếp trong Antigravity: `/DocKit Master` — Agent sẽ hỏi cấu hình inline.
+:::tip
+Use tab completion to avoid typos. The CLI validates the path exists.
 :::
 
-## Kết Quả Mong Đợi
+### Step 5: Choose Language and Options
 
-- ✅ Prompt tối ưu chứa: doc type, format, language, path
-- ✅ Prompt tự copy vào clipboard
-- ✅ Paste vào Antigravity → bắt đầu ngay lập tức
+Select output language, SEO optimization, and LLM optimization preferences.
 
-## Xử Lý Sự Cố
+### Step 6: Copy the Generated Prompt
+
+The CLI generates a ready-to-paste prompt and copies it to clipboard (macOS). Paste it into your AI IDE to start generating documentation.
+
+## Expected Results
+
+- Prompt copied to clipboard
+- Ready to paste into target IDE
+- Documentation generation begins immediately after pasting
 
 <details>
-<summary>🔴 "Directory not found" error</summary>
+<summary>Troubleshooting: "Directory not found" error</summary>
 
-**Nguyên nhân:** Đường dẫn project không tồn tại hoặc sai format.
+**Cause:** Invalid project path or path contains special characters.
 
-**Giải pháp:** Sử dụng đường dẫn tuyệt đối, ví dụ `/Users/username/projects/my-app` thay vì `~/projects/my-app`.
+**Solution:**
+1. Use absolute paths (starting with `/`)
+2. Quote paths with spaces: `"/path/with spaces/project"`
+3. Verify the directory exists: `ls /your/path`
 
 </details>
 
 <details>
-<summary>🔴 Clipboard không hoạt động</summary>
+<summary>Troubleshooting: "pbcopy not found" (Linux)</summary>
 
-**Nguyên nhân:** `pbcopy` chỉ có trên macOS.
+**Cause:** pbcopy is macOS only.
 
-**Giải pháp:** Trên Linux, cài `xclip` và thay `pbcopy` bằng `xclip -selection clipboard` trong `doc-gen.sh:116`.
-
-</details>
-
-## FAQ
-
-<details>
-<summary>Q: CLI có chạy trên Windows không?</summary>
-
-**A:** Không trực tiếp. Script sử dụng Bash và `pbcopy`. Trên Windows, dùng WSL hoặc Git Bash. Hoặc bỏ qua CLI và dùng chat mode trực tiếp trong Antigravity.
+**Solution:** Install xclip: `sudo apt install xclip` and alias: `alias pbcopy='xclip -selection clipboard'`
 
 </details>
 
----
+## Related
 
-> Xem thêm: [Tạo tech docs](./generating-tech-docs) · [Hướng dẫn triển khai](../deployment)
+- [Developer Dana](../personas/user-developer)
+- [Configure tooling JTBD](../jtbd/configure-tooling)
+- [Installation workflow](../flows/wf-installation)
+- [Generating Tech Docs](./generating-tech-docs)

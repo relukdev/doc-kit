@@ -7,7 +7,7 @@
 A professional knowledge systematization engine powered by codebase analysis.
 **1 scan = 1 complete knowledge base** — Personas, JTBD, Process Flows, Technical Docs, SOPs, API Reference.
 
-🌐 **[Landing Page](https://relukdev.github.io/doc-kit/deploy_out/index.html)** · 📖 **[Documentation](https://relukdev.github.io/doc-kit/deploy_out/docs/)** · ⭐ **[GitHub](https://github.com/relukdev/doc-kit)**
+🌐 **[Landing Page](https://dockit-master.todyai.io)** · 📖 **[Documentation](https://dockit-master.todyai.io/docs/)** · ⭐ **[GitHub](https://github.com/relukdev/doc-kit)**
 
 ---
 
@@ -37,31 +37,72 @@ DocKit Master reads your source code and generates a complete documentation suit
 
 ## 🛠 Installation
 
-Copy into your Antigravity skills directory:
+### Universal Installer (Any IDE)
+
+```bash
+cd /path/to/your-project
+bash /path/to/doc-kit/scripts/install.sh
+```
+
+Or install for a specific IDE directly:
+
+```bash
+bash scripts/install.sh --cursor     # Cursor IDE
+bash scripts/install.sh --claude     # Claude Code
+bash scripts/install.sh --gemini     # Gemini CLI
+bash scripts/install.sh --opencode   # OpenCode
+bash scripts/install.sh --windsurf   # Windsurf IDE
+bash scripts/install.sh --agents     # Generic (Kimi, Copilot, etc.)
+bash scripts/install.sh --all        # All IDEs at once
+```
+
+### Antigravity (Native)
 
 ```bash
 cp -r doc-kit ~/.gemini/antigravity/skills/
 ```
 
+### Supported IDEs
+
+| IDE | Format | Location |
+|-----|--------|----------|
+| ![Cursor](https://img.shields.io/badge/Cursor-black?style=flat-square) | `.mdc` | `.cursor/rules/dockit-master.mdc` |
+| ![Claude](https://img.shields.io/badge/Claude_Code-cc785c?style=flat-square) | `.md` | `CLAUDE.md` |
+| ![Gemini](https://img.shields.io/badge/Gemini_CLI-4285F4?style=flat-square) | `.md` + `@import` | `GEMINI.md` |
+| ![OpenCode](https://img.shields.io/badge/OpenCode-333?style=flat-square) | `.md` | `.opencode/rules/dockit-master.md` |
+| ![Windsurf](https://img.shields.io/badge/Windsurf-09B6A2?style=flat-square) | `.md` | `.windsurf/rules/dockit-master.md` |
+| ![Generic](https://img.shields.io/badge/AGENTS.md-555?style=flat-square) | `.md` | `AGENTS.md` |
+| ![Antigravity](https://img.shields.io/badge/Antigravity-blueviolet?style=flat-square) | `SKILL.md` | `~/.gemini/antigravity/skills/` |
+
 ## 💻 Quick Start
 
-### Interactive CLI
+### Interactive CLI (Any IDE)
 
 ```bash
-bash ~/.gemini/antigravity/skills/doc-kit/scripts/doc-gen.sh
+bash scripts/dockit-master.sh
 ```
+
+Select your IDE, document type, format, and language — the script generates a ready-to-paste prompt.
 
 ### Direct Trigger
 
-Type in your Antigravity session:
+Type in your AI coding IDE:
 
 > "Use DocKit Master to create documentation for the project at /path/to/project"
+
 
 ## 📂 Architecture
 
 ```text
 doc-kit/
 ├── SKILL.md                     # Main orchestration engine
+├── adapters/                    # IDE-specific instruction files
+│   ├── cursor.mdc               # Cursor (.cursor/rules/)
+│   ├── claude.md                # Claude Code (CLAUDE.md)
+│   ├── gemini.md                # Gemini CLI (GEMINI.md)
+│   ├── opencode.md              # OpenCode (.opencode/rules/)
+│   ├── windsurf.md              # Windsurf (.windsurf/rules/)
+│   └── agents.md                # Generic (AGENTS.md — Kimi, Copilot)
 ├── skills/
 │   ├── analyze-codebase.md      # Deep semantic code analysis
 │   ├── persona-builder.md       # Buyer & User Persona generation
@@ -83,7 +124,8 @@ doc-kit/
 │   ├── astro-premium/           # Astro Starlight config + CSS template
 │   └── markdown/                # Markdown structure template
 ├── scripts/
-│   └── doc-gen.sh               # Interactive CLI prompt generator
+│   ├── dockit-master.sh               # Interactive CLI prompt generator
+│   └── install.sh               # Universal IDE installer
 ├── index.html                   # Landing page
 └── astro-site/                  # Live documentation site
 ```

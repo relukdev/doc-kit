@@ -1,99 +1,82 @@
 ---
-title: "Tạo Hướng Dẫn SOP — Hướng Dẫn"
-description: "Hướng dẫn tạo Standard Operating Procedure (SOP) user guides với DocKit Master cho end-user"
-keywords: ["SOP", "user guide", "how to", "documentation"]
+title: "Generating SOP Guides — User Guide"
+description: "Step-by-step guide to generating knowledge-enriched SOP user guides with persona context, JTBD alignment, and process flows"
+keywords: ["SOP", "user guide", "documentation generation", "knowledge enriched"]
 robots: "index, follow"
 sidebar:
-  order: 3
+  order: 4
 ---
 
-# Tạo Hướng Dẫn SOP
+# Generating SOP Guides
 
-> **Tham Khảo Nhanh**
-> - **Đối tượng**: Technical Writer, Product Manager
-> - **Đầu ra**: 1 file `.md` per feature/module
-> - **Thời gian**: ~5 phút
-> - **Yêu cầu**: Project có UI/frontend routes
+> **Quick Reference**
+> - **Who**: AI Agent (via IDE)
+> - **Where**: AI Coding IDE
+> - **Time**: ~10-15 minutes
+> - **Prerequisites**: Knowledge layer (personas, JTBD, flows) recommended
 
-## Yêu Cầu
+## Persona Context
 
-- [ ] DocKit Master đã cài đặt
-- [ ] Project có frontend pages/routes hoặc UI components
-- [ ] Đang ở trong session Google Antigravity
+> **This guide is for**: [AI Agent Alex](../personas/user-ai-agent)
+>
+> **Job To Be Done**: [Systematize codebase knowledge](../jtbd/systematize-knowledge)
 
-## Hướng Dẫn Từng Bước
+## What Makes SOPs Special
 
-### Bước 1: Trigger DocKit Master
+DocKit Master SOPs are not just step-by-step instructions. They include:
 
-```
-Dùng DocKit Master để tạo hướng dẫn SOP cho project tại /path/to/project
-```
+| Feature | Traditional SOP | DocKit Master SOP |
+|---------|----------------|-------------------|
+| Steps | Yes | Yes |
+| Persona context | No | Who this guide is for |
+| JTBD alignment | No | Why the user does this |
+| Process flow | No | Mermaid workflow diagram |
+| User journey | No | Satisfaction scoring |
+| Troubleshooting | Sometimes | Always (progressive disclosure) |
+| FAQ | Sometimes | Always (schema-ready for SEO) |
 
-### Bước 2: Chọn Cấu Hình SOP
+## Process Flow
 
-| Câu hỏi | Trả lời |
-|---------|---------|
-| Loại tài liệu | `sop` |
-| Định dạng output | `astro` |
-| Phạm vi | `full` hoặc `focused` |
-| Ngôn ngữ | Auto-detect |
+```mermaid
+graph TB
+    style S fill:#232221,stroke:#3fb950,color:#E8E5DF
+    style E fill:#232221,stroke:#3fb950,color:#E8E5DF
 
-### Bước 3: Chờ Quét Code
+    S(["Start: knowledge layer exists"])
+    A["Read sop-guide.md skill"]
+    B["Identify user-facing features"]
+    C["Group by module"]
+    D["Generate SOP per feature"]
+    E(["SOP files in docs/sop/"])
 
-Agent sẽ:
-1. Quét frontend routes/pages
-2. Phát hiện UI components
-3. Nhóm features theo module (Miller's Law: 5-9 items/group)
-4. Sinh 1 file SOP per feature
-
-### Bước 4: Review Output
-
-Mỗi SOP file có cấu trúc chuẩn:
-
-```
-sop/[feature-name].md
-├── Quick Reference (Who, Where, Time)
-├── Prerequisites (checklist)
-├── Step-by-Step Guide (numbered)
-│   ├── Form field tables
-│   └── :::tip hints
-├── Expected Results
-├── Troubleshooting (<details>)
-└── FAQ (<details>)
+    S --> A --> B --> C --> D --> E
 ```
 
-:::tip[SOP chất lượng cao]
-Agent sẽ truy vết actual validation rules trong code để sinh FAQ chính xác, không phải đoán.
-:::
+## Step-by-Step Guide
 
-## Kết Quả Mong Đợi
+### Step 1: Generate Knowledge Layer First
 
-- ✅ `docs/sop/index.md` — Feature map + danh sách
-- ✅ `docs/sop/[feature].md` — 1 file per feature
-- ✅ Quick Reference card ở mỗi file
-- ✅ Form field tables với real examples
-- ✅ Troubleshooting và FAQ trong `<details>`
+SOP guides are enriched with personas, JTBD, and flows. If these do not exist, the SOP skill automatically runs the knowledge skills first.
 
-## Xử Lý Sự Cố
+### Step 2: Invoke SOP Generation
 
-<details>
-<summary>🔴 SOP không có step-by-step guide</summary>
+Use DOC_TYPE = `sop` or `all` in the configuration prompt.
 
-**Nguyên nhân:** Project không có frontend routes hoặc UI components rõ ràng.
+### Step 3: Review Each SOP
 
-**Giải pháp:** Chỉ định `focused` scope và tên module cụ thể. Hoặc sử dụng `tech` docs thay vì `sop`.
+Each SOP file should contain these sections in order:
+1. Quick Reference card
+2. Persona Context (linked to persona + JTBD)
+3. Process Flow (inline Mermaid diagram)
+4. Prerequisites checklist
+5. Numbered step-by-step guide
+6. Expected Results
+7. Troubleshooting (in `<details>` tags)
+8. FAQ (H3 questions under H2 FAQ)
 
-</details>
+## Related
 
-## FAQ
-
-<details>
-<summary>Q: SOP có hỗ trợ screenshot không?</summary>
-
-**A:** DocKit Master tạo placeholder `<!-- Screenshot: description -->`. Nếu bạn chọn `RECORD = yes`, Agent sẽ quay browser walkthrough và embedded vào docs.
-
-</details>
-
----
-
-> Xem thêm: [Tạo tech docs](./generating-tech-docs) · [Tuỳ chỉnh templates](./customizing-templates)
+- [Using the CLI](./using-cli)
+- [Generating Tech Docs](./generating-tech-docs)
+- [Personas overview](../personas/)
+- [JTBD overview](../jtbd/)

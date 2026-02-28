@@ -1,176 +1,84 @@
 ---
-title: "Tuỳ Chỉnh Templates — Hướng Dẫn"
-description: "Hướng dẫn tuỳ chỉnh Astro Starlight template: CSS, config, i18n, và Mermaid cho DocKit Master"
-keywords: ["customization", "template", "Astro Starlight", "DocKit Master"]
+title: "Customizing Templates — User Guide"
+description: "Step-by-step guide to customizing Astro Starlight theme, CSS, color palette, and sidebar layout for DocKit Master output"
+keywords: ["customization", "templates", "Astro Starlight", "CSS"]
 robots: "index, follow"
 sidebar:
   order: 5
 ---
 
-# Tuỳ Chỉnh Templates
+# Customizing Templates
 
-> **Tham Khảo Nhanh**
-> - **Đối tượng**: Developer, Designer
-> - **Files chính**: `astro.config.mjs`, `custom.css`
-> - **Thời gian**: ~15 phút
-> - **Yêu cầu**: Kiến thức CSS cơ bản
+> **Quick Reference**
+> - **Who**: Developer (intermediate+)
+> - **Where**: `templates/astro-premium/` and `astro-site/`
+> - **Time**: ~15-30 minutes
+> - **Prerequisites**: Node.js 18+, familiarity with CSS
 
-## Yêu Cầu
+## Persona Context
 
-- [ ] DocKit Master đã cài đặt
-- [ ] Đã build thành công Astro site ít nhất 1 lần
-- [ ] Hiểu CSS custom properties cơ bản
+> **This guide is for**: [Developer Dana](../personas/user-developer)
+>
+> **Job To Be Done**: [Configure tooling for team](../jtbd/configure-tooling)
 
-## Tuỳ Chỉnh Màu Sắc
+## What Can Be Customized
 
-### Thay Đổi Accent Color
+| Element | File | Scope |
+|---------|------|-------|
+| Site title and URL | `astro.config.mjs` | Global |
+| Color palette | `src/styles/custom.css` | Sitewide |
+| Sidebar order | YAML frontmatter `sidebar.order` | Per-page |
+| Social links | `astro.config.mjs` social array | Header |
+| Mermaid diagram colors | `skills/content-guidelines.md` | All diagrams |
+| Fonts | `custom.css` @import | Typography |
 
-Edit `astro-site/src/styles/custom.css`:
+## Step-by-Step Guide
 
-```css
-:root {
-    /* Đổi từ purple sang teal */
-    --sl-color-accent-low: #0d2818;
-    --sl-color-accent: #00d4aa;
-    --sl-color-accent-high: #b8fff0;
-}
-```
+### Step 1: Edit Site Configuration
 
-### Thay Đổi Dark Mode Background
-
-```css
-:root[data-theme='dark'] {
-    --sl-color-bg: #0a0a0a;         /* Darker background */
-    --sl-color-bg-nav: rgba(10, 10, 10, 0.9);
-}
-```
-
-:::tip[Preview nhanh]
-Chạy `npm run dev` để xem thay đổi CSS realtime mà không cần rebuild.
-:::
-
-## Tuỳ Chỉnh Config
-
-### Thay Đổi Project Info
-
-Edit `astro-site/astro.config.mjs`:
+Open `astro-site/astro.config.mjs` and update:
 
 ```javascript
-starlight({
-    title: 'Tên Project Của Bạn',
-    description: 'Mô tả project',
-    social: [
-        { icon: 'github', label: 'GitHub', href: 'https://github.com/your-repo' },
-    ],
-})
-```
-
-### Thêm Logo
-
-```javascript
-starlight({
-    logo: {
-        src: './src/assets/logo.svg',
-        alt: 'Logo Alt Text',
-    },
-})
-```
-
-## Cấu Hình Đa Ngôn Ngữ (i18n)
-
-### Bước 1: Uncomment Locales
-
-Trong `astro.config.mjs`:
-
-```javascript
-locales: {
-    root: { label: 'English', lang: 'en' },
-    vi: { label: 'Tiếng Việt', lang: 'vi' },   // Uncomment
-    zh: { label: '中文', lang: 'zh-CN' },        // Uncomment
-},
-```
-
-### Bước 2: Tạo Thư Mục Ngôn Ngữ
-
-```bash
-mkdir -p astro-site/src/content/docs/vi
-mkdir -p astro-site/src/content/docs/zh
-```
-
-### Bước 3: Copy và Dịch
-
-Copy các file `.md` vào thư mục ngôn ngữ tương ứng và dịch nội dung.
-
-## Thêm Mermaid Support
-
-### Bước 1: Cài Package
-
-```bash
-cd astro-site
-npm install remark-mermaidjs
-```
-
-### Bước 2: Cấu Hình
-
-Thêm vào `astro.config.mjs`:
-
-```javascript
-import remarkMermaid from 'remark-mermaidjs';
-
 export default defineConfig({
-    markdown: {
-        remarkPlugins: [remarkMermaid],
-    },
-    // ...
+  site: 'https://your-docs-url.com',  // Your deployment URL
+  integrations: [
+    starlight({
+      title: 'Your Project',           // Site title
+      social: { github: 'https://...' }, // Social links
+    }),
+  ],
 });
 ```
 
-## Custom Sidebar
+### Step 2: Customize CSS
 
-Mặc định Starlight auto-generates sidebar từ folder structure. Để custom:
+Edit `astro-site/src/styles/custom.css` to change colors:
 
-```javascript
-starlight({
-    sidebar: [
-        {
-            label: 'Kiến Trúc & Kỹ Thuật',
-            autogenerate: { directory: 'tech' },
-        },
-        {
-            label: 'Hướng Dẫn Sử Dụng',
-            autogenerate: { directory: 'sop' },
-        },
-        {
-            label: 'Tham Chiếu API',
-            autogenerate: { directory: 'api' },
-        },
-    ],
-})
+```css
+:root {
+  --sl-color-accent-low: #your-color;
+  --sl-color-accent: #your-color;
+  --sl-color-accent-high: #your-color;
+}
 ```
 
-## Xử Lý Sự Cố
+### Step 3: Adjust Sidebar Order
 
-<details>
-<summary>🔴 CSS thay đổi không có hiệu lực</summary>
+In any doc file's frontmatter, set the sidebar order:
 
-**Nguyên nhân:** CSS cache hoặc sai đường dẫn.
-
-**Giải pháp:**
-1. Kiểm tra `customCss` path trong `astro.config.mjs`
-2. Hard refresh browser (Cmd+Shift+R)
-3. Clear cache: `rm -rf node_modules/.astro`
-
-</details>
-
-## FAQ
-
-<details>
-<summary>Q: Có thể dùng Tailwind CSS thay cho custom CSS không?</summary>
-
-**A:** Có, nhưng không khuyến nghị. Starlight đã có design system tốt qua CSS custom properties. Thêm Tailwind sẽ tăng build size không cần thiết.
-
-</details>
-
+```yaml
 ---
+sidebar:
+  order: 1  # Lower numbers appear first
+---
+```
 
-> Xem thêm: [Hướng dẫn triển khai](../deployment) · [Sử dụng CLI](./using-cli)
+:::tip
+Starlight auto-generates the sidebar from folder structure. Use YAML frontmatter `sidebar.order` to control positioning within each folder.
+:::
+
+## Related
+
+- [Deployment Guide](../deployment)
+- [Using the CLI](./using-cli)
+- [System Architecture](../architecture)
