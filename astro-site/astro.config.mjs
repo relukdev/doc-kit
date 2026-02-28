@@ -33,7 +33,7 @@ export default defineConfig({
             // Uncomment additional locales as needed
             defaultLocale: 'root',
             locales: {
-                root: { label: 'Tiếng Việt', lang: 'vi' },
+                root: { label: 'English', lang: 'en' },
             },
 
             // Sidebar: auto-generated from folder structure
