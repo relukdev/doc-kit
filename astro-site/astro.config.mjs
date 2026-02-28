@@ -129,4 +129,5 @@ export default defineConfig({
     // CUSTOMIZE: Deployment
     site: 'https://dockit-master.todyai.io',
     base: '/docs',
+    trailingSlash: 'always',
 });
