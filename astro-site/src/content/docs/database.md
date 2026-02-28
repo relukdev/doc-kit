@@ -149,4 +149,4 @@ File `templates/astro-premium/astro.config.mjs` chứa cấu hình Starlight:
 
 ---
 
-> Xem thêm: [Kiến trúc hệ thống](./architecture.md) · [Luồng dữ liệu](./data-flow.md)
+> Xem thêm: [Kiến trúc hệ thống](./architecture) · [Luồng dữ liệu](./data-flow)

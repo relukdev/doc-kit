@@ -169,4 +169,4 @@ DocKit Master không có vấn đề bảo mật đặc biệt vì:
 
 ---
 
-> Xem thêm: [Luồng dữ liệu](./data-flow.md) · [Hướng dẫn triển khai](./deployment.md)
+> Xem thêm: [Luồng dữ liệu](./data-flow) · [Hướng dẫn triển khai](./deployment)

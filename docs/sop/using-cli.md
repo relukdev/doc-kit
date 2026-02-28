@@ -106,4 +106,4 @@ Thay vì dùng CLI, bạn có thể gõ trực tiếp trong Antigravity: `/DocKi
 
 ---
 
-> Xem thêm: [Tạo tech docs](./generating-tech-docs.md) · [Hướng dẫn triển khai](../deployment.md)
+> Xem thêm: [Tạo tech docs](./generating-tech-docs) · [Hướng dẫn triển khai](../deployment)

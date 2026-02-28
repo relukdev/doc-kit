@@ -37,15 +37,15 @@ graph TB
 
 | # | Hướng dẫn | Mô tả | Độ khó | Thời gian |
 |---|-----------|-------|--------|-----------|
-| 1 | [Tạo tài liệu kỹ thuật](./generating-tech-docs.md) | Sinh architecture, database, deployment, data-flow | 🟡 Trung bình | ~10 phút |
-| 2 | [Tạo hướng dẫn SOP](./generating-sop-guides.md) | Sinh user guides step-by-step | 🟢 Dễ | ~5 phút |
-| 3 | [Sử dụng CLI](./using-cli.md) | Chạy script CLI tương tác | 🟢 Dễ | ~3 phút |
-| 4 | [Tuỳ chỉnh templates](./customizing-templates.md) | Sửa CSS, config, thêm ngôn ngữ | 🟡 Trung bình | ~15 phút |
+| 1 | [Tạo tài liệu kỹ thuật](./generating-tech-docs) | Sinh architecture, database, deployment, data-flow | 🟡 Trung bình | ~10 phút |
+| 2 | [Tạo hướng dẫn SOP](./generating-sop-guides) | Sinh user guides step-by-step | 🟢 Dễ | ~5 phút |
+| 3 | [Sử dụng CLI](./using-cli) | Chạy script CLI tương tác | 🟢 Dễ | ~3 phút |
+| 4 | [Tuỳ chỉnh templates](./customizing-templates) | Sửa CSS, config, thêm ngôn ngữ | 🟡 Trung bình | ~15 phút |
 
 :::tip[Bắt đầu từ đâu?]
-Nếu bạn mới dùng DocKit Master, hãy bắt đầu với [Sử dụng CLI](./using-cli.md) — cách nhanh nhất để tạo tài liệu đầu tiên.
+Nếu bạn mới dùng DocKit Master, hãy bắt đầu với [Sử dụng CLI](./using-cli) — cách nhanh nhất để tạo tài liệu đầu tiên.
 :::
 
 ---
 
-> Xem thêm: [Kiến trúc hệ thống](../architecture.md) · [Tham chiếu Skill](../api/index.md)
+> Xem thêm: [Kiến trúc hệ thống](../architecture) · [Tham chiếu Skill](../api/index)

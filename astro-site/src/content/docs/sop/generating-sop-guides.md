@@ -96,4 +96,4 @@ Agent sẽ truy vết actual validation rules trong code để sinh FAQ chính x
 
 ---
 
-> Xem thêm: [Tạo tech docs](./generating-tech-docs.md) · [Tuỳ chỉnh templates](./customizing-templates.md)
+> Xem thêm: [Tạo tech docs](./generating-tech-docs) · [Tuỳ chỉnh templates](./customizing-templates)

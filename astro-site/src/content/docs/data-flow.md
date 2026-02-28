@@ -193,4 +193,4 @@ Orchestrator hiển thị cho người dùng:
 
 ---
 
-> Xem thêm: [Kiến trúc hệ thống](./architecture.md) · [Phân tích mã nguồn](./analysis.md)
+> Xem thêm: [Kiến trúc hệ thống](./architecture) · [Phân tích mã nguồn](./analysis)

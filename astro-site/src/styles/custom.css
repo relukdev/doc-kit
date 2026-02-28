@@ -1,35 +1,44 @@
 /* ============================================================
-   DocKit Master — UX Master Edition
-   Redesigned by MasterDesign Agent
-   
-   Design Principles:
+   DocKit Master — Claude Docs Inspired Edition
+   Design System: Warm Neutral + Serif Headings
+
+   Inspired by: platform.claude.com/docs
+   Principles:
+   - Warm, editorial aesthetic (cream/beige palette)
+   - Serif headings + sans-serif body (bilingual-friendly)
+   - Clean, minimal borders (no heavy glassmorphism)
+   - WCAG 2.1 AA compliant
    - Fitts's Law: Touch targets ≥ 44px on mobile
-   - Doherty Threshold: Smooth 150ms transitions
-   - WCAG 2.1 AA: Contrast ratios, focus-visible rings
-   - Miller's Law: Visual chunking via spacing & borders
-   - Typography: Compact, information-dense, professional
+   - Miller's Law: Visual chunking via spacing
    ============================================================ */
 
-/* --- Google Fonts Import --- */
-@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap');
+/* --- Google Fonts Import ---
+   Source Serif 4: Serif for headings — excellent multilingual support
+     (Latin, Vietnamese, Cyrillic, Greek)
+   Inter: Sans-serif for body — optimal UI readability
+   JetBrains Mono: Monospace for code blocks
+   ------------------------------------------------------------ */
+@import url('https://fonts.googleapis.com/css2?family=Source+Serif+4:ital,opsz,wght@0,8..60,400;0,8..60,500;0,8..60,600;0,8..60,700;1,8..60,400&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap');
 
 /* ============================================================
    1. DESIGN TOKENS
    ============================================================ */
 :root {
-    /* Primary palette — Purple accent (refined) */
-    --sl-color-accent-low: #1a1440;
-    --sl-color-accent: #7c6afc;
-    --sl-color-accent-high: #c9bfff;
+    /* Primary palette — Neutral warm with blue CTA */
+    --sl-color-accent-low: #EFF6FF;
+    --sl-color-accent: #2563EB;
+    --sl-color-accent-high: #1E40AF;
 
-    /* Typography — Compact, professional */
+    /* Typography — Editorial serif headings + clean sans body */
     --sl-font: 'Inter', system-ui, -apple-system, 'Segoe UI', sans-serif;
+    --sl-font-heading: 'Source Serif 4', 'Georgia', 'Times New Roman', serif;
     --sl-font-mono: 'JetBrains Mono', 'Fira Code', monospace;
-    --sl-text-base: 0.875rem;
-    --sl-line-height: 1.7;
-    --sl-line-height-headings: 1.25;
+    --sl-text-base: 0.9375rem;
+    /* 15px — slightly larger for readability */
+    --sl-line-height: 1.65;
+    --sl-line-height-headings: 1.3;
 
-    /* Spacing — Tight 4px grid */
+    /* Spacing — Comfortable 4px grid */
     --doc-spacing-xs: 0.125rem;
     --doc-spacing-sm: 0.375rem;
     --doc-spacing-md: 0.75rem;
@@ -37,57 +46,83 @@
     --doc-spacing-xl: 1.75rem;
     --doc-spacing-2xl: 2.5rem;
 
-    /* Borders — Sharp, minimal */
-    --doc-radius-sm: 4px;
+    /* Borders — Warm, rounded */
+    --doc-radius-sm: 6px;
     --doc-radius-md: 8px;
     --doc-radius-lg: 12px;
 
-    /* Shadows — Subtle */
-    --doc-shadow-sm: 0 1px 2px rgba(0, 0, 0, 0.05);
-    --doc-shadow-md: 0 2px 8px rgba(0, 0, 0, 0.08);
-    --doc-shadow-lg: 0 4px 16px rgba(0, 0, 0, 0.1);
-    --doc-shadow-glow: 0 0 16px rgba(124, 106, 252, 0.12);
+    /* Shadows — Warm, subtle */
+    --doc-shadow-sm: 0 1px 2px rgba(28, 25, 23, 0.06);
+    --doc-shadow-md: 0 2px 8px rgba(28, 25, 23, 0.08);
+    --doc-shadow-lg: 0 4px 16px rgba(28, 25, 23, 0.1);
 }
 
 /* ============================================================
-   2. DARK MODE — Deep, refined dark theme
+   2. LIGHT MODE — Warm cream (Claude-inspired)
+   ============================================================ */
+:root[data-theme='light'] {
+    --sl-color-bg: #FAF9F5;
+    --sl-color-bg-nav: #FAF9F5;
+    --sl-color-bg-sidebar: #F5F4EF;
+    --sl-color-hairline-shade: #E8E6DC;
+    --sl-color-hairline-light: #D9D6CB;
+    --sl-color-text: #1E1D1C;
+    --sl-color-text-accent: #2563EB;
+    --sl-color-white: #1E1D1C;
+    --sl-color-gray-1: #44403C;
+    --sl-color-gray-2: #57534E;
+    --sl-color-gray-3: #78716C;
+    --sl-color-gray-4: #A8A29E;
+    --sl-color-gray-5: #D6D3D1;
+    --sl-color-gray-6: #E7E5E4;
+    --sl-color-gray-7: #F5F5F4;
+
+    --sl-color-accent-low: #EFF6FF;
+    --sl-color-accent: #2563EB;
+    --sl-color-accent-high: #1E40AF;
+
+    /* Override Starlight purple (used by tip asides) → warm teal */
+    --sl-color-purple-low: #F0FDFA;
+    --sl-color-purple: #0D9488;
+    --sl-color-purple-high: #115E59;
+}
+
+/* ============================================================
+   3. DARK MODE — Warm dark (Claude-inspired)
    ============================================================ */
 :root[data-theme='dark'] {
-    --sl-color-bg: #0b0d11;
-    --sl-color-bg-nav: rgba(14, 17, 23, 0.88);
-    --sl-color-bg-sidebar: #0f1217;
-    --sl-color-hairline-shade: #1a1e26;
-    --sl-color-hairline-light: #252a33;
-    --sl-color-text: #d4d8e0;
-    --sl-color-text-accent: #9387fd;
-    --sl-color-white: #e8eaef;
-    --sl-color-gray-1: #bcc1ca;
-    --sl-color-gray-2: #9ca2ad;
-    --sl-color-gray-3: #7a8190;
-    --sl-color-gray-4: #5c6370;
-    --sl-color-gray-5: #3e4550;
-    --sl-color-gray-6: #252a33;
-    --sl-color-gray-7: #1a1e26;
+    --sl-color-bg: #1C1B1A;
+    --sl-color-bg-nav: rgba(28, 27, 26, 0.92);
+    --sl-color-bg-sidebar: #1F1E1D;
+    --sl-color-hairline-shade: #2C2A28;
+    --sl-color-hairline-light: #3A3836;
+    --sl-color-text: #E8E5DF;
+    --sl-color-text-accent: #60A5FA;
+    --sl-color-white: #FAF9F5;
+    --sl-color-gray-1: #D6D3CD;
+    --sl-color-gray-2: #A8A49E;
+    --sl-color-gray-3: #87827C;
+    --sl-color-gray-4: #6B6660;
+    --sl-color-gray-5: #4A4644;
+    --sl-color-gray-6: #2C2A28;
+    --sl-color-gray-7: #232221;
 
-    --sl-color-accent-low: #15112e;
-    --sl-color-accent: #9387fd;
-    --sl-color-accent-high: #c9bfff;
+    --sl-color-accent-low: #172554;
+    --sl-color-accent: #60A5FA;
+    --sl-color-accent-high: #93C5FD;
 
-    --doc-shadow-sm: 0 1px 2px rgba(0, 0, 0, 0.25);
-    --doc-shadow-md: 0 2px 8px rgba(0, 0, 0, 0.35);
-    --doc-shadow-lg: 0 4px 16px rgba(0, 0, 0, 0.45);
-    --doc-shadow-glow: 0 0 20px rgba(147, 135, 253, 0.15);
-}
+    /* Override Starlight purple (used by tip asides) → warm teal */
+    --sl-color-purple-low: #0D2B26;
+    --sl-color-purple: #2DD4BF;
+    --sl-color-purple-high: #5EEAD4;
 
-/* Light mode */
-:root[data-theme='light'] {
-    --sl-color-accent-low: #f0edff;
-    --sl-color-accent: #6d5dfc;
-    --sl-color-accent-high: #3520a0;
+    --doc-shadow-sm: 0 1px 2px rgba(0, 0, 0, 0.2);
+    --doc-shadow-md: 0 2px 8px rgba(0, 0, 0, 0.3);
+    --doc-shadow-lg: 0 4px 16px rgba(0, 0, 0, 0.4);
 }
 
 /* ============================================================
-   3. GLOBAL BASE — Smaller, tighter default font
+   4. GLOBAL BASE
    ============================================================ */
 html {
     font-size: 15px;
@@ -100,20 +135,19 @@ body {
 }
 
 /* ============================================================
-   4. NAVBAR — Clean glassmorphism
+   5. NAVBAR — Clean, solid background
    ============================================================ */
 header.header {
-    backdrop-filter: saturate(160%) blur(14px);
-    -webkit-backdrop-filter: saturate(160%) blur(14px);
     border-bottom: 1px solid var(--sl-color-hairline-shade);
     box-shadow: none;
     transition: background-color 150ms ease;
 }
 
-/* Site title — compact */
+/* Site title — editorial feel */
 .site-title {
-    font-weight: 700;
-    font-size: 0.9rem;
+    font-family: var(--sl-font-heading);
+    font-weight: 600;
+    font-size: 1rem;
     letter-spacing: -0.01em;
 }
 
@@ -124,41 +158,40 @@ nav a {
     align-items: center;
     border-radius: var(--doc-radius-sm);
     transition: color 150ms ease, background-color 150ms ease;
-    font-size: 0.8rem;
+    font-size: 0.8125rem;
 }
 
-/* Search input — refined */
+/* Search input */
 site-search button[data-open-modal] {
-    font-size: 0.8rem;
+    font-size: 0.8125rem;
 }
 
 /* ============================================================
-   5. SIDEBAR — Minimal, compact
+   6. SIDEBAR — Clean, warm
    ============================================================ */
 starlight-menu-button button {
-    min-width: 40px;
-    min-height: 40px;
+    min-width: 44px;
+    min-height: 44px;
 }
 
 nav.sidebar {
-    font-size: 0.8rem;
+    font-size: 0.8125rem;
 }
 
 nav.sidebar a {
     border-radius: var(--doc-radius-sm);
     transition: all 150ms ease;
-    font-size: 0.8rem;
+    font-size: 0.8125rem;
     min-height: 32px;
     padding-top: 0.25rem;
     padding-bottom: 0.25rem;
-    line-height: 1.4;
+    line-height: 1.45;
 }
 
 nav.sidebar a[aria-current='page'] {
     font-weight: 600;
-    border-left: 2px solid var(--sl-color-accent);
-    padding-left: calc(var(--doc-spacing-md) - 2px);
-    background: var(--sl-color-accent-low);
+    background: var(--sl-color-hairline-shade);
+    color: var(--sl-color-white);
 }
 
 nav.sidebar details>summary {
@@ -173,8 +206,8 @@ nav.sidebar details>summary {
 }
 
 nav.sidebar details>summary:hover {
-    background-color: var(--sl-color-accent-low);
-    color: var(--sl-color-accent);
+    background-color: var(--sl-color-hairline-shade);
+    color: var(--sl-color-white);
 }
 
 /* Sidebar top-level group labels */
@@ -189,69 +222,75 @@ nav.sidebar>ul>li>details>summary {
 }
 
 /* ============================================================
-   6. CONTENT — Information-dense, readable
+   7. CONTENT — Readable, editorial
    ============================================================ */
 
-/* Content area max width */
+/* Content area */
 .sl-markdown-content {
-    font-size: 0.875rem;
-    line-height: 1.7;
+    font-size: 0.9375rem;
+    line-height: 1.65;
 }
 
-/* Headings — Compact, sharp */
+/* Headings — Serif, warm */
 .sl-markdown-content h1 {
-    font-size: 1.5rem;
-    letter-spacing: -0.025em;
+    font-family: var(--sl-font-heading);
+    font-size: 1.75rem;
+    font-weight: 500;
+    letter-spacing: -0.02em;
     margin-bottom: var(--doc-spacing-lg);
     padding-bottom: var(--doc-spacing-sm);
     border-bottom: 1px solid var(--sl-color-hairline-shade);
-    font-weight: 700;
-    line-height: 1.2;
+    line-height: 1.25;
+    color: var(--sl-color-white);
 }
 
 .sl-markdown-content h2 {
-    font-size: 1.15rem;
-    letter-spacing: -0.02em;
+    font-family: var(--sl-font-heading);
+    font-size: 1.35rem;
+    font-weight: 500;
+    letter-spacing: -0.015em;
     margin-top: var(--doc-spacing-2xl);
     margin-bottom: var(--doc-spacing-md);
-    font-weight: 700;
-    line-height: 1.25;
+    line-height: 1.3;
+    color: var(--sl-color-white);
 }
 
 .sl-markdown-content h3 {
-    font-size: 0.95rem;
+    font-size: 1rem;
     letter-spacing: -0.01em;
     margin-top: var(--doc-spacing-xl);
     margin-bottom: var(--doc-spacing-sm);
     font-weight: 600;
-    line-height: 1.3;
+    line-height: 1.35;
+    color: var(--sl-color-white);
 }
 
 .sl-markdown-content h4 {
-    font-size: 0.85rem;
+    font-size: 0.875rem;
     font-weight: 600;
     margin-top: var(--doc-spacing-lg);
     margin-bottom: var(--doc-spacing-xs);
-    line-height: 1.35;
+    line-height: 1.4;
+    color: var(--sl-color-white);
 }
 
 /* Paragraphs — Optimal reading width */
 .sl-markdown-content p {
-    max-width: 68ch;
-    line-height: 1.7;
-    font-size: 0.875rem;
-    color: var(--sl-color-gray-1);
+    max-width: 70ch;
+    line-height: 1.65;
+    font-size: 0.9375rem;
+    color: var(--sl-color-text);
 }
 
-/* Lists — Tighter spacing */
+/* Lists */
 .sl-markdown-content ul,
 .sl-markdown-content ol {
-    font-size: 0.875rem;
-    line-height: 1.65;
+    font-size: 0.9375rem;
+    line-height: 1.6;
 }
 
 .sl-markdown-content li {
-    margin-bottom: 0.15rem;
+    margin-bottom: 0.2rem;
 }
 
 /* Strong text */
@@ -272,47 +311,36 @@ nav.sidebar>ul>li>details>summary {
 }
 
 /* ============================================================
-   7. TABLES — Striped, compact, refined
+   8. TABLES — Minimal (Claude-inspired thin borders)
    ============================================================ */
 .sl-markdown-content table {
     display: table;
     width: 100%;
-    border-collapse: separate;
-    border-spacing: 0;
+    border-collapse: collapse;
     border-radius: var(--doc-radius-md);
     overflow: hidden;
-    border: 1px solid var(--sl-color-hairline-shade);
-    font-size: 0.8rem;
-    line-height: 1.5;
+    font-size: 0.8125rem;
+    line-height: 1.55;
 }
 
 .sl-markdown-content th {
     background-color: var(--sl-color-gray-7, var(--sl-color-bg-sidebar));
     font-weight: 600;
-    text-transform: uppercase;
-    font-size: 0.68rem;
-    letter-spacing: 0.06em;
-    padding: 0.4rem 0.65rem;
-    color: var(--sl-color-gray-3);
+    font-size: 0.75rem;
+    padding: 0.5rem 0.75rem;
+    color: var(--sl-color-gray-2);
     white-space: nowrap;
+    border-bottom: 1px solid var(--sl-color-hairline-shade);
+    text-align: left;
 }
 
 .sl-markdown-content td {
-    padding: 0.35rem 0.65rem;
-    border-top: 1px solid var(--sl-color-hairline-shade);
-    font-size: 0.8rem;
+    padding: 0.45rem 0.75rem;
+    border-bottom: 1px solid var(--sl-color-hairline-shade);
+    font-size: 0.8125rem;
 }
 
-/* Zebra striping */
-.sl-markdown-content tbody tr:nth-child(even) {
-    background-color: rgba(255, 255, 255, 0.015);
-}
-
-:root[data-theme='dark'] .sl-markdown-content tbody tr:nth-child(even) {
-    background-color: rgba(255, 255, 255, 0.02);
-}
-
-/* Hover — Doherty Threshold */
+/* Hover — subtle highlight */
 .sl-markdown-content tr {
     transition: background-color 150ms ease;
 }
@@ -322,76 +350,72 @@ nav.sidebar>ul>li>details>summary {
 }
 
 /* ============================================================
-   8. CODE BLOCKS — Compact, refined
+   9. CODE BLOCKS — Clean, refined
    ============================================================ */
 .sl-markdown-content pre {
     border-radius: var(--doc-radius-md) !important;
     border: 1px solid var(--sl-color-hairline-shade);
-    font-size: 0.78rem;
+    font-size: 0.8125rem;
     line-height: 1.6;
-    padding: 0.75rem 1rem !important;
+    padding: 0.85rem 1rem !important;
 }
 
 .sl-markdown-content :not(pre)>code {
     border-radius: var(--doc-radius-sm);
-    padding: 0.1em 0.35em;
-    font-size: 0.82em;
+    padding: 0.15em 0.4em;
+    font-size: 0.85em;
     background-color: var(--sl-color-accent-low);
     color: var(--sl-color-accent-high);
     font-weight: 500;
 }
 
 /* ============================================================
-   9. ASIDES (Admonitions) — Minimal, integrated
+   10. ASIDES (Admonitions) — Warm, minimal
    ============================================================ */
 .starlight-aside {
     border-radius: var(--doc-radius-md);
     box-shadow: none;
-    font-size: 0.825rem;
-    padding: 0.65rem 0.85rem;
-    margin: 0.75rem 0;
+    font-size: 0.875rem;
+    padding: 0.75rem 1rem;
+    margin: 0.85rem 0;
 }
 
 .starlight-aside--title {
     font-weight: 600;
-    font-size: 0.78rem;
-    text-transform: uppercase;
-    letter-spacing: 0.03em;
+    font-size: 0.8125rem;
+    letter-spacing: 0.02em;
 }
 
 /* ============================================================
-   10. CARDS & LINK CARDS — Subtle hover
+   11. CARDS & LINK CARDS — Subtle, warm
    ============================================================ */
 .card {
     border-radius: var(--doc-radius-md);
     border: 1px solid var(--sl-color-hairline-shade);
     background: var(--sl-color-bg-sidebar, var(--sl-color-gray-7));
-    transition: all 200ms cubic-bezier(0.4, 0, 0.2, 1);
+    transition: border-color 200ms ease;
     overflow: hidden;
 }
 
 .card:hover {
-    transform: translateY(-2px);
-    border-color: var(--sl-color-accent);
-    box-shadow: var(--doc-shadow-glow);
+    border-color: var(--sl-color-gray-3);
 }
 
 .sl-link-card {
     border-radius: var(--doc-radius-md);
-    transition: all 150ms ease;
-    font-size: 0.825rem;
+    transition: border-color 150ms ease;
+    font-size: 0.875rem;
 }
 
 .sl-link-card:hover {
-    transform: translateY(-1px);
-    box-shadow: var(--doc-shadow-glow);
+    border-color: var(--sl-color-accent);
 }
 
 /* ============================================================
-   11. TABLE OF CONTENTS — Right sidebar, refined
+   12. TABLE OF CONTENTS — Right sidebar
    ============================================================ */
 starlight-toc a {
-    font-size: 0.75rem;
+    font-size: 0.78rem;
     transition: color 150ms ease;
     line-height: 1.5;
 }
@@ -404,7 +428,7 @@ starlight-toc a[aria-current='true'] {
 /* "On this page" label */
 starlight-toc h2,
 .right-sidebar-panel h2 {
-    font-size: 0.68rem;
+    font-size: 0.7rem;
     text-transform: uppercase;
     letter-spacing: 0.06em;
     font-weight: 700;
@@ -412,39 +436,39 @@ starlight-toc h2,
 }
 
 /* ============================================================
-   12. MERMAID — Dark mode compatible
+   13. MERMAID — Warm palette
    ============================================================ */
 .mermaid {
     background: var(--sl-color-bg-sidebar, var(--sl-color-gray-7));
     border-radius: var(--doc-radius-md);
     padding: var(--doc-spacing-md);
     border: 1px solid var(--sl-color-hairline-shade);
-    font-size: 0.8rem;
+    font-size: 0.8125rem;
 }
 
 :root[data-theme='dark'] .mermaid .node rect,
 :root[data-theme='dark'] .mermaid .node circle,
 :root[data-theme='dark'] .mermaid .node polygon {
-    fill: #1a1e26 !important;
-    stroke: #7c6afc !important;
+    fill: #232221 !important;
+    stroke: #60A5FA !important;
 }
 
 :root[data-theme='dark'] .mermaid text {
-    fill: #d4d8e0 !important;
-    font-size: 0.75rem !important;
+    fill: #E8E5DF !important;
+    font-size: 0.78rem !important;
 }
 
 :root[data-theme='dark'] .mermaid .edgeLabel {
-    background-color: #0f1217 !important;
-    color: #d4d8e0 !important;
+    background-color: #1F1E1D !important;
+    color: #E8E5DF !important;
 }
 
 :root[data-theme='dark'] .mermaid .flowchart-link {
-    stroke: #5c6370 !important;
+    stroke: #6B6660 !important;
 }
 
 /* ============================================================
-   13. ACCESSIBILITY — WCAG 2.1 AA
+   14. ACCESSIBILITY — WCAG 2.1 AA
    ============================================================ */
 
 /* Focus-visible for keyboard navigation */
@@ -470,7 +494,7 @@ input:focus-visible,
 }
 
 /* ============================================================
-   14. RESPONSIVE — Mobile optimized
+   15. RESPONSIVE — Mobile optimized
    ============================================================ */
 @media (max-width: 72rem) {
     html {
@@ -478,15 +502,15 @@ input:focus-visible,
     }
 
     .sl-markdown-content h1 {
-        font-size: 1.35rem;
+        font-size: 1.5rem;
     }
 
     .sl-markdown-content h2 {
-        font-size: 1.05rem;
+        font-size: 1.2rem;
     }
 
     .sl-markdown-content h3 {
-        font-size: 0.9rem;
+        font-size: 0.95rem;
     }
 
     /* Table scroll on mobile */
@@ -498,18 +522,18 @@ input:focus-visible,
 }
 
 /* ============================================================
-   15. UTILITY CLASSES
+   16. UTILITY CLASSES
    ============================================================ */
 
 /* Badge */
 .badge--premium {
-    background-color: rgba(124, 106, 252, 0.08);
+    background-color: rgba(37, 99, 235, 0.08);
     color: var(--sl-color-accent);
-    border: 1px solid rgba(147, 135, 253, 0.2);
+    border: 1px solid rgba(37, 99, 235, 0.2);
     padding: 0.1rem 0.4rem;
     border-radius: 50px;
     font-weight: 600;
-    font-size: 0.68rem;
+    font-size: 0.7rem;
     letter-spacing: 0.02em;
 }
 
@@ -521,20 +545,22 @@ input:focus-visible,
     border-radius: var(--doc-radius-md);
     padding: var(--doc-spacing-md);
     margin-bottom: var(--doc-spacing-lg);
-    font-size: 0.825rem;
+    font-size: 0.875rem;
 }
 
-/* Blockquotes — Quick Reference style */
+/* Blockquotes — Warm editorial */
 .sl-markdown-content blockquote {
-    font-size: 0.825rem;
+    font-size: 0.875rem;
     line-height: 1.6;
     border-left-width: 3px;
-    padding: 0.5rem 0.85rem;
+    border-left-color: var(--sl-color-hairline-light);
+    padding: 0.5rem 1rem;
     margin: 0.5rem 0 1rem;
+    color: var(--sl-color-gray-2);
 }
 
 .sl-markdown-content blockquote p {
-    font-size: 0.825rem;
+    font-size: 0.875rem;
     margin: 0.15rem 0;
 }
 
@@ -542,21 +568,20 @@ input:focus-visible,
 .sl-markdown-content details {
     border: 1px solid var(--sl-color-hairline-shade);
     border-radius: var(--doc-radius-md);
-    padding: 0.5rem 0.75rem;
+    padding: 0.6rem 0.85rem;
     margin-bottom: 0.5rem;
-    transition: all 150ms ease;
-    font-size: 0.825rem;
+    transition: border-color 150ms ease;
+    font-size: 0.875rem;
 }
 
 .sl-markdown-content details[open] {
     border-color: var(--sl-color-accent);
-    box-shadow: var(--doc-shadow-sm);
 }
 
 .sl-markdown-content details summary {
     cursor: pointer;
     font-weight: 600;
-    font-size: 0.825rem;
+    font-size: 0.875rem;
     padding: 0.15rem 0;
     min-height: 36px;
     display: flex;
@@ -568,37 +593,76 @@ input:focus-visible,
 }
 
 /* ============================================================
-   16. HERO / PAGE TITLE — Refined
+   17. HERO / PAGE TITLE
    ============================================================ */
 .content-panel+.content-panel .sl-markdown-content>h1:first-child,
 [data-page-title] {
-    font-size: 1.5rem;
-    letter-spacing: -0.025em;
+    font-family: var(--sl-font-heading);
+    font-size: 1.75rem;
+    font-weight: 500;
+    letter-spacing: -0.02em;
 }
 
 /* Page header area */
 .main-pane h1.heading {
-    font-size: 1.5rem;
-    letter-spacing: -0.025em;
+    font-family: var(--sl-font-heading);
+    font-size: 1.75rem;
+    font-weight: 500;
+    letter-spacing: -0.02em;
 }
 
 /* ============================================================
-   17. FOOTER — Clean
+   18. FOOTER — Clean
    ============================================================ */
 footer {
     border-top: 1px solid var(--sl-color-hairline-shade);
-    font-size: 0.75rem;
+    font-size: 0.78rem;
 }
 
-/* Pagination links */
+/* Pagination links — compact, refined */
+.pagination-links {
+    display: flex;
+    gap: 0.75rem;
+    margin-top: var(--doc-spacing-xl);
+    padding-top: var(--doc-spacing-md);
+    border-top: 1px solid var(--sl-color-hairline-shade);
+}
+
 .pagination-links a {
-    font-size: 0.8rem;
+    font-size: 0.8125rem;
+    padding: 0.4rem 0.75rem;
+    border: 1px solid var(--sl-color-hairline-shade);
+    border-radius: var(--doc-radius-sm);
+    text-decoration: none;
+    transition: border-color 150ms ease, background-color 150ms ease;
+    flex: 0 1 auto;
+    max-width: 50%;
+}
+
+.pagination-links a:hover {
+    border-color: var(--sl-color-accent);
+    background-color: var(--sl-color-accent-low);
+}
+
+/* Shrink the direction label */
+.pagination-links .link-title {
+    font-size: 0.8125rem;
+    font-weight: 500;
+    line-height: 1.4;
+}
+
+/* Smaller direction hint (Trước / Tiếp) */
+.pagination-links .link-page {
+    font-size: 0.7rem;
+    color: var(--sl-color-gray-3);
+    text-transform: uppercase;
+    letter-spacing: 0.04em;
 }
 
 /* ============================================================
-   18. LAST UPDATED — Subtle
+   19. LAST UPDATED — Subtle
    ============================================================ */
 .meta {
-    font-size: 0.7rem;
+    font-size: 0.72rem;
     color: var(--sl-color-gray-4);
 }

@@ -7,10 +7,12 @@
 
 import { defineConfig } from 'astro/config';
 import starlight from '@astrojs/starlight';
+import mermaid from 'astro-mermaid';
 import sitemap from '@astrojs/sitemap';
 
 export default defineConfig({
     integrations: [
+        mermaid(),
         starlight({
             // CUSTOMIZE: Project identity
             title: '[Project Name]',
@@ -62,8 +64,23 @@ export default defineConfig({
             // Built-in components customization
             components: {},
 
-            // Theme: dark mode default + SEO meta tags
+            // Theme: dark mode default + SEO meta tags + font preconnect
             head: [
+                {
+                    tag: 'link',
+                    attrs: {
+                        rel: 'preconnect',
+                        href: 'https://fonts.googleapis.com',
+                    },
+                },
+                {
+                    tag: 'link',
+                    attrs: {
+                        rel: 'preconnect',
+                        href: 'https://fonts.gstatic.com',
+                        crossorigin: true,
+                    },
+                },
                 {
                     tag: 'script',
                     content: `
@@ -105,15 +122,7 @@ export default defineConfig({
         sitemap(),
     ],
 
-    // Markdown configuration
-    markdown: {
-        // Mermaid: Starlight doesn't include mermaid by default.
-        // Use remark-mermaidjs for server-side rendering (recommended)
-        // or add a client-side script via head injection.
-        // Install: npm install remark-mermaidjs
-        // Then uncomment:
-        // remarkPlugins: [remarkMermaid],
-    },
+
 
     // CUSTOMIZE: Deployment
     site: 'https://docs.example.com', // CUSTOMIZE: your deployment URL

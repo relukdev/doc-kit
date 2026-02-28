@@ -25,9 +25,9 @@ DocKit Master sử dụng hệ thống skill files — mỗi file Markdown chứ
 
 | Skill | File | Vai trò |
 |-------|------|---------|
-| [Orchestrator](./orchestrator.md) | `SKILL.md` | Điều phối pipeline 6 bước |
-| [Analyzer](./analyze-codebase.md) | `skills/analyze-codebase.md` | Quét codebase, phát hiện tech stack |
-| [Content Guidelines](./content-guidelines.md) | `skills/content-guidelines.md` | Quy tắc chất lượng nội dung |
+| [Orchestrator](./orchestrator) | `SKILL.md` | Điều phối pipeline 6 bước |
+| [Analyzer](./analyze-codebase) | `skills/analyze-codebase.md` | Quét codebase, phát hiện tech stack |
+| [Content Guidelines](./content-guidelines) | `skills/content-guidelines.md` | Quy tắc chất lượng nội dung |
 
 ### Generator Skills
 
@@ -61,4 +61,4 @@ DocKit Master sử dụng hệ thống skill files — mỗi file Markdown chứ
 
 ---
 
-> Xem thêm: [Kiến trúc hệ thống](../architecture.md) · [Hướng dẫn sử dụng](../sop/index.md)
+> Xem thêm: [Kiến trúc hệ thống](../architecture) · [Hướng dẫn sử dụng](../sop/index)

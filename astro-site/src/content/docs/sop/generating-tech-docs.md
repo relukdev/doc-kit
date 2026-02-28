@@ -17,7 +17,7 @@ sidebar:
 
 ## Yêu Cầu
 
-- [ ] DocKit Master đã cài đặt (xem [Hướng dẫn triển khai](../deployment.md))
+- [ ] DocKit Master đã cài đặt (xem [Hướng dẫn triển khai](../deployment))
 - [ ] Có source code project cần tạo tài liệu
 - [ ] Đang ở trong session Google Antigravity
 
@@ -143,4 +143,4 @@ markdown: { remarkPlugins: [remarkMermaid] }
 
 ---
 
-> Xem thêm: [Tạo SOP guides](./generating-sop-guides.md) · [Sử dụng CLI](./using-cli.md)
+> Xem thêm: [Tạo SOP guides](./generating-sop-guides) · [Sử dụng CLI](./using-cli)

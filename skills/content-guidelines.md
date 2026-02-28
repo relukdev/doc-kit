@@ -114,8 +114,9 @@ If `robots` is omitted from frontmatter, the page defaults to `"index, follow"` 
 
 ### Links
 
-- Use **relative paths**: `[API](./api-reference.md)` not absolute
-- **Anchor links** must match actual heading slugs
+- Use **relative paths without `.md` extension**: `[API](./api-reference)` not `[API](./api-reference.md)`
+- Astro Starlight renders pages as `/page-slug/` — `.md` links break in the built site
+- **Anchor links** must match actual heading slugs: `[Section](./page#heading-slug)`
 - **No `<a>` tags** — use Markdown `[text](url)` syntax
 
 ---
@@ -206,12 +207,12 @@ import { Tabs, TabItem } from '@astrojs/starlight/components';
 Always use these colors for Mermaid diagrams:
 
 ```
-Node fill:     #2d333b
-Node border:   #6d5dfc  
-Node text:     #e6edf3
-Background:    #161b22
-Edge lines:    #8b949e
-Highlight:     #8a7efd
+Node fill:     #232221
+Node border:   #60A5FA  
+Node text:     #E8E5DF
+Background:    #1C1B1A
+Edge lines:    #6B6660
+Highlight:     #60A5FA
 Success:       #3fb950
 Warning:       #d29922
 Danger:        #f85149
@@ -221,8 +222,8 @@ Danger:        #f85149
 
 ```mermaid
 graph LR
-    style A fill:#2d333b,stroke:#6d5dfc,color:#e6edf3
-    style B fill:#2d333b,stroke:#3fb950,color:#e6edf3
+    style A fill:#232221,stroke:#60A5FA,color:#E8E5DF
+    style B fill:#232221,stroke:#3fb950,color:#E8E5DF
 ```
 
 ### Minimum Requirements
@@ -253,10 +254,10 @@ Every page MUST include **≥2 internal links** to other documentation pages.
 
 | Location | Example |
 |----------|---------|
-| Quick Reference box | `See [Database](./database.md)` |
-| Body text (contextual) | `...uses the [auth flow](./data-flow.md#authentication)` |
-| Related section (bottom) | `## Related\n- [Architecture](./architecture.md)` |
-| Admonition tips | `:::tip\nSee [Deploy Guide](./deployment.md)\n:::` |
+| Quick Reference box | `See [Database](./database)` |
+| Body text (contextual) | `...uses the [auth flow](./data-flow#authentication)` |
+| Related section (bottom) | `## Related\n- [Architecture](./architecture)` |
+| Admonition tips | `:::tip\nSee [Deploy Guide](./deployment)\n:::` |
 
 **Anchor text rules:** Always use descriptive text, never "click here" or "read more".
 

@@ -81,6 +81,9 @@ mkdir -p astro-site/src/content/docs/vi
 
 ### 5. Install & Build
 
+> **Note:** Mermaid diagram rendering is **built-in** via `astro-mermaid` integration.
+> No additional setup required — all `\`\`\`mermaid` code blocks will auto-render as SVG diagrams.
+
 // turbo
 ```bash
 cd astro-site
@@ -116,31 +119,13 @@ Open `http://localhost:4321` to preview.
 - [ ] Admonitions render (`:::tip`, `:::note`, `:::caution`, `:::danger`)
 - [ ] Mobile responsive (hamburger menu works)
 - [ ] Custom CSS applied (purple accent colors)
+- [ ] Mermaid diagrams render as SVG (not raw code blocks)
 - [ ] Every page has `title` and `description` in frontmatter
 - [ ] `robots.txt` exists in `public/`
 - [ ] `sitemap-urls.txt` generated after build
 - [ ] All pages have ≥2 internal links
 
 ### 7. Post-Setup Optimizations (Optional)
-
-#### Add Mermaid Support
-
-```bash
-cd astro-site
-npm install remark-mermaidjs
-```
-
-Add to `astro.config.mjs`:
-```javascript
-import remarkMermaid from 'remark-mermaidjs';
-
-export default defineConfig({
-  markdown: {
-    remarkPlugins: [remarkMermaid],
-  },
-  integrations: [/* ... */],
-});
-```
 
 #### Deploy to GitHub Pages
 

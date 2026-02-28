@@ -100,4 +100,4 @@ Mọi trang phải có **≥2 internal links** trong:
 
 ---
 
-> Xem thêm: [Orchestrator](./orchestrator.md) · [Analyzer](./analyze-codebase.md)
+> Xem thêm: [Orchestrator](./orchestrator) · [Analyzer](./analyze-codebase)

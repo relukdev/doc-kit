@@ -51,29 +51,29 @@ bash ~/.gemini/antigravity/skills/doc-kit/scripts/doc-gen.sh
 
 ## 📐 Tài Liệu Kỹ Thuật
 
-- [Kiến trúc hệ thống](./architecture.md) — Sơ đồ tổng quan, ADR
-- [Cấu trúc dữ liệu](./database.md) — Design tokens, config schemas
-- [Hướng dẫn triển khai](./deployment.md) — Cài đặt, cấu hình, deploy
-- [Luồng dữ liệu](./data-flow.md) — Pipeline 6 bước, tích hợp
+- [Kiến trúc hệ thống](./architecture) — Sơ đồ tổng quan, ADR
+- [Cấu trúc dữ liệu](./database) — Design tokens, config schemas
+- [Hướng dẫn triển khai](./deployment) — Cài đặt, cấu hình, deploy
+- [Luồng dữ liệu](./data-flow) — Pipeline 6 bước, tích hợp
 
 ## 📋 Hướng Dẫn Sử Dụng (SOP)
 
-- [Tổng quan hướng dẫn](./sop/index.md)
-- [Tạo tài liệu kỹ thuật](./sop/generating-tech-docs.md)
-- [Tạo hướng dẫn SOP](./sop/generating-sop-guides.md)
-- [Sử dụng CLI](./sop/using-cli.md)
-- [Tuỳ chỉnh templates](./sop/customizing-templates.md)
+- [Tổng quan hướng dẫn](./sop/index)
+- [Tạo tài liệu kỹ thuật](./sop/generating-tech-docs)
+- [Tạo hướng dẫn SOP](./sop/generating-sop-guides)
+- [Sử dụng CLI](./sop/using-cli)
+- [Tuỳ chỉnh templates](./sop/customizing-templates)
 
 ## 🔌 Tham Chiếu Skill
 
-- [Tổng quan skill](./api/index.md)
-- [Orchestrator — SKILL.md](./api/orchestrator.md)
-- [Analyzer — analyze-codebase.md](./api/analyze-codebase.md)
-- [Content Guidelines](./api/content-guidelines.md)
+- [Tổng quan skill](./api/index)
+- [Orchestrator — SKILL.md](./api/orchestrator)
+- [Analyzer — analyze-codebase.md](./api/analyze-codebase)
+- [Content Guidelines](./api/content-guidelines)
 
 ## 📊 Phân Tích Mã Nguồn
 
-- [Phân tích codebase](./analysis.md)
+- [Phân tích codebase](./analysis)
 
 ---
 

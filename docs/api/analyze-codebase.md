@@ -73,4 +73,4 @@ analysis.md
 
 ---
 
-> Xem thêm: [Orchestrator](./orchestrator.md) · [Content Guidelines](./content-guidelines.md)
+> Xem thêm: [Orchestrator](./orchestrator) · [Content Guidelines](./content-guidelines)

@@ -71,4 +71,4 @@ graph LR
 
 ---
 
-> Xem thêm: [Analyzer](./analyze-codebase.md) · [Content Guidelines](./content-guidelines.md)
+> Xem thêm: [Analyzer](./analyze-codebase) · [Content Guidelines](./content-guidelines)

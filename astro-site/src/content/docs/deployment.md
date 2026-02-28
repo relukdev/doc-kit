@@ -205,4 +205,4 @@ docs/
 
 ---
 
-> Xem thêm: [Kiến trúc hệ thống](./architecture.md) · [Sử dụng CLI](./sop/using-cli.md)
+> Xem thêm: [Kiến trúc hệ thống](./architecture) · [Sử dụng CLI](./sop/using-cli)

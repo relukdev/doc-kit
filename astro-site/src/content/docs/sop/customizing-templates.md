@@ -173,4 +173,4 @@ starlight({
 
 ---
 
-> Xem thêm: [Hướng dẫn triển khai](../deployment.md) · [Sử dụng CLI](./using-cli.md)
+> Xem thêm: [Hướng dẫn triển khai](../deployment) · [Sử dụng CLI](./using-cli)

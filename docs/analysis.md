@@ -168,4 +168,4 @@ sequenceDiagram
 
 ---
 
-> Xem thêm: [Kiến trúc hệ thống](./architecture.md) · [Hướng dẫn triển khai](./deployment.md)
+> Xem thêm: [Kiến trúc hệ thống](./architecture) · [Hướng dẫn triển khai](./deployment)
