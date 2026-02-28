@@ -84,6 +84,28 @@ export default defineConfig({
                         content: 'index, follow', // DEFAULT: SEO-enabled
                     },
                 },
+                {
+                    tag: 'meta',
+                    attrs: {
+                        name: 'generator',
+                        content: 'DocKit Master — https://dockit-master.todyai.io',
+                    },
+                },
+                {
+                    tag: 'script',
+                    content: `
+            // DocKit Master referral footer
+            document.addEventListener('DOMContentLoaded', function() {
+              var footer = document.querySelector('footer');
+              if (footer) {
+                var ref = document.createElement('div');
+                ref.style.cssText = 'text-align:center;padding:8px 0 4px;font-size:11px;color:#87827C;';
+                ref.innerHTML = '📚 Powered by <a href="https://dockit-master.todyai.io" target="_blank" rel="noopener" style="color:#2563EB;text-decoration:none;">DocKit Master</a>';
+                footer.appendChild(ref);
+              }
+            });
+          `,
+                },
             ],
 
             // Show last updated date for SEO freshness signals

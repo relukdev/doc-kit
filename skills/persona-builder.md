@@ -83,9 +83,6 @@ sidebar:
 
 ```mermaid
 graph LR
-    style A fill:#232221,stroke:#60A5FA,color:#E8E5DF
-    style B fill:#232221,stroke:#60A5FA,color:#E8E5DF
-    style C fill:#232221,stroke:#3fb950,color:#E8E5DF
 
     A["Login"] --> B["[Core Action]"]
     B --> C["[Outcome]"]
@@ -232,8 +229,6 @@ sidebar:
 
 ```mermaid
 graph TB
-    style BP fill:#232221,stroke:#f78166,color:#E8E5DF
-    style UP fill:#232221,stroke:#60A5FA,color:#E8E5DF
 
     subgraph Buyers["🏢 Buyer Personas"]
         BP1["[Buyer 1]"]
@@ -282,7 +277,7 @@ docs/personas/
 - **Cite source**: `(file_path:line_number)` for every claim
 - **Link to JTBD**: Every persona must have at least 1 JTBD statement
 - **Link to SOP**: Persona → which SOPs are relevant to them
-- **Mermaid dark-mode colors**: fill `#232221`, stroke `#60A5FA`, text `#E8E5DF`
+- **No inline `style` in Mermaid** — let native themes handle colors (auto light/dark)
 - **SEO frontmatter** — include `title`, `description`, `keywords`, `robots`
 - **Progressive disclosure** — Use `<details>` for detailed permission matrices
 - **Min 2 internal links** per persona page (to SOPs, JTBD, or other personas)

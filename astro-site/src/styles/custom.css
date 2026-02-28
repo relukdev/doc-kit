@@ -436,35 +436,17 @@ starlight-toc h2,
 }
 
 /* ============================================================
-   13. MERMAID — Warm palette
+   13. MERMAID — Native theme (auto light/dark via astro-mermaid)
    ============================================================ */
-.mermaid {
-    background: var(--sl-color-bg-sidebar, var(--sl-color-gray-7));
+/* Container styling only — diagram colors handled by Mermaid's
+   native 'default' (light) and 'dark' themes automatically */
+pre.mermaid {
     border-radius: var(--doc-radius-md);
-    padding: var(--doc-spacing-md);
-    border: 1px solid var(--sl-color-hairline-shade);
-    font-size: 0.8125rem;
+    overflow: auto;
 }
 
-:root[data-theme='dark'] .mermaid .node rect,
-:root[data-theme='dark'] .mermaid .node circle,
-:root[data-theme='dark'] .mermaid .node polygon {
-    fill: #232221 !important;
-    stroke: #60A5FA !important;
-}
-
-:root[data-theme='dark'] .mermaid text {
-    fill: #E8E5DF !important;
-    font-size: 0.78rem !important;
-}
-
-:root[data-theme='dark'] .mermaid .edgeLabel {
-    background-color: #1F1E1D !important;
-    color: #E8E5DF !important;
-}
-
-:root[data-theme='dark'] .mermaid .flowchart-link {
-    stroke: #6B6660 !important;
+pre.mermaid[data-processed] {
+    background: transparent !important;
 }
 
 /* ============================================================

@@ -44,9 +44,6 @@ sidebar:
 
 ```mermaid
 graph TB
-    style Client fill:#232221,stroke:#60A5FA,color:#E8E5DF
-    style API fill:#232221,stroke:#60A5FA,color:#E8E5DF
-    style DB fill:#232221,stroke:#3fb950,color:#E8E5DF
 
     Client["🌐 Client"] --> API["⚙️ API Server"]
     API --> DB["🗄️ Database"]
@@ -226,7 +223,6 @@ cp .env.example .env
 
 ```mermaid
 graph LR
-    style A fill:#232221,stroke:#60A5FA,color:#E8E5DF
     A["🔀 Push"] --> B["🧪 Test"]
     B --> C["📦 Build"]
     C --> D["🚀 Deploy"]
@@ -263,9 +259,6 @@ sidebar:
 
 ```mermaid
 graph TB
-    style Input fill:#232221,stroke:#60A5FA,color:#E8E5DF
-    style Process fill:#232221,stroke:#d29922,color:#E8E5DF
-    style Output fill:#232221,stroke:#3fb950,color:#E8E5DF
 
     Input["📥 Input"] --> Process["⚙️ Processing"]
     Process --> Output["📤 Output"]
@@ -306,7 +299,7 @@ sequenceDiagram
 - **Minimum 2 Mermaid diagrams per file**
 - **Text description** alongside every Mermaid diagram (for LLM parsing)
 - **Every claim cites** `(file_path:line_number)`
-- **Dark-mode Mermaid colors**: fill `#232221`, border `#60A5FA`, text `#E8E5DF`
+- **No inline `style` in Mermaid** — let native themes handle colors (auto light/dark)
 - **Use admonitions** (`:::tip`, `:::warning`, `:::danger`) for callouts
 - **Use `<details>` Progressive Disclosure** for secondary information
 - **Tables** for all structured data — never use bullet lists for tabular data

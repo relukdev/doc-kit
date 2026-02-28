@@ -35,8 +35,6 @@ sidebar:
 
 ```mermaid
 graph TB
-    style S fill:#232221,stroke:#3fb950,color:#E8E5DF
-    style E fill:#232221,stroke:#3fb950,color:#E8E5DF
 
     S(["Start: analysis.md exists"])
     A["Read tech-docs.md skill"]

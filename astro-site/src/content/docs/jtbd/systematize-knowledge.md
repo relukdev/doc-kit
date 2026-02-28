@@ -49,17 +49,6 @@ sidebar:
 
 ```mermaid
 graph TB
-    style MJ fill:#232221,stroke:#f78166,color:#E8E5DF
-    style SJ1 fill:#232221,stroke:#60A5FA,color:#E8E5DF
-    style SJ2 fill:#232221,stroke:#60A5FA,color:#E8E5DF
-    style SJ3 fill:#232221,stroke:#60A5FA,color:#E8E5DF
-    style SJ4 fill:#232221,stroke:#60A5FA,color:#E8E5DF
-    style MJ1 fill:#232221,stroke:#3fb950,color:#E8E5DF
-    style MJ2 fill:#232221,stroke:#3fb950,color:#E8E5DF
-    style MJ3 fill:#232221,stroke:#3fb950,color:#E8E5DF
-    style MJ4 fill:#232221,stroke:#3fb950,color:#E8E5DF
-    style MJ5 fill:#232221,stroke:#3fb950,color:#E8E5DF
-    style MJ6 fill:#232221,stroke:#3fb950,color:#E8E5DF
 
     MJ["Main: Systematize\ncodebase knowledge"]
     SJ1["Analyze codebase"]

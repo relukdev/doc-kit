@@ -20,10 +20,6 @@ sidebar:
 
 ```mermaid
 graph TB
-    style M1 fill:#232221,stroke:#60A5FA,color:#E8E5DF
-    style M2 fill:#232221,stroke:#60A5FA,color:#E8E5DF
-    style M3 fill:#232221,stroke:#60A5FA,color:#E8E5DF
-    style M4 fill:#232221,stroke:#60A5FA,color:#E8E5DF
 
     M1["Skills Engine\n11 instruction files"]
     M2["CLI and Adapters\nMulti-IDE entry points"]

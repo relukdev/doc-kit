@@ -93,8 +93,6 @@ sidebar:
 
 ```mermaid
 graph TB
-    style S fill:#232221,stroke:#3fb950,color:#E8E5DF
-    style E fill:#232221,stroke:#3fb950,color:#E8E5DF
 
     S(["▶ Start"])
     A["Step 1: [Action]"]
@@ -244,7 +242,6 @@ sidebar:
 
 ```mermaid
 graph TB
-    style M1 fill:#232221,stroke:#60A5FA,color:#E8E5DF
     M1["User Management"] --> F1["Login"]
     M1 --> F2["Register"]
     M1 --> F3["Settings"]

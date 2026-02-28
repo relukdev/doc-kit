@@ -23,11 +23,6 @@ DocKit Master is a knowledge systematization engine that transforms codebases in
 
 ```mermaid
 graph TB
-    style Entry fill:#232221,stroke:#3fb950,color:#E8E5DF
-    style Engine fill:#232221,stroke:#60A5FA,color:#E8E5DF
-    style Quality fill:#232221,stroke:#d29922,color:#E8E5DF
-    style Export fill:#232221,stroke:#f78166,color:#E8E5DF
-    style Output fill:#232221,stroke:#3fb950,color:#E8E5DF
 
     subgraph Entry["Entry Points"]
         CLI["CLI Script\ndockit-master.sh"]

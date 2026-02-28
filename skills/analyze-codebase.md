@@ -114,9 +114,6 @@ sidebar_position: 99
 
 ```mermaid
 graph TB
-    style UI fill:#232221,stroke:#60A5FA,color:#E8E5DF
-    style API fill:#232221,stroke:#60A5FA,color:#E8E5DF
-    style DB fill:#232221,stroke:#3fb950,color:#E8E5DF
 
     subgraph Presentation
         UI["🖥️ Frontend"]
@@ -172,9 +169,8 @@ graph TB
 - **TRACE actual code** — never guess from filenames
 - **Cite every finding**: `(file_path:line_number)`
 - **Output file**: `analysis.md` (**NOT** `_analysis.md` — underscore breaks MDX)
-- Use Mermaid diagrams with dark-mode colors:
-  - Node fill: `#232221`, border: `#60A5FA`, text: `#E8E5DF`
-  - Background: `#1C1B1A`, Success: `#3fb950`
+- **No inline `style` in Mermaid** — do NOT use `style X fill:#... stroke:#...` directives.
+  Let Mermaid's native themes handle colors (auto light/dark via astro-mermaid).
 - If a section cannot be determined, state **"Undetermined — requires further inspection"**
 - **Quick Reference card** at top of output
 - **Include dependency analysis** — essential for understanding the project

@@ -19,10 +19,6 @@ sidebar:
 
 ```mermaid
 graph TB
-    style BP1 fill:#232221,stroke:#f78166,color:#E8E5DF
-    style UP1 fill:#232221,stroke:#60A5FA,color:#E8E5DF
-    style UP2 fill:#232221,stroke:#60A5FA,color:#E8E5DF
-    style UP3 fill:#232221,stroke:#60A5FA,color:#E8E5DF
 
     subgraph Buyers["Buyer Personas"]
         BP1["Tech Lead Taylor\nDecision Maker"]

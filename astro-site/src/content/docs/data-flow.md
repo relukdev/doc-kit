@@ -18,9 +18,6 @@ sidebar:
 
 ```mermaid
 graph TB
-    style Input fill:#232221,stroke:#60A5FA,color:#E8E5DF
-    style Process fill:#232221,stroke:#d29922,color:#E8E5DF
-    style Output fill:#232221,stroke:#3fb950,color:#E8E5DF
 
     Input["Source Code\nProject files, README,\npackage.json, routes"]
     Process["Skill Pipeline\n11 skills process\nsequentially"]
@@ -35,12 +32,6 @@ graph TB
 
 ```mermaid
 graph LR
-    style A fill:#232221,stroke:#60A5FA,color:#E8E5DF
-    style B fill:#232221,stroke:#60A5FA,color:#E8E5DF
-    style C fill:#232221,stroke:#60A5FA,color:#E8E5DF
-    style D fill:#232221,stroke:#60A5FA,color:#E8E5DF
-    style E fill:#232221,stroke:#60A5FA,color:#E8E5DF
-    style F fill:#232221,stroke:#3fb950,color:#E8E5DF
 
     A["Source Code"] -->|"scan"| B["analysis.md"]
     B -->|"extract roles"| C["personas/"]
@@ -69,12 +60,6 @@ graph LR
 
 ```mermaid
 graph TB
-    style S fill:#232221,stroke:#60A5FA,color:#E8E5DF
-    style Q1 fill:#232221,stroke:#d29922,color:#E8E5DF
-    style Q2 fill:#232221,stroke:#d29922,color:#E8E5DF
-    style Q3 fill:#232221,stroke:#d29922,color:#E8E5DF
-    style Q4 fill:#232221,stroke:#d29922,color:#E8E5DF
-    style O fill:#232221,stroke:#3fb950,color:#E8E5DF
 
     S["Generated Docs\nRaw content"]
     Q1["content-guidelines\nStructure, UX laws"]

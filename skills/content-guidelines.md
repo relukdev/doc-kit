@@ -202,28 +202,19 @@ import { Tabs, TabItem } from '@astrojs/starlight/components';
 
 ## Mermaid Diagram Rules
 
-### Dark-Mode Color Palette
+### Native Theme (No Inline Styles)
 
-Always use these colors for Mermaid diagrams:
+**Do NOT use inline `style` directives** in Mermaid diagrams. The Astro Starlight integration auto-switches between Mermaid's native `default` (light) and `dark` themes based on the user's theme preference.
 
+❌ **Wrong** — breaks light mode:
 ```
-Node fill:     #232221
-Node border:   #60A5FA  
-Node text:     #E8E5DF
-Background:    #1C1B1A
-Edge lines:    #6B6660
-Highlight:     #60A5FA
-Success:       #3fb950
-Warning:       #d29922
-Danger:        #f85149
+style A fill:#232221,stroke:#60A5FA,color:#E8E5DF
 ```
 
-### Style Syntax
-
+✅ **Correct** — let native theme handle colors:
 ```mermaid
 graph LR
-    style A fill:#232221,stroke:#60A5FA,color:#E8E5DF
-    style B fill:#232221,stroke:#3fb950,color:#E8E5DF
+    A["Source Code"] --> B["Analysis"]
 ```
 
 ### Minimum Requirements

@@ -36,10 +36,6 @@ The orchestrator accepts a config object with 10 parameters:
 
 ```mermaid
 graph TB
-    style K fill:#232221,stroke:#60A5FA,color:#E8E5DF
-    style T fill:#232221,stroke:#60A5FA,color:#E8E5DF
-    style S fill:#232221,stroke:#60A5FA,color:#E8E5DF
-    style A fill:#232221,stroke:#60A5FA,color:#E8E5DF
 
     D{"DOC_TYPE?"}
     K["knowledge\npersona + jtbd + flow"]

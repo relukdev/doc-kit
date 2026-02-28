@@ -21,12 +21,6 @@ sidebar:
 
 ```mermaid
 graph TB
-    style SKILL fill:#232221,stroke:#60A5FA,color:#E8E5DF
-    style WORKFLOW fill:#232221,stroke:#60A5FA,color:#E8E5DF
-    style SCRIPTS fill:#232221,stroke:#3fb950,color:#E8E5DF
-    style ADAPTERS fill:#232221,stroke:#d29922,color:#E8E5DF
-    style PAGES fill:#232221,stroke:#f78166,color:#E8E5DF
-    style OUTPUT fill:#232221,stroke:#3fb950,color:#E8E5DF
 
     subgraph Core["Knowledge Engine"]
         SKILL["Skills - 11 files\nAnalysis, Personas, JTBD\nFlows, Tech, SOP, API\nSEO, Content, LLM"]

@@ -26,10 +26,6 @@ sidebar:
 
 ```mermaid
 graph LR
-    style A fill:#232221,stroke:#3fb950,color:#E8E5DF
-    style B fill:#232221,stroke:#60A5FA,color:#E8E5DF
-    style C fill:#232221,stroke:#60A5FA,color:#E8E5DF
-    style D fill:#232221,stroke:#3fb950,color:#E8E5DF
 
     A["Install"] --> B["Run CLI"]
     B --> C["Paste Prompt"]

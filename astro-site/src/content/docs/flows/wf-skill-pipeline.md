@@ -19,16 +19,6 @@ sidebar:
 
 ```mermaid
 graph TB
-    style Start fill:#232221,stroke:#3fb950,color:#E8E5DF
-    style End fill:#232221,stroke:#3fb950,color:#E8E5DF
-    style A fill:#232221,stroke:#60A5FA,color:#E8E5DF
-    style B fill:#232221,stroke:#60A5FA,color:#E8E5DF
-    style C fill:#232221,stroke:#60A5FA,color:#E8E5DF
-    style D fill:#232221,stroke:#60A5FA,color:#E8E5DF
-    style E fill:#232221,stroke:#60A5FA,color:#E8E5DF
-    style F fill:#232221,stroke:#60A5FA,color:#E8E5DF
-    style G fill:#232221,stroke:#60A5FA,color:#E8E5DF
-    style Decision fill:#232221,stroke:#f78166,color:#E8E5DF
 
     Start(["Trigger: CLI or IDE command"])
     A["Step 1: Gather config\ntype, format, scope, language"]

@@ -102,10 +102,6 @@ Update the `site` field in `astro.config.mjs` with your actual deployment URL be
 
 ```mermaid
 graph LR
-    style A fill:#232221,stroke:#60A5FA,color:#E8E5DF
-    style B fill:#232221,stroke:#60A5FA,color:#E8E5DF
-    style C fill:#232221,stroke:#60A5FA,color:#E8E5DF
-    style D fill:#232221,stroke:#3fb950,color:#E8E5DF
 
     A["Push to main"] --> B["npm install"]
     B --> C["npm run build"]

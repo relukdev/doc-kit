@@ -19,12 +19,6 @@ sidebar:
 
 ```mermaid
 graph TB
-    style Start fill:#232221,stroke:#3fb950,color:#E8E5DF
-    style End fill:#232221,stroke:#3fb950,color:#E8E5DF
-    style A fill:#232221,stroke:#60A5FA,color:#E8E5DF
-    style B fill:#232221,stroke:#60A5FA,color:#E8E5DF
-    style C fill:#232221,stroke:#60A5FA,color:#E8E5DF
-    style D fill:#232221,stroke:#f78166,color:#E8E5DF
 
     Start(["Trigger: Team adopts DocKit Master"])
     A["Run install.sh\n--all or --cursor etc."]

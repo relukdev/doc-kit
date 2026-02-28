@@ -27,9 +27,6 @@ sidebar:
 
 ```mermaid
 graph TB
-    style MJ fill:#232221,stroke:#f78166,color:#E8E5DF
-    style SJ1 fill:#232221,stroke:#60A5FA,color:#E8E5DF
-    style SJ2 fill:#232221,stroke:#60A5FA,color:#E8E5DF
 
     MJ["Main: Consume\nand share docs"]
     SJ1["Search and browse"]

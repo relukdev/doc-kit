@@ -37,13 +37,6 @@ DocKit Master skills function as an API — each skill file defines inputs, proc
 
 ```mermaid
 graph LR
-    style A fill:#232221,stroke:#60A5FA,color:#E8E5DF
-    style B fill:#232221,stroke:#60A5FA,color:#E8E5DF
-    style C fill:#232221,stroke:#60A5FA,color:#E8E5DF
-    style D fill:#232221,stroke:#60A5FA,color:#E8E5DF
-    style E fill:#232221,stroke:#3fb950,color:#E8E5DF
-    style F fill:#232221,stroke:#3fb950,color:#E8E5DF
-    style G fill:#232221,stroke:#3fb950,color:#E8E5DF
 
     A["analyze-codebase"] --> B["persona-builder"]
     A --> C["jtbd-analyzer"]

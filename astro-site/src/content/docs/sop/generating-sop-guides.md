@@ -39,8 +39,6 @@ DocKit Master SOPs are not just step-by-step instructions. They include:
 
 ```mermaid
 graph TB
-    style S fill:#232221,stroke:#3fb950,color:#E8E5DF
-    style E fill:#232221,stroke:#3fb950,color:#E8E5DF
 
     S(["Start: knowledge layer exists"])
     A["Read sop-guide.md skill"]

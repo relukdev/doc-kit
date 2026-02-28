@@ -143,12 +143,6 @@ sidebar:
 
 ```mermaid
 graph TB
-    style MJ fill:#232221,stroke:#f78166,color:#E8E5DF
-    style SJ1 fill:#232221,stroke:#60A5FA,color:#E8E5DF
-    style SJ2 fill:#232221,stroke:#60A5FA,color:#E8E5DF
-    style MJ1 fill:#232221,stroke:#3fb950,color:#E8E5DF
-    style MJ2 fill:#232221,stroke:#3fb950,color:#E8E5DF
-    style MJ3 fill:#232221,stroke:#3fb950,color:#E8E5DF
 
     MJ["🎯 Main Job:<br/>[Job Statement]"]
     SJ1["📋 Small Job 1:<br/>[Process]"]
@@ -212,7 +206,6 @@ sidebar:
 
 ```mermaid
 graph TB
-    style P fill:#1C1B1A,stroke:#f78166,color:#E8E5DF
 
     subgraph P["🏢 Product: [Name]"]
         MJ1["🎯 Main Job 1"]
@@ -259,8 +252,7 @@ docs/jtbd/
 - **Link to Personas**: Every job must have a Job Performer linked to a persona
 - **Link to SOPs**: Job steps should map to SOP procedures
 - **Cite source**: `(file_path:line_number)` for every job identified
-- **Mermaid dark-mode colors**: fill `#232221`, stroke `#60A5FA`, text `#E8E5DF`
-- **Use color coding** in Mermaid: Main (🔴 `#f78166`), Small (🟣 `#60A5FA`), Micro (🟢 `#3fb950`)
+- **No inline `style` in Mermaid** — let native themes handle colors (auto light/dark)
 - **SEO frontmatter** — include `title`, `description`, `keywords`, `robots`
 - **Min 2 internal links** per canvas page
 - **Progressive disclosure** — Use `<details>` for detailed job steps
