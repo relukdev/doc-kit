@@ -53,11 +53,21 @@
                 📚</div>
             <span class="font-heading font-bold text-base sm:text-lg tracking-tight">DocKit Master</span>
         </a>
-        <div class="hidden md:flex items-center gap-8 text-sm text-zinc-400">
+        <div class="hidden md:flex items-center gap-6 text-sm text-zinc-400">
             <a href="#" class="text-white transition-colors cursor-pointer">Home</a>
             <a href="#features" class="hover:text-white transition-colors cursor-pointer">Features</a>
-            <a href="#how" class="hover:text-white transition-colors cursor-pointer">How It Works</a>
             <a href="docs/" class="hover:text-white transition-colors cursor-pointer">Docs Site</a>
+            <div
+                class="lang-switcher-mini flex items-center gap-1 bg-white/5 rounded-lg px-1 py-0.5 border border-white/10">
+                <button onclick="switchLang('en')"
+                    class="lang-btn-mini px-2 py-1 rounded text-xs font-medium text-white bg-white/10">EN</button>
+                <button onclick="switchLang('vi')"
+                    class="lang-btn-mini px-2 py-1 rounded text-xs font-medium text-zinc-500 hover:text-white">VI</button>
+                <button onclick="switchLang('ru')"
+                    class="lang-btn-mini px-2 py-1 rounded text-xs font-medium text-zinc-500 hover:text-white">RU</button>
+                <button onclick="switchLang('zh')"
+                    class="lang-btn-mini px-2 py-1 rounded text-xs font-medium text-zinc-500 hover:text-white">ZH</button>
+            </div>
         </div>
         <div class="flex items-center gap-1.5 sm:gap-3">
             <a href="https://github.com/relukdev/doc-kit" target="_blank" rel="noopener"
@@ -82,8 +92,18 @@
         class="md:hidden mobile-menu fixed top-20 left-4 right-4 z-40 bg-zinc-900/95 backdrop-blur-xl border border-white/10 rounded-2xl px-6 py-4 flex flex-col gap-4 text-sm font-medium shadow-2xl">
         <a href="#" onclick="closeMobileMenu()" class="text-white py-2">Home</a>
         <a href="#features" onclick="closeMobileMenu()" class="text-zinc-300 hover:text-white py-2">Features</a>
-        <a href="#how" onclick="closeMobileMenu()" class="text-zinc-300 hover:text-white py-2">How It Works</a>
         <a href="docs/" onclick="closeMobileMenu()" class="text-zinc-300 hover:text-white py-2">Docs Site</a>
+        <div
+            class="lang-switcher-mini flex items-center justify-center gap-1 bg-white/5 rounded-lg px-1 py-0.5 border border-white/10">
+            <button onclick="switchLang('en')"
+                class="lang-btn-mini px-2 py-1 rounded text-xs font-medium text-white bg-white/10">EN</button>
+            <button onclick="switchLang('vi')"
+                class="lang-btn-mini px-2 py-1 rounded text-xs font-medium text-zinc-500 hover:text-white">VI</button>
+            <button onclick="switchLang('ru')"
+                class="lang-btn-mini px-2 py-1 rounded text-xs font-medium text-zinc-500 hover:text-white">RU</button>
+            <button onclick="switchLang('zh')"
+                class="lang-btn-mini px-2 py-1 rounded text-xs font-medium text-zinc-500 hover:text-white">ZH</button>
+        </div>
         <a href="#start" onclick="closeMobileMenu()"
             class="cta-primary text-white text-center font-semibold px-4 py-2.5 rounded-xl mt-2">Get Started Free</a>
     </div>
@@ -267,14 +287,18 @@
 
         <!-- Features Grid -->
         <div id="features" class="grid sm:grid-cols-2 lg:grid-cols-3 gap-5">
-            <div class="glass-card rounded-2xl p-7 reveal">
+            <a href="pages/features/deep-code-analysis.html" class="glass-card rounded-2xl p-7 reveal block group">
                 <div
                     class="w-12 h-12 rounded-2xl bg-gradient-to-br from-accent/20 to-accent/5 flex items-center justify-center text-accent-light mb-5 text-2xl">
                     🧠</div>
-                <h3 class="font-heading font-bold text-lg mb-2">Deep Code Analysis</h3>
+                <h3 class="font-heading font-bold text-lg mb-2 group-hover:text-accent-light transition-colors">Deep
+                    Code Analysis</h3>
                 <p class="text-zinc-500 text-sm leading-relaxed">Traces actual code paths, inspects ORMs, maps API
                     routes. No more guessing or shallow descriptions.</p>
-            </div>
+                <span
+                    class="text-accent-light text-xs mt-3 inline-block opacity-0 group-hover:opacity-100 transition-opacity">Learn
+                    more →</span>
+            </a>
             <div class="glass-card rounded-2xl p-7 reveal reveal-delay-1">
                 <div
                     class="w-12 h-12 rounded-2xl bg-gradient-to-br from-magic/20 to-magic/5 flex items-center justify-center text-magic-light mb-5 text-2xl">
@@ -283,15 +307,20 @@
                 <p class="text-zinc-500 text-sm leading-relaxed">Beautiful Mermaid diagrams for Data Flows, ER Diagrams,
                     and System Architecture — dark-mode ready.</p>
             </div>
-            <div class="glass-card rounded-2xl p-7 reveal reveal-delay-2">
+            <a href="pages/features/astro-starlight.html"
+                class="glass-card rounded-2xl p-7 reveal reveal-delay-2 block group">
                 <div
                     class="w-12 h-12 rounded-2xl bg-gradient-to-br from-success/20 to-success/5 flex items-center justify-center text-success-light mb-5 text-2xl">
                     ⚡</div>
-                <h3 class="font-heading font-bold text-lg mb-2">Dual Output Formats</h3>
+                <h3 class="font-heading font-bold text-lg mb-2 group-hover:text-accent-light transition-colors">Dual
+                    Output Formats</h3>
                 <p class="text-zinc-500 text-sm leading-relaxed">Clean Markdown files or a premium Astro Starlight site
                     with
                     glassmorphism, search, and sidebar navigation.</p>
-            </div>
+                <span
+                    class="text-accent-light text-xs mt-3 inline-block opacity-0 group-hover:opacity-100 transition-opacity">Learn
+                    more →</span>
+            </a>
             <div class="glass-card rounded-2xl p-7 reveal">
                 <div
                     class="w-12 h-12 rounded-2xl bg-gradient-to-br from-warn/20 to-warn/5 flex items-center justify-center text-warn-light mb-5 text-2xl">
@@ -317,23 +346,32 @@
                 <p class="text-zinc-500 text-sm leading-relaxed">Auto-detect chat language. Support for English,
                     Vietnamese, Chinese, Russian, and more.</p>
             </div>
-            <div class="glass-card rounded-2xl p-7 reveal">
+            <a href="pages/features/knowledge-engine.html" class="glass-card rounded-2xl p-7 reveal block group">
                 <div
                     class="w-12 h-12 rounded-2xl bg-gradient-to-br from-orange-500/20 to-orange-500/5 flex items-center justify-center text-orange-400 mb-5 text-2xl">
                     🎯</div>
-                <h3 class="font-heading font-bold text-lg mb-2">Knowledge Engine</h3>
+                <h3 class="font-heading font-bold text-lg mb-2 group-hover:text-accent-light transition-colors">
+                    Knowledge Engine</h3>
                 <p class="text-zinc-500 text-sm leading-relaxed">Auto-generate Personas, JTBD Canvases, and 4 types of
                     Process Flow diagrams from your codebase.</p>
-            </div>
-            <div class="glass-card rounded-2xl p-7 reveal reveal-delay-1">
+                <span
+                    class="text-accent-light text-xs mt-3 inline-block opacity-0 group-hover:opacity-100 transition-opacity">Learn
+                    more →</span>
+            </a>
+            <a href="pages/features/seo-ai-optimization.html"
+                class="glass-card rounded-2xl p-7 reveal reveal-delay-1 block group">
                 <div
                     class="w-12 h-12 rounded-2xl bg-gradient-to-br from-teal-500/20 to-teal-500/5 flex items-center justify-center text-teal-400 mb-5 text-2xl">
                     📈</div>
-                <h3 class="font-heading font-bold text-lg mb-2">SEO Optimized</h3>
+                <h3 class="font-heading font-bold text-lg mb-2 group-hover:text-accent-light transition-colors">SEO
+                    Optimized</h3>
                 <p class="text-zinc-500 text-sm leading-relaxed">Built-in SEO checklist, keyword strategy, content
                     writing
                     guidelines, sitemap generation, and robots directives.</p>
-            </div>
+                <span
+                    class="text-accent-light text-xs mt-3 inline-block opacity-0 group-hover:opacity-100 transition-opacity">Learn
+                    more →</span>
+            </a>
             <div class="glass-card rounded-2xl p-7 reveal reveal-delay-2">
                 <div
                     class="w-12 h-12 rounded-2xl bg-gradient-to-br from-violet-500/20 to-violet-500/5 flex items-center justify-center text-violet-400 mb-5 text-2xl">
@@ -355,11 +393,13 @@
                 docs.<br>Now it gets them automatically.</h2>
         </div>
         <div class="grid sm:grid-cols-2 lg:grid-cols-3 gap-4 reveal">
-            <div class="persona-pill rounded-2xl p-6 text-center cursor-pointer">
-                <h4 class="font-heading font-bold text-base mb-1">🏗️ CTOs & Tech Leads</h4>
+            <a href="pages/use-cases/cto-tech-leads.html"
+                class="persona-pill rounded-2xl p-6 text-center cursor-pointer block group">
+                <h4 class="font-heading font-bold text-base mb-1 group-hover:text-accent-light transition-colors">🏗️
+                    CTOs & Tech Leads</h4>
                 <p class="text-zinc-500 text-xs leading-relaxed">Onboard new devs in days, not weeks. Architecture docs
                     always current.</p>
-            </div>
+            </a>
             <div class="persona-pill rounded-2xl p-6 text-center cursor-pointer">
                 <h4 class="font-heading font-bold text-base mb-1">💻 Developers</h4>
                 <p class="text-zinc-500 text-xs leading-relaxed">Stop writing docs manually. Let AI trace the code and
@@ -370,21 +410,27 @@
                 <p class="text-zinc-500 text-xs leading-relaxed">SOP guides with visual flows. Hand off to support and
                     training teams.</p>
             </div>
-            <div class="persona-pill rounded-2xl p-6 text-center cursor-pointer">
-                <h4 class="font-heading font-bold text-base mb-1">🚀 Startup Founders</h4>
+            <a href="pages/use-cases/startup-founders.html"
+                class="persona-pill rounded-2xl p-6 text-center cursor-pointer block group">
+                <h4 class="font-heading font-bold text-base mb-1 group-hover:text-accent-light transition-colors">🚀
+                    Startup Founders</h4>
                 <p class="text-zinc-500 text-xs leading-relaxed">Ship professional docs for investors and enterprise
                     clients. Zero extra cost.</p>
-            </div>
-            <div class="persona-pill rounded-2xl p-6 text-center cursor-pointer">
-                <h4 class="font-heading font-bold text-base mb-1">💡 Solo Makers</h4>
+            </a>
+            <a href="pages/use-cases/solo-makers.html"
+                class="persona-pill rounded-2xl p-6 text-center cursor-pointer block group">
+                <h4 class="font-heading font-bold text-base mb-1 group-hover:text-accent-light transition-colors">💡
+                    Solo Makers</h4>
                 <p class="text-zinc-500 text-xs leading-relaxed">One person = entire docs team. Technical + user-facing,
                     all automated.</p>
-            </div>
-            <div class="persona-pill rounded-2xl p-6 text-center cursor-pointer">
-                <h4 class="font-heading font-bold text-base mb-1">🔌 API Providers</h4>
+            </a>
+            <a href="pages/use-cases/api-providers.html"
+                class="persona-pill rounded-2xl p-6 text-center cursor-pointer block group">
+                <h4 class="font-heading font-bold text-base mb-1 group-hover:text-accent-light transition-colors">🔌 API
+                    Providers</h4>
                 <p class="text-zinc-500 text-xs leading-relaxed">Auto-generate endpoint docs with examples in cURL, JS,
                     and Python.</p>
-            </div>
+            </a>
         </div>
     </section>
     <div class="glow-line max-w-4xl mx-auto"></div>
@@ -702,6 +748,25 @@
     </footer>
 
     <script>
+        // Language switcher — persists to localStorage for sub-pages
+        function switchLang(lang) {
+            localStorage.setItem('dockit-lang', lang);
+            document.querySelectorAll('.lang-btn-mini').forEach(btn => {
+                if (btn.textContent.trim() === lang.toUpperCase()) {
+                    btn.classList.add('text-white', 'bg-white/10');
+                    btn.classList.remove('text-zinc-500');
+                } else {
+                    btn.classList.remove('text-white', 'bg-white/10');
+                    btn.classList.add('text-zinc-500');
+                }
+            });
+        }
+        // Auto-highlight saved lang on load
+        (function () {
+            const saved = localStorage.getItem('dockit-lang');
+            if (saved) switchLang(saved);
+        })();
+
         // Mobile menu
         function toggleMobileMenu() {
             document.getElementById('mobileMenu').classList.toggle('open');
