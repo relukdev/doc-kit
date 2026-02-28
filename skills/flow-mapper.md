@@ -63,9 +63,9 @@ sidebar:
 
 ```mermaid
 graph TB
-    style Start fill:#2d333b,stroke:#3fb950,color:#e6edf3
-    style End fill:#2d333b,stroke:#3fb950,color:#e6edf3
-    style Decision fill:#2d333b,stroke:#f78166,color:#e6edf3
+    style Start fill:#232221,stroke:#3fb950,color:#E8E5DF
+    style End fill:#232221,stroke:#3fb950,color:#E8E5DF
+    style Decision fill:#232221,stroke:#f78166,color:#E8E5DF
 
     Start(["▶ Trigger: [Event]"])
     A["Step 1: [Action]"]
@@ -319,7 +319,7 @@ sidebar:
 
 ```mermaid
 graph TB
-    style System fill:#161b22,stroke:#6d5dfc,color:#e6edf3
+    style System fill:#1C1B1A,stroke:#60A5FA,color:#E8E5DF
 
     subgraph System["🏗️ [Product Name]"]
         M1["Module 1"]
@@ -380,10 +380,10 @@ docs/flows/
 - **Cite source**: `(file_path:line_number)` for every step in a flow
 - **4 flow types mandatory** for `knowledge` doc type: Workflow, Sequence, Lifecycle, Journey
 - **Mermaid dark-mode colors**:
-  - Node fill: `#2d333b`, border: `#6d5dfc`, text: `#e6edf3`
+  - Node fill: `#232221`, border: `#60A5FA`, text: `#E8E5DF`
   - Start/End: stroke `#3fb950` (green)
   - Decision/Warning: stroke `#f78166` (orange)
-  - Background: `#161b22`
+  - Background: `#1C1B1A`
 - **Link to Personas**: Every flow must reference its performer
 - **Link to JTBD**: Workflows map to Small Jobs; Micro-jobs map to Sequence steps
 - **Link to SOPs**: Flows are the visual representation of SOPs

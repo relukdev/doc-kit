@@ -1,0 +1,284 @@
+<!DOCTYPE html><html lang="vi" dir="ltr" data-theme="dark" data-has-toc data-has-sidebar class="astro-bguv2lll"> <head><meta charset="utf-8"/><meta name="viewport" content="width=device-width, initial-scale=1"/><title>Luồng Dữ Liệu — DocKit Master | DocKit Master</title><link rel="canonical" href="https://relukdev.github.io/doc-kit/docs/data-flow/"/><link rel="sitemap" href="/doc-kit/docs/sitemap-index.xml"/><link rel="preconnect" href="https://fonts.googleapis.com"/><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="true"/><script>
+            // Set dark mode as default if no preference stored
+            if (!localStorage.getItem('starlight-theme')) {
+              document.documentElement.dataset.theme = 'dark';
+            }
+          </script><link rel="shortcut icon" href="/doc-kit/docs/favicon.svg" type="image/svg+xml"/><meta name="generator" content="Astro v5.18.0"/><meta name="generator" content="Starlight v0.37.6"/><meta property="og:title" content="Luồng Dữ Liệu — DocKit Master"/><meta property="og:url" content="https://relukdev.github.io/doc-kit/docs/data-flow/"/><meta property="og:locale" content="vi"/><meta property="og:description" content="Luồng xử lý 6 bước của DocKit Master: từ input người dùng đến output tài liệu hoàn chỉnh"/><meta property="og:site_name" content="DocKit Master"/><meta name="twitter:card" content="summary_large_image"/><meta name="description" content="Luồng xử lý 6 bước của DocKit Master: từ input người dùng đến output tài liệu hoàn chỉnh"/><meta property="og:type" content="article"/><meta name="robots" content="index, follow"/><script>
+	window.StarlightThemeProvider = (() => {
+		const storedTheme =
+			typeof localStorage !== 'undefined' && localStorage.getItem('starlight-theme');
+		const theme =
+			storedTheme ||
+			(window.matchMedia('(prefers-color-scheme: light)').matches ? 'light' : 'dark');
+		document.documentElement.dataset.theme = theme === 'light' ? 'light' : 'dark';
+		return {
+			updatePickers(theme = storedTheme || 'auto') {
+				document.querySelectorAll('starlight-theme-select').forEach((picker) => {
+					const select = picker.querySelector('select');
+					if (select) select.value = theme;
+					/** @type {HTMLTemplateElement | null} */
+					const tmpl = document.querySelector(`#theme-icons`);
+					const newIcon = tmpl && tmpl.content.querySelector('.' + theme);
+					if (newIcon) {
+						const oldIcon = picker.querySelector('svg.label-icon');
+						if (oldIcon) {
+							oldIcon.replaceChildren(...newIcon.cloneNode(true).childNodes);
+						}
+					}
+				});
+			},
+		};
+	})();
+</script><template id="theme-icons"><svg aria-hidden="true" class="light astro-c6vsoqas" width="16" height="16" viewBox="0 0 24 24" fill="currentColor" style="--sl-icon-size: 1em;"><path d="M5 12a1 1 0 0 0-1-1H3a1 1 0 0 0 0 2h1a1 1 0 0 0 1-1Zm.64 5-.71.71a1 1 0 0 0 0 1.41 1 1 0 0 0 1.41 0l.71-.71A1 1 0 0 0 5.64 17ZM12 5a1 1 0 0 0 1-1V3a1 1 0 0 0-2 0v1a1 1 0 0 0 1 1Zm5.66 2.34a1 1 0 0 0 .7-.29l.71-.71a1 1 0 1 0-1.41-1.41l-.66.71a1 1 0 0 0 0 1.41 1 1 0 0 0 .66.29Zm-12-.29a1 1 0 0 0 1.41 0 1 1 0 0 0 0-1.41l-.71-.71a1.004 1.004 0 1 0-1.43 1.41l.73.71ZM21 11h-1a1 1 0 0 0 0 2h1a1 1 0 0 0 0-2Zm-2.64 6A1 1 0 0 0 17 18.36l.71.71a1 1 0 0 0 1.41 0 1 1 0 0 0 0-1.41l-.76-.66ZM12 6.5a5.5 5.5 0 1 0 5.5 5.5A5.51 5.51 0 0 0 12 6.5Zm0 9a3.5 3.5 0 1 1 0-7 3.5 3.5 0 0 1 0 7Zm0 3.5a1 1 0 0 0-1 1v1a1 1 0 0 0 2 0v-1a1 1 0 0 0-1-1Z"/></svg><svg aria-hidden="true" class="dark astro-c6vsoqas" width="16" height="16" viewBox="0 0 24 24" fill="currentColor" style="--sl-icon-size: 1em;"><path d="M21.64 13a1 1 0 0 0-1.05-.14 8.049 8.049 0 0 1-3.37.73 8.15 8.15 0 0 1-8.14-8.1 8.59 8.59 0 0 1 .25-2A1 1 0 0 0 8 2.36a10.14 10.14 0 1 0 14 11.69 1 1 0 0 0-.36-1.05Zm-9.5 6.69A8.14 8.14 0 0 1 7.08 5.22v.27a10.15 10.15 0 0 0 10.14 10.14 9.784 9.784 0 0 0 2.1-.22 8.11 8.11 0 0 1-7.18 4.32v-.04Z"/></svg><svg aria-hidden="true" class="auto astro-c6vsoqas" width="16" height="16" viewBox="0 0 24 24" fill="currentColor" style="--sl-icon-size: 1em;"><path d="M21 14h-1V7a3 3 0 0 0-3-3H7a3 3 0 0 0-3 3v7H3a1 1 0 0 0-1 1v2a3 3 0 0 0 3 3h14a3 3 0 0 0 3-3v-2a1 1 0 0 0-1-1ZM6 7a1 1 0 0 1 1-1h10a1 1 0 0 1 1 1v7H6V7Zm14 10a1 1 0 0 1-1 1H5a1 1 0 0 1-1-1v-1h16v1Z"/></svg></template><link rel="stylesheet" href="/doc-kit/docs/_astro/print.DNXP8c50.css" media="print"><link rel="stylesheet" href="/doc-kit/docs/_astro/index.Cq4A_x6s.css"><script type="module" src="/doc-kit/docs/_astro/page.Bf9bYwUL.js"></script></head> <body class="astro-bguv2lll"> <a href="#_top" class="astro-7q3lir66">Bỏ qua để đến nội dung</a>  <div class="page sl-flex astro-vrdttmbt"> <header class="header astro-vrdttmbt"><div class="header astro-kmkmnagf"> <div class="title-wrapper sl-flex astro-kmkmnagf"> <a href="/doc-kit/docs/" class="site-title sl-flex astro-m46x6ez3">  <span class="astro-m46x6ez3" translate="no"> DocKit Master </span> </a>  </div> <div class="sl-flex print:hidden astro-kmkmnagf"> <site-search class="astro-kmkmnagf astro-v37mnknz" data-translations="{&#34;placeholder&#34;:&#34;Tìm kiếm&#34;}"> <button data-open-modal disabled aria-label="Tìm kiếm" aria-keyshortcuts="Control+K" class="astro-v37mnknz"> <svg aria-hidden="true" class="astro-v37mnknz astro-c6vsoqas" width="16" height="16" viewBox="0 0 24 24" fill="currentColor" style="--sl-icon-size: 1em;"><path d="M21.71 20.29 18 16.61A9 9 0 1 0 16.61 18l3.68 3.68a.999.999 0 0 0 1.42 0 1 1 0 0 0 0-1.39ZM11 18a7 7 0 1 1 0-14 7 7 0 0 1 0 14Z"/></svg> <span class="sl-hidden md:sl-block astro-v37mnknz" aria-hidden="true">Tìm kiếm</span> <kbd class="sl-hidden md:sl-flex astro-v37mnknz" style="display: none;"> <kbd class="astro-v37mnknz">Ctrl</kbd><kbd class="astro-v37mnknz">K</kbd> </kbd> </button> <dialog style="padding:0" aria-label="Tìm kiếm" class="astro-v37mnknz"> <div class="dialog-frame sl-flex astro-v37mnknz">  <button data-close-modal class="sl-flex md:sl-hidden astro-v37mnknz"> Hủy </button> <div class="search-container astro-v37mnknz"> <div id="starlight__search" class="astro-v37mnknz"></div> </div> </div> </dialog> </site-search>  <script>
+	(() => {
+		const openBtn = document.querySelector('button[data-open-modal]');
+		const shortcut = openBtn?.querySelector('kbd');
+		if (!openBtn || !(shortcut instanceof HTMLElement)) return;
+		const platformKey = shortcut.querySelector('kbd');
+		if (platformKey && /(Mac|iPhone|iPod|iPad)/i.test(navigator.platform)) {
+			platformKey.textContent = '⌘';
+			openBtn.setAttribute('aria-keyshortcuts', 'Meta+K');
+		}
+		shortcut.style.display = '';
+	})();
+</script> <script type="module" src="/doc-kit/docs/_astro/Search.astro_astro_type_script_index_0_lang.CPZmPY6r.js"></script>   </div> <div class="sl-hidden md:sl-flex print:hidden right-group astro-kmkmnagf"> <div class="sl-flex social-icons astro-kmkmnagf">  </div> <starlight-theme-select>  <label style="--sl-select-width: 6.25em" class="astro-4yphtoen"> <span class="sr-only astro-4yphtoen">Chọn giao diện</span> <svg aria-hidden="true" class="icon label-icon astro-4yphtoen astro-c6vsoqas" width="16" height="16" viewBox="0 0 24 24" fill="currentColor" style="--sl-icon-size: 1em;"><path d="M21 14h-1V7a3 3 0 0 0-3-3H7a3 3 0 0 0-3 3v7H3a1 1 0 0 0-1 1v2a3 3 0 0 0 3 3h14a3 3 0 0 0 3-3v-2a1 1 0 0 0-1-1ZM6 7a1 1 0 0 1 1-1h10a1 1 0 0 1 1 1v7H6V7Zm14 10a1 1 0 0 1-1 1H5a1 1 0 0 1-1-1v-1h16v1Z"/></svg> <select autocomplete="off" class="astro-4yphtoen"> <option value="dark" class="astro-4yphtoen">Tối</option><option value="light" class="astro-4yphtoen">Sáng</option><option value="auto" selected class="astro-4yphtoen">Tự động</option> </select> <svg aria-hidden="true" class="icon caret astro-4yphtoen astro-c6vsoqas" width="16" height="16" viewBox="0 0 24 24" fill="currentColor" style="--sl-icon-size: 1em;"><path d="M17 9.17a1 1 0 0 0-1.41 0L12 12.71 8.46 9.17a1 1 0 1 0-1.41 1.42l4.24 4.24a1.002 1.002 0 0 0 1.42 0L17 10.59a1.002 1.002 0 0 0 0-1.42Z"/></svg> </label>  </starlight-theme-select>  <script>
+	StarlightThemeProvider.updatePickers();
+</script> <script type="module">const r="starlight-theme",o=e=>e==="auto"||e==="dark"||e==="light"?e:"auto",c=()=>o(typeof localStorage<"u"&&localStorage.getItem(r));function n(e){typeof localStorage<"u"&&localStorage.setItem(r,e==="light"||e==="dark"?e:"")}const l=()=>matchMedia("(prefers-color-scheme: light)").matches?"light":"dark";function t(e){StarlightThemeProvider.updatePickers(e),document.documentElement.dataset.theme=e==="auto"?l():e,n(e)}matchMedia("(prefers-color-scheme: light)").addEventListener("change",()=>{c()==="auto"&&t("auto")});class s extends HTMLElement{constructor(){super(),t(c()),this.querySelector("select")?.addEventListener("change",a=>{a.currentTarget instanceof HTMLSelectElement&&t(o(a.currentTarget.value))})}}customElements.define("starlight-theme-select",s);</script> <script type="module">class s extends HTMLElement{constructor(){super();const e=this.querySelector("select");e&&(e.addEventListener("change",t=>{t.currentTarget instanceof HTMLSelectElement&&(window.location.pathname=t.currentTarget.value)}),window.addEventListener("pageshow",t=>{if(!t.persisted)return;const n=e.querySelector("option[selected]")?.index;n!==e.selectedIndex&&(e.selectedIndex=n??0)}))}}customElements.define("starlight-lang-select",s);</script> </div> </div> </header> <nav class="sidebar print:hidden astro-vrdttmbt" aria-label="Chính"> <starlight-menu-button class="print:hidden astro-jif73yzw"> <button aria-expanded="false" aria-label="Menu" aria-controls="starlight__sidebar" class="sl-flex md:sl-hidden astro-jif73yzw"> <svg aria-hidden="true" class="open-menu astro-jif73yzw astro-c6vsoqas" width="16" height="16" viewBox="0 0 24 24" fill="currentColor" style="--sl-icon-size: 1em;"><path d="M3 8h18a1 1 0 1 0 0-2H3a1 1 0 0 0 0 2Zm18 8H3a1 1 0 0 0 0 2h18a1 1 0 0 0 0-2Zm0-5H3a1 1 0 0 0 0 2h18a1 1 0 0 0 0-2Z"/></svg> <svg aria-hidden="true" class="close-menu astro-jif73yzw astro-c6vsoqas" width="16" height="16" viewBox="0 0 24 24" fill="currentColor" style="--sl-icon-size: 1em;"><path d="m13.41 12 6.3-6.29a1.004 1.004 0 1 0-1.42-1.42L12 10.59l-6.29-6.3a1.004 1.004 0 0 0-1.42 1.42l6.3 6.29-6.3 6.29a1 1 0 0 0 0 1.42.998.998 0 0 0 1.42 0l6.29-6.3 6.29 6.3a.999.999 0 0 0 1.42 0 1 1 0 0 0 0-1.42L13.41 12Z"/></svg> </button> </starlight-menu-button> <script type="module">class s extends HTMLElement{constructor(){super(),this.btn=this.querySelector("button"),this.btn.addEventListener("click",()=>this.toggleExpanded());const t=this.closest("nav");t&&t.addEventListener("keyup",e=>this.closeOnEscape(e))}setExpanded(t){this.setAttribute("aria-expanded",String(t)),document.body.toggleAttribute("data-mobile-menu-expanded",t)}toggleExpanded(){this.setExpanded(this.getAttribute("aria-expanded")!=="true")}closeOnEscape(t){t.code==="Escape"&&(this.setExpanded(!1),this.btn.focus())}}customElements.define("starlight-menu-button",s);</script>   <div id="starlight__sidebar" class="sidebar-pane astro-vrdttmbt"> <div class="sidebar-content sl-flex astro-vrdttmbt"> <sl-sidebar-state-persist data-hash="0msw6l0" class="astro-kku4brbg"> <script aria-hidden="true">
+		(() => {
+			try {
+				if (!matchMedia('(min-width: 50em)').matches) return;
+				/** @type {HTMLElement | null} */
+				const target = document.querySelector('sl-sidebar-state-persist');
+				const state = JSON.parse(sessionStorage.getItem('sl-sidebar-state') || '0');
+				if (!target || !state || target.dataset.hash !== state.hash) return;
+				window._starlightScrollRestore = state.scroll;
+				customElements.define(
+					'sl-sidebar-restore',
+					class SidebarRestore extends HTMLElement {
+						connectedCallback() {
+							try {
+								const idx = parseInt(this.dataset.index || '');
+								const details = this.closest('details');
+								if (details && typeof state.open[idx] === 'boolean') details.open = state.open[idx];
+							} catch {}
+						}
+					}
+				);
+			} catch {}
+		})();
+	</script>  <ul class="top-level astro-3ii7xxms"> <li class="astro-3ii7xxms"> <a href="/doc-kit/docs/" class="large astro-3ii7xxms"> <span class="astro-3ii7xxms">DocKit Master — Tài Liệu Chính Thức</span>  </a> </li><li class="astro-3ii7xxms"> <details open class="astro-3ii7xxms"> <summary class="astro-3ii7xxms"> <span class="group-label astro-3ii7xxms"> <span class="large astro-3ii7xxms">api</span>  </span> <svg aria-hidden="true" class="caret astro-3ii7xxms astro-c6vsoqas" width="16" height="16" viewBox="0 0 24 24" fill="currentColor" style="--sl-icon-size: 1.25rem;"><path d="m14.83 11.29-4.24-4.24a1 1 0 1 0-1.42 1.41L12.71 12l-3.54 3.54a1 1 0 0 0 0 1.41 1 1 0 0 0 .71.29 1 1 0 0 0 .71-.29l4.24-4.24a1.002 1.002 0 0 0 0-1.42Z"/></svg> </summary> <sl-sidebar-restore data-index="0"></sl-sidebar-restore> <ul class="astro-3ii7xxms"> <li class="astro-3ii7xxms"> <a href="/doc-kit/docs/api/" class="astro-3ii7xxms"> <span class="astro-3ii7xxms">Tham Chiếu Skill — Tổng Quan</span>  </a> </li><li class="astro-3ii7xxms"> <a href="/doc-kit/docs/api/orchestrator/" class="astro-3ii7xxms"> <span class="astro-3ii7xxms">Orchestrator — SKILL.md Reference</span>  </a> </li><li class="astro-3ii7xxms"> <a href="/doc-kit/docs/api/analyze-codebase/" class="astro-3ii7xxms"> <span class="astro-3ii7xxms">Analyzer — analyze-codebase.md Reference</span>  </a> </li><li class="astro-3ii7xxms"> <a href="/doc-kit/docs/api/content-guidelines/" class="astro-3ii7xxms"> <span class="astro-3ii7xxms">Content Guidelines Reference</span>  </a> </li> </ul>  </details> </li><li class="astro-3ii7xxms"> <details open class="astro-3ii7xxms"> <summary class="astro-3ii7xxms"> <span class="group-label astro-3ii7xxms"> <span class="large astro-3ii7xxms">sop</span>  </span> <svg aria-hidden="true" class="caret astro-3ii7xxms astro-c6vsoqas" width="16" height="16" viewBox="0 0 24 24" fill="currentColor" style="--sl-icon-size: 1.25rem;"><path d="m14.83 11.29-4.24-4.24a1 1 0 1 0-1.42 1.41L12.71 12l-3.54 3.54a1 1 0 0 0 0 1.41 1 1 0 0 0 .71.29 1 1 0 0 0 .71-.29l4.24-4.24a1.002 1.002 0 0 0 0-1.42Z"/></svg> </summary> <sl-sidebar-restore data-index="1"></sl-sidebar-restore> <ul class="astro-3ii7xxms"> <li class="astro-3ii7xxms"> <a href="/doc-kit/docs/sop/" class="astro-3ii7xxms"> <span class="astro-3ii7xxms">Hướng Dẫn Sử Dụng — Tổng Quan</span>  </a> </li><li class="astro-3ii7xxms"> <a href="/doc-kit/docs/sop/generating-tech-docs/" class="astro-3ii7xxms"> <span class="astro-3ii7xxms">Tạo Tài Liệu Kỹ Thuật — Hướng Dẫn</span>  </a> </li><li class="astro-3ii7xxms"> <a href="/doc-kit/docs/sop/generating-sop-guides/" class="astro-3ii7xxms"> <span class="astro-3ii7xxms">Tạo Hướng Dẫn SOP — Hướng Dẫn</span>  </a> </li><li class="astro-3ii7xxms"> <a href="/doc-kit/docs/sop/using-cli/" class="astro-3ii7xxms"> <span class="astro-3ii7xxms">Sử Dụng CLI — Hướng Dẫn</span>  </a> </li><li class="astro-3ii7xxms"> <a href="/doc-kit/docs/sop/customizing-templates/" class="astro-3ii7xxms"> <span class="astro-3ii7xxms">Tuỳ Chỉnh Templates — Hướng Dẫn</span>  </a> </li> </ul>  </details> </li><li class="astro-3ii7xxms"> <a href="/doc-kit/docs/architecture/" class="large astro-3ii7xxms"> <span class="astro-3ii7xxms">Kiến Trúc Hệ Thống — DocKit Master</span>  </a> </li><li class="astro-3ii7xxms"> <a href="/doc-kit/docs/database/" class="large astro-3ii7xxms"> <span class="astro-3ii7xxms">Cấu Trúc Dữ Liệu — DocKit Master</span>  </a> </li><li class="astro-3ii7xxms"> <a href="/doc-kit/docs/deployment/" class="large astro-3ii7xxms"> <span class="astro-3ii7xxms">Hướng Dẫn Triển Khai — DocKit Master</span>  </a> </li><li class="astro-3ii7xxms"> <a href="/doc-kit/docs/data-flow/" aria-current="page" class="large astro-3ii7xxms"> <span class="astro-3ii7xxms">Luồng Dữ Liệu — DocKit Master</span>  </a> </li> </ul>   <script aria-hidden="true">
+		(() => {
+			const scroller = document.getElementById('starlight__sidebar');
+			if (!window._starlightScrollRestore || !scroller) return;
+			scroller.scrollTop = window._starlightScrollRestore;
+			delete window._starlightScrollRestore;
+		})();
+	</script> </sl-sidebar-state-persist>  <div class="md:sl-hidden"> <div class="mobile-preferences sl-flex astro-wu23bvmt"> <div class="social-icons astro-wu23bvmt">  </div> <starlight-theme-select>  <label style="--sl-select-width: 6.25em" class="astro-4yphtoen"> <span class="sr-only astro-4yphtoen">Chọn giao diện</span> <svg aria-hidden="true" class="icon label-icon astro-4yphtoen astro-c6vsoqas" width="16" height="16" viewBox="0 0 24 24" fill="currentColor" style="--sl-icon-size: 1em;"><path d="M21 14h-1V7a3 3 0 0 0-3-3H7a3 3 0 0 0-3 3v7H3a1 1 0 0 0-1 1v2a3 3 0 0 0 3 3h14a3 3 0 0 0 3-3v-2a1 1 0 0 0-1-1ZM6 7a1 1 0 0 1 1-1h10a1 1 0 0 1 1 1v7H6V7Zm14 10a1 1 0 0 1-1 1H5a1 1 0 0 1-1-1v-1h16v1Z"/></svg> <select autocomplete="off" class="astro-4yphtoen"> <option value="dark" class="astro-4yphtoen">Tối</option><option value="light" class="astro-4yphtoen">Sáng</option><option value="auto" selected class="astro-4yphtoen">Tự động</option> </select> <svg aria-hidden="true" class="icon caret astro-4yphtoen astro-c6vsoqas" width="16" height="16" viewBox="0 0 24 24" fill="currentColor" style="--sl-icon-size: 1em;"><path d="M17 9.17a1 1 0 0 0-1.41 0L12 12.71 8.46 9.17a1 1 0 1 0-1.41 1.42l4.24 4.24a1.002 1.002 0 0 0 1.42 0L17 10.59a1.002 1.002 0 0 0 0-1.42Z"/></svg> </label>  </starlight-theme-select>  <script>
+	StarlightThemeProvider.updatePickers();
+</script>   </div>  </div> </div> </div> </nav> <div class="main-frame astro-vrdttmbt">  <script type="module">const a=document.getElementById("starlight__sidebar"),n=a?.querySelector("sl-sidebar-state-persist"),o="sl-sidebar-state",i=()=>{let t=[];const e=n?.dataset.hash||"";try{const s=sessionStorage.getItem(o),r=JSON.parse(s||"{}");Array.isArray(r.open)&&r.hash===e&&(t=r.open)}catch{}return{hash:e,open:t,scroll:a?.scrollTop||0}},c=t=>{try{sessionStorage.setItem(o,JSON.stringify(t))}catch{}},d=()=>c(i()),l=(t,e)=>{const s=i();s.open[e]=t,c(s)};n?.addEventListener("click",t=>{if(!(t.target instanceof Element))return;const e=t.target.closest("summary")?.closest("details");if(!e)return;const s=e.querySelector("sl-sidebar-restore"),r=parseInt(s?.dataset.index||"");isNaN(r)||l(!e.open,r)});addEventListener("visibilitychange",()=>{document.visibilityState==="hidden"&&d()});addEventListener("pageHide",d);</script> <div class="lg:sl-flex astro-67yu43on"> <aside class="right-sidebar-container print:hidden astro-67yu43on"> <div class="right-sidebar astro-67yu43on"> <script type="module" src="/doc-kit/docs/_astro/MobileTableOfContents.astro_astro_type_script_index_0_lang.hwBsy0Mo.js"></script><script type="module" src="/doc-kit/docs/_astro/TableOfContents.astro_astro_type_script_index_0_lang.FuRcXuRY.js"></script><div class="lg:sl-hidden astro-pb3aqygn"><mobile-starlight-toc data-min-h="2" data-max-h="3" class="astro-doynk5tl"><nav aria-labelledby="starlight__on-this-page--mobile" class="astro-doynk5tl"><details id="starlight__mobile-toc" class="astro-doynk5tl"><summary id="starlight__on-this-page--mobile" class="sl-flex astro-doynk5tl"><span class="toggle sl-flex astro-doynk5tl">Trên trang này<svg aria-hidden="true" class="caret astro-doynk5tl astro-c6vsoqas" width="16" height="16" viewBox="0 0 24 24" fill="currentColor" style="--sl-icon-size: 1rem;"><path d="m14.83 11.29-4.24-4.24a1 1 0 1 0-1.42 1.41L12.71 12l-3.54 3.54a1 1 0 0 0 0 1.41 1 1 0 0 0 .71.29 1 1 0 0 0 .71-.29l4.24-4.24a1.002 1.002 0 0 0 0-1.42Z"/></svg></span><span class="display-current astro-doynk5tl"></span></summary><div class="dropdown astro-doynk5tl"><ul class="isMobile astro-g2bywc46" style="--depth: 0;"> <li class="astro-g2bywc46" style="--depth: 0;"> <a href="#_top" class="astro-g2bywc46" style="--depth: 0;"> <span class="astro-g2bywc46" style="--depth: 0;">Tổng quan</span> </a>  </li><li class="astro-g2bywc46" style="--depth: 0;"> <a href="#pipeline-tổng-quan" class="astro-g2bywc46" style="--depth: 0;"> <span class="astro-g2bywc46" style="--depth: 0;">Pipeline Tổng Quan</span> </a>  </li><li class="astro-g2bywc46" style="--depth: 0;"> <a href="#step-1-gather-input" class="astro-g2bywc46" style="--depth: 0;"> <span class="astro-g2bywc46" style="--depth: 0;">Step 1: Gather Input</span> </a>  </li><li class="astro-g2bywc46" style="--depth: 0;"> <a href="#step-2-analyze-codebase" class="astro-g2bywc46" style="--depth: 0;"> <span class="astro-g2bywc46" style="--depth: 0;">Step 2: Analyze Codebase</span> </a>  </li><li class="astro-g2bywc46" style="--depth: 0;"> <a href="#step-3-apply-content-guidelines" class="astro-g2bywc46" style="--depth: 0;"> <span class="astro-g2bywc46" style="--depth: 0;">Step 3: Apply Content Guidelines</span> </a>  </li><li class="astro-g2bywc46" style="--depth: 0;"> <a href="#step-4-generate-documents" class="astro-g2bywc46" style="--depth: 0;"> <span class="astro-g2bywc46" style="--depth: 0;">Step 4: Generate Documents</span> </a> <ul class="isMobile astro-g2bywc46" style="--depth: 1;"> <li class="astro-g2bywc46" style="--depth: 1;"> <a href="#tech-docs-generator" class="astro-g2bywc46" style="--depth: 1;"> <span class="astro-g2bywc46" style="--depth: 1;">Tech Docs Generator</span> </a>  </li><li class="astro-g2bywc46" style="--depth: 1;"> <a href="#sop-generator" class="astro-g2bywc46" style="--depth: 1;"> <span class="astro-g2bywc46" style="--depth: 1;">SOP Generator</span> </a>  </li><li class="astro-g2bywc46" style="--depth: 1;"> <a href="#api-generator" class="astro-g2bywc46" style="--depth: 1;"> <span class="astro-g2bywc46" style="--depth: 1;">API Generator</span> </a>  </li> </ul>  </li><li class="astro-g2bywc46" style="--depth: 0;"> <a href="#step-5-export" class="astro-g2bywc46" style="--depth: 0;"> <span class="astro-g2bywc46" style="--depth: 0;">Step 5: Export</span> </a> <ul class="isMobile astro-g2bywc46" style="--depth: 1;"> <li class="astro-g2bywc46" style="--depth: 1;"> <a href="#astro-path" class="astro-g2bywc46" style="--depth: 1;"> <span class="astro-g2bywc46" style="--depth: 1;">Astro Path</span> </a>  </li><li class="astro-g2bywc46" style="--depth: 1;"> <a href="#markdown-path" class="astro-g2bywc46" style="--depth: 1;"> <span class="astro-g2bywc46" style="--depth: 1;">Markdown Path</span> </a>  </li> </ul>  </li><li class="astro-g2bywc46" style="--depth: 0;"> <a href="#step-6-summary" class="astro-g2bywc46" style="--depth: 0;"> <span class="astro-g2bywc46" style="--depth: 0;">Step 6: Summary</span> </a>  </li><li class="astro-g2bywc46" style="--depth: 0;"> <a href="#tích-hợp-bên-ngoài" class="astro-g2bywc46" style="--depth: 0;"> <span class="astro-g2bywc46" style="--depth: 0;">Tích Hợp Bên Ngoài</span> </a>  </li> </ul> </div></details></nav></mobile-starlight-toc></div><div class="right-sidebar-panel sl-hidden lg:sl-block astro-pb3aqygn"><div class="sl-container astro-pb3aqygn"><starlight-toc data-min-h="2" data-max-h="3"><nav aria-labelledby="starlight__on-this-page"><h2 id="starlight__on-this-page">Trên trang này</h2><ul class="astro-g2bywc46" style="--depth: 0;"> <li class="astro-g2bywc46" style="--depth: 0;"> <a href="#_top" class="astro-g2bywc46" style="--depth: 0;"> <span class="astro-g2bywc46" style="--depth: 0;">Tổng quan</span> </a>  </li><li class="astro-g2bywc46" style="--depth: 0;"> <a href="#pipeline-tổng-quan" class="astro-g2bywc46" style="--depth: 0;"> <span class="astro-g2bywc46" style="--depth: 0;">Pipeline Tổng Quan</span> </a>  </li><li class="astro-g2bywc46" style="--depth: 0;"> <a href="#step-1-gather-input" class="astro-g2bywc46" style="--depth: 0;"> <span class="astro-g2bywc46" style="--depth: 0;">Step 1: Gather Input</span> </a>  </li><li class="astro-g2bywc46" style="--depth: 0;"> <a href="#step-2-analyze-codebase" class="astro-g2bywc46" style="--depth: 0;"> <span class="astro-g2bywc46" style="--depth: 0;">Step 2: Analyze Codebase</span> </a>  </li><li class="astro-g2bywc46" style="--depth: 0;"> <a href="#step-3-apply-content-guidelines" class="astro-g2bywc46" style="--depth: 0;"> <span class="astro-g2bywc46" style="--depth: 0;">Step 3: Apply Content Guidelines</span> </a>  </li><li class="astro-g2bywc46" style="--depth: 0;"> <a href="#step-4-generate-documents" class="astro-g2bywc46" style="--depth: 0;"> <span class="astro-g2bywc46" style="--depth: 0;">Step 4: Generate Documents</span> </a> <ul class="astro-g2bywc46" style="--depth: 1;"> <li class="astro-g2bywc46" style="--depth: 1;"> <a href="#tech-docs-generator" class="astro-g2bywc46" style="--depth: 1;"> <span class="astro-g2bywc46" style="--depth: 1;">Tech Docs Generator</span> </a>  </li><li class="astro-g2bywc46" style="--depth: 1;"> <a href="#sop-generator" class="astro-g2bywc46" style="--depth: 1;"> <span class="astro-g2bywc46" style="--depth: 1;">SOP Generator</span> </a>  </li><li class="astro-g2bywc46" style="--depth: 1;"> <a href="#api-generator" class="astro-g2bywc46" style="--depth: 1;"> <span class="astro-g2bywc46" style="--depth: 1;">API Generator</span> </a>  </li> </ul>  </li><li class="astro-g2bywc46" style="--depth: 0;"> <a href="#step-5-export" class="astro-g2bywc46" style="--depth: 0;"> <span class="astro-g2bywc46" style="--depth: 0;">Step 5: Export</span> </a> <ul class="astro-g2bywc46" style="--depth: 1;"> <li class="astro-g2bywc46" style="--depth: 1;"> <a href="#astro-path" class="astro-g2bywc46" style="--depth: 1;"> <span class="astro-g2bywc46" style="--depth: 1;">Astro Path</span> </a>  </li><li class="astro-g2bywc46" style="--depth: 1;"> <a href="#markdown-path" class="astro-g2bywc46" style="--depth: 1;"> <span class="astro-g2bywc46" style="--depth: 1;">Markdown Path</span> </a>  </li> </ul>  </li><li class="astro-g2bywc46" style="--depth: 0;"> <a href="#step-6-summary" class="astro-g2bywc46" style="--depth: 0;"> <span class="astro-g2bywc46" style="--depth: 0;">Step 6: Summary</span> </a>  </li><li class="astro-g2bywc46" style="--depth: 0;"> <a href="#tích-hợp-bên-ngoài" class="astro-g2bywc46" style="--depth: 0;"> <span class="astro-g2bywc46" style="--depth: 0;">Tích Hợp Bên Ngoài</span> </a>  </li> </ul> </nav></starlight-toc></div></div> </div> </aside> <div class="main-pane astro-67yu43on">  <main data-pagefind-body class="astro-bguv2lll" lang="vi" dir="ltr">    <div class="content-panel astro-7nkwcw3z"> <div class="sl-container astro-7nkwcw3z"> <h1 id="_top" class="astro-j6tvhyss">Luồng Dữ Liệu — DocKit Master</h1>  </div> </div>  <div class="content-panel astro-7nkwcw3z"> <div class="sl-container astro-7nkwcw3z"> <div class="sl-markdown-content"> <div class="sl-heading-wrapper level-h1"><h1 id="luồng-dữ-liệu">Luồng Dữ Liệu</h1><a class="sl-anchor-link" href="#luồng-dữ-liệu"><span aria-hidden="true" class="sl-anchor-icon"><svg width="16" height="16" viewBox="0 0 24 24"><path fill="currentcolor" d="m12.11 15.39-3.88 3.88a2.52 2.52 0 0 1-3.5 0 2.47 2.47 0 0 1 0-3.5l3.88-3.88a1 1 0 0 0-1.42-1.42l-3.88 3.89a4.48 4.48 0 0 0 6.33 6.33l3.89-3.88a1 1 0 1 0-1.42-1.42Zm8.58-12.08a4.49 4.49 0 0 0-6.33 0l-3.89 3.88a1 1 0 0 0 1.42 1.42l3.88-3.88a2.52 2.52 0 0 1 3.5 0 2.47 2.47 0 0 1 0 3.5l-3.88 3.88a1 1 0 1 0 1.42 1.42l3.88-3.89a4.49 4.49 0 0 0 0-6.33ZM8.83 15.17a1 1 0 0 0 1.1.22 1 1 0 0 0 .32-.22l4.92-4.92a1 1 0 0 0-1.42-1.42l-4.92 4.92a1 1 0 0 0 0 1.42Z"></path></svg></span><span class="sr-only" data-pagefind-ignore="">Phần tiêu đề “Luồng Dữ Liệu”</span></a></div>
+<blockquote>
+<p><strong>Tham Khảo Nhanh</strong></p>
+<ul>
+<li><strong>Pattern</strong>: Sequential Pipeline (6 bước)</li>
+<li><strong>Input</strong>: Câu trả lời cấu hình + source code</li>
+<li><strong>Output</strong>: Astro Starlight site hoặc Markdown files</li>
+<li><strong>Serialization</strong>: Markdown + YAML frontmatter</li>
+</ul>
+</blockquote>
+<div class="sl-heading-wrapper level-h2"><h2 id="pipeline-tổng-quan">Pipeline Tổng Quan</h2><a class="sl-anchor-link" href="#pipeline-tổng-quan"><span aria-hidden="true" class="sl-anchor-icon"><svg width="16" height="16" viewBox="0 0 24 24"><path fill="currentcolor" d="m12.11 15.39-3.88 3.88a2.52 2.52 0 0 1-3.5 0 2.47 2.47 0 0 1 0-3.5l3.88-3.88a1 1 0 0 0-1.42-1.42l-3.88 3.89a4.48 4.48 0 0 0 6.33 6.33l3.89-3.88a1 1 0 1 0-1.42-1.42Zm8.58-12.08a4.49 4.49 0 0 0-6.33 0l-3.89 3.88a1 1 0 0 0 1.42 1.42l3.88-3.88a2.52 2.52 0 0 1 3.5 0 2.47 2.47 0 0 1 0 3.5l-3.88 3.88a1 1 0 1 0 1.42 1.42l3.88-3.89a4.49 4.49 0 0 0 0-6.33ZM8.83 15.17a1 1 0 0 0 1.1.22 1 1 0 0 0 .32-.22l4.92-4.92a1 1 0 0 0-1.42-1.42l-4.92 4.92a1 1 0 0 0 0 1.42Z"></path></svg></span><span class="sr-only" data-pagefind-ignore="">Phần tiêu đề “Pipeline Tổng Quan”</span></a></div>
+<p>DocKit Master xử lý dữ liệu theo pipeline 6 bước tuần tự. Mỗi bước nhận output của bước trước làm input.</p>
+<pre class="mermaid">graph TB
+    style S1 fill:#2d333b,stroke:#6d5dfc,color:#e6edf3
+    style S2 fill:#2d333b,stroke:#6d5dfc,color:#e6edf3
+    style S3 fill:#2d333b,stroke:#8b949e,color:#e6edf3
+    style S4 fill:#2d333b,stroke:#6d5dfc,color:#e6edf3
+    style S5 fill:#2d333b,stroke:#3fb950,color:#e6edf3
+    style S6 fill:#2d333b,stroke:#3fb950,color:#e6edf3
+
+    S1["📥 Step 1&#x3C;br/>Gather Input"] --> S2["🔍 Step 2&#x3C;br/>Analyze Codebase"]
+    S2 --> S3["📝 Step 3&#x3C;br/>Apply Guidelines"]
+    S3 --> S4["⚙️ Step 4&#x3C;br/>Generate Documents"]
+    S4 --> S5["📤 Step 5&#x3C;br/>Export + Sitemap"]
+    S5 --> S6["✅ Step 6&#x3C;br/>Summary"]</pre>
+<div class="sl-heading-wrapper level-h2"><h2 id="step-1-gather-input">Step 1: Gather Input</h2><a class="sl-anchor-link" href="#step-1-gather-input"><span aria-hidden="true" class="sl-anchor-icon"><svg width="16" height="16" viewBox="0 0 24 24"><path fill="currentcolor" d="m12.11 15.39-3.88 3.88a2.52 2.52 0 0 1-3.5 0 2.47 2.47 0 0 1 0-3.5l3.88-3.88a1 1 0 0 0-1.42-1.42l-3.88 3.89a4.48 4.48 0 0 0 6.33 6.33l3.89-3.88a1 1 0 1 0-1.42-1.42Zm8.58-12.08a4.49 4.49 0 0 0-6.33 0l-3.89 3.88a1 1 0 0 0 1.42 1.42l3.88-3.88a2.52 2.52 0 0 1 3.5 0 2.47 2.47 0 0 1 0 3.5l-3.88 3.88a1 1 0 1 0 1.42 1.42l3.88-3.89a4.49 4.49 0 0 0 0-6.33ZM8.83 15.17a1 1 0 0 0 1.1.22 1 1 0 0 0 .32-.22l4.92-4.92a1 1 0 0 0-1.42-1.42l-4.92 4.92a1 1 0 0 0 0 1.42Z"></path></svg></span><span class="sr-only" data-pagefind-ignore="">Phần tiêu đề “Step 1: Gather Input”</span></a></div>
+<p>Orchestrator (<code dir="auto">SKILL.md:41-118</code>) hiển thị form 10 câu hỏi cho người dùng. Output là execution config.</p>
+<pre class="mermaid">sequenceDiagram
+    participant U as 👤 User
+    participant O as 📋 SKILL.md
+
+    O->>U: Hiển thị form cấu hình
+    Note over U: Trả lời: "all, astro, full, yes, yes"
+    U->>O: Cấu hình
+
+    Note over O: Auto-detect language&#x3C;br/>từ ngôn ngữ chat
+    Note over O: Generate execution plan&#x3C;br/>DOC_TYPE=all, FORMAT=astro...
+
+    O->>U: Hiển thị kế hoạch triển khai
+    Note over O: Proceed to Step 2</pre>
+<p><strong>Input:</strong> Câu trả lời người dùng (text)
+<strong>Output:</strong> Execution config object (10 fields)</p>
+<div class="sl-heading-wrapper level-h2"><h2 id="step-2-analyze-codebase">Step 2: Analyze Codebase</h2><a class="sl-anchor-link" href="#step-2-analyze-codebase"><span aria-hidden="true" class="sl-anchor-icon"><svg width="16" height="16" viewBox="0 0 24 24"><path fill="currentcolor" d="m12.11 15.39-3.88 3.88a2.52 2.52 0 0 1-3.5 0 2.47 2.47 0 0 1 0-3.5l3.88-3.88a1 1 0 0 0-1.42-1.42l-3.88 3.89a4.48 4.48 0 0 0 6.33 6.33l3.89-3.88a1 1 0 1 0-1.42-1.42Zm8.58-12.08a4.49 4.49 0 0 0-6.33 0l-3.89 3.88a1 1 0 0 0 1.42 1.42l3.88-3.88a2.52 2.52 0 0 1 3.5 0 2.47 2.47 0 0 1 0 3.5l-3.88 3.88a1 1 0 1 0 1.42 1.42l3.88-3.89a4.49 4.49 0 0 0 0-6.33ZM8.83 15.17a1 1 0 0 0 1.1.22 1 1 0 0 0 .32-.22l4.92-4.92a1 1 0 0 0-1.42-1.42l-4.92 4.92a1 1 0 0 0 0 1.42Z"></path></svg></span><span class="sr-only" data-pagefind-ignore="">Phần tiêu đề “Step 2: Analyze Codebase”</span></a></div>
+<p>Analyzer (<code dir="auto">skills/analyze-codebase.md</code>) quét toàn bộ codebase và tạo metadata.</p>
+<pre class="mermaid">graph LR
+    style SCAN fill:#2d333b,stroke:#6d5dfc,color:#e6edf3
+    style DETECT fill:#2d333b,stroke:#6d5dfc,color:#e6edf3
+    style MAP fill:#2d333b,stroke:#6d5dfc,color:#e6edf3
+    style OUTPUT fill:#2d333b,stroke:#3fb950,color:#e6edf3
+
+    SCAN["📂 Scan Files&#x3C;br/>root, dirs, extensions"] --> DETECT["🔎 Detect Stack&#x3C;br/>frameworks, languages"]
+    DETECT --> MAP["🗺️ Map Architecture&#x3C;br/>layers, entry points"]
+    MAP --> OUTPUT["📄 analysis.md&#x3C;br/>structured metadata"]</pre>
+<p><strong>Quy trình quét:</strong></p>
+<ol>
+<li>Đọc <code dir="auto">README.md</code>, <code dir="auto">package.json</code>, config files</li>
+<li>Đếm files theo extension → detect languages</li>
+<li>Detect frameworks từ signal files</li>
+<li>Map 6 architecture layers (presentation, business, data, infra, integrations, testing)</li>
+<li>Extract routes, database schema, dependencies</li>
+</ol>
+<p><strong>Input:</strong> Source code files
+<strong>Output:</strong> <code dir="auto">docs/analysis.md</code> với Quick Reference, Architecture diagram, tables</p>
+<div class="sl-heading-wrapper level-h2"><h2 id="step-3-apply-content-guidelines">Step 3: Apply Content Guidelines</h2><a class="sl-anchor-link" href="#step-3-apply-content-guidelines"><span aria-hidden="true" class="sl-anchor-icon"><svg width="16" height="16" viewBox="0 0 24 24"><path fill="currentcolor" d="m12.11 15.39-3.88 3.88a2.52 2.52 0 0 1-3.5 0 2.47 2.47 0 0 1 0-3.5l3.88-3.88a1 1 0 0 0-1.42-1.42l-3.88 3.89a4.48 4.48 0 0 0 6.33 6.33l3.89-3.88a1 1 0 1 0-1.42-1.42Zm8.58-12.08a4.49 4.49 0 0 0-6.33 0l-3.89 3.88a1 1 0 0 0 1.42 1.42l3.88-3.88a2.52 2.52 0 0 1 3.5 0 2.47 2.47 0 0 1 0 3.5l-3.88 3.88a1 1 0 1 0 1.42 1.42l3.88-3.89a4.49 4.49 0 0 0 0-6.33ZM8.83 15.17a1 1 0 0 0 1.1.22 1 1 0 0 0 .32-.22l4.92-4.92a1 1 0 0 0-1.42-1.42l-4.92 4.92a1 1 0 0 0 0 1.42Z"></path></svg></span><span class="sr-only" data-pagefind-ignore="">Phần tiêu đề “Step 3: Apply Content Guidelines”</span></a></div>
+<p>Content engine áp dụng 3 bộ quy tắc song song:</p>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<table><thead><tr><th>Bộ quy tắc</th><th>File</th><th>Mục đích</th></tr></thead><tbody><tr><td>Content Guidelines</td><td><code dir="auto">skills/content-guidelines.md</code></td><td>UX laws, Markdown rules, frontmatter schema</td></tr><tr><td>SEO Writing</td><td><code dir="auto">skills/content-writing.md</code></td><td>Keyword placement, inverted pyramid, active voice</td></tr><tr><td>LLM Optimization</td><td><code dir="auto">skills/llm-optimization.md</code></td><td>AI-readable heading, self-contained sections</td></tr></tbody></table>
+<p>Các quy tắc này <strong>không tạo output file</strong> — chúng là constraints cho Step 4.</p>
+<div class="sl-heading-wrapper level-h2"><h2 id="step-4-generate-documents">Step 4: Generate Documents</h2><a class="sl-anchor-link" href="#step-4-generate-documents"><span aria-hidden="true" class="sl-anchor-icon"><svg width="16" height="16" viewBox="0 0 24 24"><path fill="currentcolor" d="m12.11 15.39-3.88 3.88a2.52 2.52 0 0 1-3.5 0 2.47 2.47 0 0 1 0-3.5l3.88-3.88a1 1 0 0 0-1.42-1.42l-3.88 3.89a4.48 4.48 0 0 0 6.33 6.33l3.89-3.88a1 1 0 1 0-1.42-1.42Zm8.58-12.08a4.49 4.49 0 0 0-6.33 0l-3.89 3.88a1 1 0 0 0 1.42 1.42l3.88-3.88a2.52 2.52 0 0 1 3.5 0 2.47 2.47 0 0 1 0 3.5l-3.88 3.88a1 1 0 1 0 1.42 1.42l3.88-3.89a4.49 4.49 0 0 0 0-6.33ZM8.83 15.17a1 1 0 0 0 1.1.22 1 1 0 0 0 .32-.22l4.92-4.92a1 1 0 0 0-1.42-1.42l-4.92 4.92a1 1 0 0 0 0 1.42Z"></path></svg></span><span class="sr-only" data-pagefind-ignore="">Phần tiêu đề “Step 4: Generate Documents”</span></a></div>
+<p>3 generators chạy tuần tự, mỗi generator đọc <code dir="auto">analysis.md</code> + source code:</p>
+<pre class="mermaid">graph TB
+    style ANALYSIS fill:#2d333b,stroke:#8b949e,color:#e6edf3
+    style TECH fill:#2d333b,stroke:#6d5dfc,color:#e6edf3
+    style SOP fill:#2d333b,stroke:#6d5dfc,color:#e6edf3
+    style API fill:#2d333b,stroke:#6d5dfc,color:#e6edf3
+    style OUT1 fill:#2d333b,stroke:#3fb950,color:#e6edf3
+    style OUT2 fill:#2d333b,stroke:#3fb950,color:#e6edf3
+    style OUT3 fill:#2d333b,stroke:#3fb950,color:#e6edf3
+
+    ANALYSIS["📄 analysis.md"] --> TECH["📐 tech-docs.md"]
+    ANALYSIS --> SOP["📋 sop-guide.md"]
+    ANALYSIS --> API["🔌 api-reference.md"]
+
+    TECH --> OUT1["architecture.md&#x3C;br/>database.md&#x3C;br/>deployment.md&#x3C;br/>data-flow.md"]
+    SOP --> OUT2["sop/index.md&#x3C;br/>sop/[feature].md"]
+    API --> OUT3["api/index.md&#x3C;br/>api/[resource].md"]</pre>
+<div class="sl-heading-wrapper level-h3"><h3 id="tech-docs-generator">Tech Docs Generator</h3><a class="sl-anchor-link" href="#tech-docs-generator"><span aria-hidden="true" class="sl-anchor-icon"><svg width="16" height="16" viewBox="0 0 24 24"><path fill="currentcolor" d="m12.11 15.39-3.88 3.88a2.52 2.52 0 0 1-3.5 0 2.47 2.47 0 0 1 0-3.5l3.88-3.88a1 1 0 0 0-1.42-1.42l-3.88 3.89a4.48 4.48 0 0 0 6.33 6.33l3.89-3.88a1 1 0 1 0-1.42-1.42Zm8.58-12.08a4.49 4.49 0 0 0-6.33 0l-3.89 3.88a1 1 0 0 0 1.42 1.42l3.88-3.88a2.52 2.52 0 0 1 3.5 0 2.47 2.47 0 0 1 0 3.5l-3.88 3.88a1 1 0 1 0 1.42 1.42l3.88-3.89a4.49 4.49 0 0 0 0-6.33ZM8.83 15.17a1 1 0 0 0 1.1.22 1 1 0 0 0 .32-.22l4.92-4.92a1 1 0 0 0-1.42-1.42l-4.92 4.92a1 1 0 0 0 0 1.42Z"></path></svg></span><span class="sr-only" data-pagefind-ignore="">Phần tiêu đề “Tech Docs Generator”</span></a></div>
+<p>Sinh 4 file kỹ thuật với ≥2 Mermaid diagrams mỗi file:</p>
+<ul>
+<li><code dir="auto">architecture.md</code> — Sơ đồ kiến trúc, ADR</li>
+<li><code dir="auto">database.md</code> — Schema, ER diagram, indexes</li>
+<li><code dir="auto">deployment.md</code> — Cài đặt, cấu hình, CI/CD</li>
+<li><code dir="auto">data-flow.md</code> — Pipeline, sequence diagrams</li>
+</ul>
+<div class="sl-heading-wrapper level-h3"><h3 id="sop-generator">SOP Generator</h3><a class="sl-anchor-link" href="#sop-generator"><span aria-hidden="true" class="sl-anchor-icon"><svg width="16" height="16" viewBox="0 0 24 24"><path fill="currentcolor" d="m12.11 15.39-3.88 3.88a2.52 2.52 0 0 1-3.5 0 2.47 2.47 0 0 1 0-3.5l3.88-3.88a1 1 0 0 0-1.42-1.42l-3.88 3.89a4.48 4.48 0 0 0 6.33 6.33l3.89-3.88a1 1 0 1 0-1.42-1.42Zm8.58-12.08a4.49 4.49 0 0 0-6.33 0l-3.89 3.88a1 1 0 0 0 1.42 1.42l3.88-3.88a2.52 2.52 0 0 1 3.5 0 2.47 2.47 0 0 1 0 3.5l-3.88 3.88a1 1 0 1 0 1.42 1.42l3.88-3.89a4.49 4.49 0 0 0 0-6.33ZM8.83 15.17a1 1 0 0 0 1.1.22 1 1 0 0 0 .32-.22l4.92-4.92a1 1 0 0 0-1.42-1.42l-4.92 4.92a1 1 0 0 0 0 1.42Z"></path></svg></span><span class="sr-only" data-pagefind-ignore="">Phần tiêu đề “SOP Generator”</span></a></div>
+<p>Quét UI routes/components → nhóm theo module → sinh 1 file SOP per feature:</p>
+<ul>
+<li>Quick Reference card</li>
+<li>Step-by-step numbered guide</li>
+<li>Form field tables</li>
+<li>Troubleshooting (progressive disclosure)</li>
+<li>FAQ (schema-ready)</li>
+</ul>
+<div class="sl-heading-wrapper level-h3"><h3 id="api-generator">API Generator</h3><a class="sl-anchor-link" href="#api-generator"><span aria-hidden="true" class="sl-anchor-icon"><svg width="16" height="16" viewBox="0 0 24 24"><path fill="currentcolor" d="m12.11 15.39-3.88 3.88a2.52 2.52 0 0 1-3.5 0 2.47 2.47 0 0 1 0-3.5l3.88-3.88a1 1 0 0 0-1.42-1.42l-3.88 3.89a4.48 4.48 0 0 0 6.33 6.33l3.89-3.88a1 1 0 1 0-1.42-1.42Zm8.58-12.08a4.49 4.49 0 0 0-6.33 0l-3.89 3.88a1 1 0 0 0 1.42 1.42l3.88-3.88a2.52 2.52 0 0 1 3.5 0 2.47 2.47 0 0 1 0 3.5l-3.88 3.88a1 1 0 1 0 1.42 1.42l3.88-3.89a4.49 4.49 0 0 0 0-6.33ZM8.83 15.17a1 1 0 0 0 1.1.22 1 1 0 0 0 .32-.22l4.92-4.92a1 1 0 0 0-1.42-1.42l-4.92 4.92a1 1 0 0 0 0 1.42Z"></path></svg></span><span class="sr-only" data-pagefind-ignore="">Phần tiêu đề “API Generator”</span></a></div>
+<p>Quét route files → nhóm theo resource → sinh 1 file per resource:</p>
+<ul>
+<li>Endpoints overview table</li>
+<li>Parameters + response schemas</li>
+<li>Multi-language examples (cURL, Python, JS, Go)</li>
+<li>Error codes + rate limiting</li>
+</ul>
+<div class="sl-heading-wrapper level-h2"><h2 id="step-5-export">Step 5: Export</h2><a class="sl-anchor-link" href="#step-5-export"><span aria-hidden="true" class="sl-anchor-icon"><svg width="16" height="16" viewBox="0 0 24 24"><path fill="currentcolor" d="m12.11 15.39-3.88 3.88a2.52 2.52 0 0 1-3.5 0 2.47 2.47 0 0 1 0-3.5l3.88-3.88a1 1 0 0 0-1.42-1.42l-3.88 3.89a4.48 4.48 0 0 0 6.33 6.33l3.89-3.88a1 1 0 1 0-1.42-1.42Zm8.58-12.08a4.49 4.49 0 0 0-6.33 0l-3.89 3.88a1 1 0 0 0 1.42 1.42l3.88-3.88a2.52 2.52 0 0 1 3.5 0 2.47 2.47 0 0 1 0 3.5l-3.88 3.88a1 1 0 1 0 1.42 1.42l3.88-3.89a4.49 4.49 0 0 0 0-6.33ZM8.83 15.17a1 1 0 0 0 1.1.22 1 1 0 0 0 .32-.22l4.92-4.92a1 1 0 0 0-1.42-1.42l-4.92 4.92a1 1 0 0 0 0 1.42Z"></path></svg></span><span class="sr-only" data-pagefind-ignore="">Phần tiêu đề “Step 5: Export”</span></a></div>
+<p>Tuỳ theo <code dir="auto">FORMAT</code>, exporter scaffold output:</p>
+<div class="sl-heading-wrapper level-h3"><h3 id="astro-path">Astro Path</h3><a class="sl-anchor-link" href="#astro-path"><span aria-hidden="true" class="sl-anchor-icon"><svg width="16" height="16" viewBox="0 0 24 24"><path fill="currentcolor" d="m12.11 15.39-3.88 3.88a2.52 2.52 0 0 1-3.5 0 2.47 2.47 0 0 1 0-3.5l3.88-3.88a1 1 0 0 0-1.42-1.42l-3.88 3.89a4.48 4.48 0 0 0 6.33 6.33l3.89-3.88a1 1 0 1 0-1.42-1.42Zm8.58-12.08a4.49 4.49 0 0 0-6.33 0l-3.89 3.88a1 1 0 0 0 1.42 1.42l3.88-3.88a2.52 2.52 0 0 1 3.5 0 2.47 2.47 0 0 1 0 3.5l-3.88 3.88a1 1 0 1 0 1.42 1.42l3.88-3.89a4.49 4.49 0 0 0 0-6.33ZM8.83 15.17a1 1 0 0 0 1.1.22 1 1 0 0 0 .32-.22l4.92-4.92a1 1 0 0 0-1.42-1.42l-4.92 4.92a1 1 0 0 0 0 1.42Z"></path></svg></span><span class="sr-only" data-pagefind-ignore="">Phần tiêu đề “Astro Path”</span></a></div>
+<pre class="mermaid">graph LR
+    style DOCS fill:#2d333b,stroke:#6d5dfc,color:#e6edf3
+    style SCAFFOLD fill:#2d333b,stroke:#6d5dfc,color:#e6edf3
+    style TEMPLATE fill:#2d333b,stroke:#8b949e,color:#e6edf3
+    style BUILD fill:#2d333b,stroke:#3fb950,color:#e6edf3
+    style SEO fill:#2d333b,stroke:#d29922,color:#e6edf3
+
+    DOCS["📄 docs/*.md"] --> SCAFFOLD["🚀 npm create astro"]
+    TEMPLATE["🎯 templates/&#x3C;br/>config + CSS"] --> SCAFFOLD
+    SCAFFOLD --> BUILD["📦 npm run build&#x3C;br/>→ dist/"]
+    BUILD --> SEO["🔍 SEO Audit&#x3C;br/>+ Sitemap"]</pre>
+<ol>
+<li><code dir="auto">npm create astro@latest</code> — scaffold Starlight project</li>
+<li>Copy premium template (config + CSS)</li>
+<li>Copy docs into <code dir="auto">src/content/docs/</code></li>
+<li><code dir="auto">npm install &#x26;&#x26; npm run build</code></li>
+<li>Generate <code dir="auto">sitemap-urls.txt</code> + <code dir="auto">robots.txt</code></li>
+<li>Run SEO checklist trên mọi trang</li>
+</ol>
+<div class="sl-heading-wrapper level-h3"><h3 id="markdown-path">Markdown Path</h3><a class="sl-anchor-link" href="#markdown-path"><span aria-hidden="true" class="sl-anchor-icon"><svg width="16" height="16" viewBox="0 0 24 24"><path fill="currentcolor" d="m12.11 15.39-3.88 3.88a2.52 2.52 0 0 1-3.5 0 2.47 2.47 0 0 1 0-3.5l3.88-3.88a1 1 0 0 0-1.42-1.42l-3.88 3.89a4.48 4.48 0 0 0 6.33 6.33l3.89-3.88a1 1 0 1 0-1.42-1.42Zm8.58-12.08a4.49 4.49 0 0 0-6.33 0l-3.89 3.88a1 1 0 0 0 1.42 1.42l3.88-3.88a2.52 2.52 0 0 1 3.5 0 2.47 2.47 0 0 1 0 3.5l-3.88 3.88a1 1 0 1 0 1.42 1.42l3.88-3.89a4.49 4.49 0 0 0 0-6.33ZM8.83 15.17a1 1 0 0 0 1.1.22 1 1 0 0 0 .32-.22l4.92-4.92a1 1 0 0 0-1.42-1.42l-4.92 4.92a1 1 0 0 0 0 1.42Z"></path></svg></span><span class="sr-only" data-pagefind-ignore="">Phần tiêu đề “Markdown Path”</span></a></div>
+<p>Copy docs trực tiếp, tạo <code dir="auto">docs/README.md</code> làm index.</p>
+<div class="sl-heading-wrapper level-h2"><h2 id="step-6-summary">Step 6: Summary</h2><a class="sl-anchor-link" href="#step-6-summary"><span aria-hidden="true" class="sl-anchor-icon"><svg width="16" height="16" viewBox="0 0 24 24"><path fill="currentcolor" d="m12.11 15.39-3.88 3.88a2.52 2.52 0 0 1-3.5 0 2.47 2.47 0 0 1 0-3.5l3.88-3.88a1 1 0 0 0-1.42-1.42l-3.88 3.89a4.48 4.48 0 0 0 6.33 6.33l3.89-3.88a1 1 0 1 0-1.42-1.42Zm8.58-12.08a4.49 4.49 0 0 0-6.33 0l-3.89 3.88a1 1 0 0 0 1.42 1.42l3.88-3.88a2.52 2.52 0 0 1 3.5 0 2.47 2.47 0 0 1 0 3.5l-3.88 3.88a1 1 0 1 0 1.42 1.42l3.88-3.89a4.49 4.49 0 0 0 0-6.33ZM8.83 15.17a1 1 0 0 0 1.1.22 1 1 0 0 0 .32-.22l4.92-4.92a1 1 0 0 0-1.42-1.42l-4.92 4.92a1 1 0 0 0 0 1.42Z"></path></svg></span><span class="sr-only" data-pagefind-ignore="">Phần tiêu đề “Step 6: Summary”</span></a></div>
+<p>Orchestrator hiển thị cho người dùng:</p>
+<ul>
+<li>Danh sách file đã tạo + kích thước</li>
+<li>Hướng dẫn xem/serve docs</li>
+<li>Next steps (customize, deploy)</li>
+</ul>
+<div class="sl-heading-wrapper level-h2"><h2 id="tích-hợp-bên-ngoài">Tích Hợp Bên Ngoài</h2><a class="sl-anchor-link" href="#tích-hợp-bên-ngoài"><span aria-hidden="true" class="sl-anchor-icon"><svg width="16" height="16" viewBox="0 0 24 24"><path fill="currentcolor" d="m12.11 15.39-3.88 3.88a2.52 2.52 0 0 1-3.5 0 2.47 2.47 0 0 1 0-3.5l3.88-3.88a1 1 0 0 0-1.42-1.42l-3.88 3.89a4.48 4.48 0 0 0 6.33 6.33l3.89-3.88a1 1 0 1 0-1.42-1.42Zm8.58-12.08a4.49 4.49 0 0 0-6.33 0l-3.89 3.88a1 1 0 0 0 1.42 1.42l3.88-3.88a2.52 2.52 0 0 1 3.5 0 2.47 2.47 0 0 1 0 3.5l-3.88 3.88a1 1 0 1 0 1.42 1.42l3.88-3.89a4.49 4.49 0 0 0 0-6.33ZM8.83 15.17a1 1 0 0 0 1.1.22 1 1 0 0 0 .32-.22l4.92-4.92a1 1 0 0 0-1.42-1.42l-4.92 4.92a1 1 0 0 0 0 1.42Z"></path></svg></span><span class="sr-only" data-pagefind-ignore="">Phần tiêu đề “Tích Hợp Bên Ngoài”</span></a></div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<table><thead><tr><th>Dịch vụ</th><th>Protocol</th><th>Hướng</th><th>Dữ liệu</th></tr></thead><tbody><tr><td>Google Antigravity</td><td>Prompt/Response</td><td>Bidirectional</td><td>Markdown text</td></tr><tr><td>Clipboard (macOS)</td><td><code dir="auto">pbcopy</code></td><td>Output only</td><td>Prompt text</td></tr><tr><td>npm Registry</td><td>HTTP</td><td>Download</td><td>Astro packages</td></tr><tr><td>NotebookLM</td><td>URL paste</td><td>Output only</td><td><code dir="auto">sitemap-urls.txt</code></td></tr></tbody></table>
+<hr>
+<blockquote>
+<p>Xem thêm: <a href="./architecture">Kiến trúc hệ thống</a> · <a href="./analysis">Phân tích mã nguồn</a></p>
+</blockquote> </div> <footer class="sl-flex astro-3yyafb3n"> <div class="meta sl-flex astro-3yyafb3n">  <p>Cập nhật lần cuối: <time datetime="2026-02-28T07:28:25.000Z">28 thg 2, 2026</time></p> </div> <div class="pagination-links print:hidden astro-u2l5gyhi" dir="ltr"> <a href="/doc-kit/docs/deployment/" rel="prev" class="astro-u2l5gyhi"> <svg aria-hidden="true" class="astro-u2l5gyhi astro-c6vsoqas" width="16" height="16" viewBox="0 0 24 24" fill="currentColor" style="--sl-icon-size: 1.5rem;"><path d="M17 11H9.41l3.3-3.29a1.004 1.004 0 1 0-1.42-1.42l-5 5a1 1 0 0 0-.21.33 1 1 0 0 0 0 .76 1 1 0 0 0 .21.33l5 5a1.002 1.002 0 0 0 1.639-.325 1 1 0 0 0-.219-1.095L9.41 13H17a1 1 0 0 0 0-2Z"/></svg> <span class="astro-u2l5gyhi"> Trước <br class="astro-u2l5gyhi"> <span class="link-title astro-u2l5gyhi">Hướng Dẫn Triển Khai — DocKit Master</span> </span> </a>  </div>   </footer>  </div> </div>   </main> </div> </div>  </div> </div>  </body></html>

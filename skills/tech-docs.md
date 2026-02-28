@@ -4,7 +4,7 @@ Generate professional technical system documentation with rich diagrams, visual 
 
 ## Input Required
 
-- `docs/_analysis.md` (output from analyze-codebase)
+- `docs/analysis.md` (output from analyze-codebase)
 - Access to source code for deep tracing
 
 ## Content Guidelines
@@ -44,9 +44,9 @@ sidebar:
 
 ```mermaid
 graph TB
-    style Client fill:#2d333b,stroke:#6d5dfc,color:#e6edf3
-    style API fill:#2d333b,stroke:#6d5dfc,color:#e6edf3
-    style DB fill:#2d333b,stroke:#3fb950,color:#e6edf3
+    style Client fill:#232221,stroke:#60A5FA,color:#E8E5DF
+    style API fill:#232221,stroke:#60A5FA,color:#E8E5DF
+    style DB fill:#232221,stroke:#3fb950,color:#E8E5DF
 
     Client["🌐 Client"] --> API["⚙️ API Server"]
     API --> DB["🗄️ Database"]
@@ -226,7 +226,7 @@ cp .env.example .env
 
 ```mermaid
 graph LR
-    style A fill:#2d333b,stroke:#6d5dfc,color:#e6edf3
+    style A fill:#232221,stroke:#60A5FA,color:#E8E5DF
     A["🔀 Push"] --> B["🧪 Test"]
     B --> C["📦 Build"]
     C --> D["🚀 Deploy"]
@@ -263,9 +263,9 @@ sidebar:
 
 ```mermaid
 graph TB
-    style Input fill:#2d333b,stroke:#6d5dfc,color:#e6edf3
-    style Process fill:#2d333b,stroke:#d29922,color:#e6edf3
-    style Output fill:#2d333b,stroke:#3fb950,color:#e6edf3
+    style Input fill:#232221,stroke:#60A5FA,color:#E8E5DF
+    style Process fill:#232221,stroke:#d29922,color:#E8E5DF
+    style Output fill:#232221,stroke:#3fb950,color:#E8E5DF
 
     Input["📥 Input"] --> Process["⚙️ Processing"]
     Process --> Output["📤 Output"]
@@ -306,7 +306,7 @@ sequenceDiagram
 - **Minimum 2 Mermaid diagrams per file**
 - **Text description** alongside every Mermaid diagram (for LLM parsing)
 - **Every claim cites** `(file_path:line_number)`
-- **Dark-mode Mermaid colors**: fill `#2d333b`, border `#6d5dfc`, text `#e6edf3`
+- **Dark-mode Mermaid colors**: fill `#232221`, border `#60A5FA`, text `#E8E5DF`
 - **Use admonitions** (`:::tip`, `:::warning`, `:::danger`) for callouts
 - **Use `<details>` Progressive Disclosure** for secondary information
 - **Tables** for all structured data — never use bullet lists for tabular data

@@ -114,9 +114,9 @@ sidebar_position: 99
 
 ```mermaid
 graph TB
-    style UI fill:#2d333b,stroke:#6d5dfc,color:#e6edf3
-    style API fill:#2d333b,stroke:#6d5dfc,color:#e6edf3
-    style DB fill:#2d333b,stroke:#3fb950,color:#e6edf3
+    style UI fill:#232221,stroke:#60A5FA,color:#E8E5DF
+    style API fill:#232221,stroke:#60A5FA,color:#E8E5DF
+    style DB fill:#232221,stroke:#3fb950,color:#E8E5DF
 
     subgraph Presentation
         UI["🖥️ Frontend"]
@@ -173,8 +173,8 @@ graph TB
 - **Cite every finding**: `(file_path:line_number)`
 - **Output file**: `analysis.md` (**NOT** `_analysis.md` — underscore breaks MDX)
 - Use Mermaid diagrams with dark-mode colors:
-  - Node fill: `#2d333b`, border: `#6d5dfc`, text: `#e6edf3`
-  - Background: `#161b22`, Success: `#3fb950`
+  - Node fill: `#232221`, border: `#60A5FA`, text: `#E8E5DF`
+  - Background: `#1C1B1A`, Success: `#3fb950`
 - If a section cannot be determined, state **"Undetermined — requires further inspection"**
 - **Quick Reference card** at top of output
 - **Include dependency analysis** — essential for understanding the project

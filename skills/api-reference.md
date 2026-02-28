@@ -4,7 +4,7 @@ Automatically generate API reference documentation with multi-language SDK examp
 
 ## Input Required
 
-- `docs/_analysis.md` (output from analyze-codebase)
+- `docs/analysis.md` (output from analyze-codebase)
 - Access to route files, controllers, middleware, type definitions
 
 ## Content Guidelines

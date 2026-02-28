@@ -1,91 +1,110 @@
-# 📚 DocKit Master for Google Antigravity
+# 📚 DocKit Master
 
-[![Documentation Generator](https://img.shields.io/badge/Documentation-Generator-blueviolet?style=for-the-badge)](https://github.com/your-repo/DocKit Master)
-[![Format Docusaurus](https://img.shields.io/badge/Format-Docusaurus-2ca5e0?style=for-the-badge&logo=docusaurus)](https://docusaurus.io/)
-[![Format Markdown](https://img.shields.io/badge/Format-Markdown-black?style=for-the-badge&logo=markdown)](https://en.wikipedia.org/wiki/Markdown)
+[![Knowledge Engine](https://img.shields.io/badge/Knowledge-Systematization_Engine-blueviolet?style=for-the-badge)]()
+[![Astro Starlight](https://img.shields.io/badge/Output-Astro_Starlight-FF5D01?style=for-the-badge&logo=astro)](https://starlight.astro.build/)
+[![Markdown](https://img.shields.io/badge/Output-Markdown-black?style=for-the-badge&logo=markdown)]()
 
-A professional documentation generation toolkit built for **Google Antigravity**. Skip the manual documentation effort and instantly turn your codebase into beautiful, structured, and deployable documentation.
+A professional knowledge systematization engine powered by codebase analysis.
+**1 scan = 1 complete knowledge base** — Personas, JTBD, Process Flows, Technical Docs, SOPs, API Reference.
 
 ---
 
-## 🚀 The Problem We Solve
+## 🚀 What It Does
 
-Writing documentation is tedious. Keeping it updated is even harder.
-**DocKit Master** empowers your AI agent to independently read your code, trace logic, map architectures, and write documentation that developers and end-users will actually love to read.
+DocKit Master reads your source code and generates a complete documentation suite:
 
-## ✨ Core Features
+| Document Type | What It Generates |
+|---------------|-------------------|
+| **Knowledge** | Buyer & User Personas, JTBD Canvases (3-level hierarchy), Process Flow diagrams (4 types) |
+| **Tech Docs** | System Architecture + ADR, Database Schema, Deployment Guide, Data Flow diagrams |
+| **SOP Guides** | Step-by-step user guides enriched with Persona context, JTBD alignment, Process Flows |
+| **API Reference** | Endpoints, parameters, multi-language examples (cURL, Python, JS, Go) |
 
-*   **🧠 Deep Codebase Analysis:** Traces real code paths, not just file names.
-*   **📐 Technical Documentation:** Generates System Architecture, Data Flows, and Database Schemas with dark-mode Mermaids.
-*   **📋 SOP User Guides:** Creates step-by-step Standard Operating Procedures (SOPs) for non-technical users.
-*   **🔌 API Reference:** Automatically extracts endpoints, request/response schemas, and builds cURL/JS examples.
-*   **🎨 Dual Output Formats:**
-    *   **Markdown:** Clean, portable `.md` files structured perfectly for any repo.
-    *   **Docusaurus:** Instantly scaffolds a fully-featured, dark-mode static site ready to deploy.
+### Output Formats
+
+| Format | Description |
+|--------|-------------|
+| **Astro Starlight** ⭐ | Premium static site — dark mode, built-in search, i18n, auto-sidebar |
+| **Markdown** | Plain `.md` files — portable, works anywhere |
+
+### Built-in Optimization
+
+- **SEO** — Per-page audit checklist, keyword placement, sitemap generation, robots.txt
+- **AI/LLM** — Clean heading hierarchy, text fallbacks for Mermaid, NotebookLM-ready URL lists
+- **UX** — Hick's Law, Miller's Law, progressive disclosure, WCAG 2.1 AA accessibility
 
 ## 🛠 Installation
 
-Simply copy the `DocKit Master` folder into your Antigravity skills directory:
+Copy into your Antigravity skills directory:
 
 ```bash
-cp -r DocKit Master ~/.gemini/antigravity/skills/
-```
-
-Make sure the CLI script is executable:
-
-```bash
-chmod +x ~/.gemini/antigravity/skills/DocKit Master/scripts/doc-gen.sh
+cp -r doc-kit ~/.gemini/antigravity/skills/
 ```
 
 ## 💻 Quick Start
 
-### The Interactive CLI
-
-To get the best results effortlessly, use the built-in CLI menu:
+### Interactive CLI
 
 ```bash
-bash ~/.gemini/antigravity/skills/DocKit Master/scripts/doc-gen.sh
+bash ~/.gemini/antigravity/skills/doc-kit/scripts/doc-gen.sh
 ```
-
-The CLI will ask you 4 quick questions:
-1.  **Document Type:** Technical, SOP, API, or All.
-2.  **Output Format:** Plain Markdown or Docusaurus.
-3.  **Source Code Path:** Which project do you want to document?
-4.  **Language:** English or Vietnamese.
-
-It instantly generates an optimized prompt and copies it to your clipboard. Just paste it into your Google Antigravity session!
 
 ### Direct Trigger
 
-Alternatively, simply type in your Antigravity session:
+Type in your Antigravity session:
 
-> "Use DocKit Master to create documentation for the project at /path/to/my/project"
+> "Use DocKit Master to create documentation for the project at /path/to/project"
 
-The agent will prompt you for the required choices.
-
-## 📂 Architecture of DocKit Master
-
-DocKit Master is built using specialized sub-skills for maximum depth and accuracy:
+## 📂 Architecture
 
 ```text
-skills/DocKit Master/
-├── SKILL.md                 # Main orchestration agent
-├── scripts/
-│   └── doc-gen.sh           # Highly interactive CLI
+doc-kit/
+├── SKILL.md                     # Main orchestration engine
 ├── skills/
-│   ├── analyze-codebase.md  # Semantic analysis
-│   ├── tech-docs.md         # System Architecture
-│   ├── sop-guide.md         # Step-by-step UX flows
-│   └── api-reference.md     # Auto REST/GraphQL extraction
-└── workflows/               # Rules for output (Markdown or Docusaurus)
+│   ├── analyze-codebase.md      # Deep semantic code analysis
+│   ├── persona-builder.md       # Buyer & User Persona generation
+│   ├── jtbd-analyzer.md         # Jobs To Be Done analysis (3-level)
+│   ├── flow-mapper.md           # 4 types of process flow diagrams
+│   ├── tech-docs.md             # Architecture, DB, deployment, data flow
+│   ├── sop-guide.md             # Knowledge-enriched SOP user guides
+│   ├── api-reference.md         # Multi-language API reference
+│   ├── content-guidelines.md    # Content structure & formatting rules
+│   ├── content-writing.md       # SEO copywriting guidelines
+│   ├── seo-checklist.md         # Per-page SEO audit template
+│   └── llm-optimization.md      # AI-readable content rules
+├── workflows/
+│   ├── generate-docs.md         # Main generation workflow
+│   ├── setup-astro.md           # Astro Starlight scaffolding
+│   ├── export-markdown.md       # Markdown export
+│   └── generate-sitemap.md      # XML sitemap + NotebookLM URLs
+├── templates/
+│   ├── astro-premium/           # Astro Starlight config + CSS template
+│   └── markdown/                # Markdown structure template
+├── scripts/
+│   └── doc-gen.sh               # Interactive CLI prompt generator
+├── index.html                   # Landing page
+└── astro-site/                  # Live documentation site
 ```
 
-## 🛡 Verification Standard
+## ✨ Key Features
 
-DocKit Master enforces **zero-tolerance for shallow analysis**:
-1.  **Every claim cited:** Documentation cites `(file_path:line_number)`.
-2.  **Visual architecture:** Requires minimum 2 dark-theme Mermaid diagrams per technical file.
-3.  **No Hand-Waving:** If the AI hasn't traced the code, it explicitly states "Requires further inspection".
+### Knowledge Systematization (New)
+- **Persona Builder** — Auto-detect roles from RBAC, generate Buyer + User Personas (GitLab format)
+- **JTBD Analyzer** — 3-level job hierarchy: Main Job → Small Job → Micro-job
+- **Flow Mapper** — 4 diagram types: Workflow, Sequence, Lifecycle, User Journey
+
+### Documentation Quality
+- Every claim cites `(file_path:line_number)`
+- Minimum 2 dark-mode Mermaid diagrams per technical file
+- Progressive disclosure via `<details>` for advanced content
+- Schema-ready FAQ sections for search engine rich snippets
+
+### Design System
+- Claude Docs-inspired warm neutral palette
+- Serif headings (Source Serif 4) + sans-serif body (Inter)
+- Bilingual support (Vietnamese, Chinese, Russian, English)
+- Touch-friendly targets (≥44px), focus-visible rings
 
 ---
-*Elevate your codebase with documentation that writes itself.*
+
+*One scan = one complete knowledge base.*

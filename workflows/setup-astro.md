@@ -26,12 +26,12 @@ npm create astro@latest ./astro-site -- --template starlight --no-install --no-g
 // turbo
 ```bash
 # Copy premium config
-cp ~/.gemini/antigravity/skills/DocKit Master/templates/astro-premium/astro.config.mjs \
+cp ~/.gemini/antigravity/skills/doc-kit/templates/astro-premium/astro.config.mjs \
    astro-site/astro.config.mjs
 
 # Copy premium CSS
 mkdir -p astro-site/src/styles
-cp ~/.gemini/antigravity/skills/DocKit Master/templates/astro-premium/src/styles/custom.css \
+cp ~/.gemini/antigravity/skills/doc-kit/templates/astro-premium/src/styles/custom.css \
    astro-site/src/styles/custom.css
 ```
 
@@ -118,7 +118,7 @@ Open `http://localhost:4321` to preview.
 - [ ] Search works (built-in Pagefind)
 - [ ] Admonitions render (`:::tip`, `:::note`, `:::caution`, `:::danger`)
 - [ ] Mobile responsive (hamburger menu works)
-- [ ] Custom CSS applied (purple accent colors)
+- [ ] Custom CSS applied (warm neutral accents)
 - [ ] Mermaid diagrams render as SVG (not raw code blocks)
 - [ ] Every page has `title` and `description` in frontmatter
 - [ ] `robots.txt` exists in `public/`

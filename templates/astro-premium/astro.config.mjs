@@ -14,9 +14,7 @@ export default defineConfig({
     integrations: [
         mermaid(),
         starlight({
-            // CUSTOMIZE: Project identity
-            title: '[Project Name]',
-            description: '[Project description]',
+            title: '[Project Name]', // CUSTOMIZE: Project name
 
             // CUSTOMIZE: Social links
             social: [
@@ -38,25 +36,9 @@ export default defineConfig({
                 // vi: { label: 'Tiếng Việt', lang: 'vi' },
                 // zh: { label: '中文', lang: 'zh-CN' },
                 // ru: { label: 'Русский', lang: 'ru' },
-                // ja: { label: '日本語', lang: 'ja' },
             },
 
             // Sidebar: auto-generated from folder structure
-            // Override here if custom grouping is needed
-            // sidebar: [
-            //   {
-            //     label: 'Architecture & Technical',
-            //     autogenerate: { directory: 'tech' },
-            //   },
-            //   {
-            //     label: 'User Guides',
-            //     autogenerate: { directory: 'sop' },
-            //   },
-            //   {
-            //     label: 'API Reference',
-            //     autogenerate: { directory: 'api' },
-            //   },
-            // ],
 
             // Premium custom CSS
             customCss: ['./src/styles/custom.css'],
@@ -122,9 +104,7 @@ export default defineConfig({
         sitemap(),
     ],
 
-
-
     // CUSTOMIZE: Deployment
-    site: 'https://docs.example.com', // CUSTOMIZE: your deployment URL
-    // base: '/docs/',                // CUSTOMIZE: if deploying to a subdirectory
+    site: 'https://example.com', // CUSTOMIZE: Your deployed site URL
+    // base: '/docs',           // CUSTOMIZE: Base path if not at root
 });

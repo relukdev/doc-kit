@@ -26,18 +26,20 @@ echo ""
 # Step 1: Choose document type
 echo -e "${BOLD}📑 Step 1: Document Type${NC}"
 echo ""
-echo -e "  ${GREEN}1)${NC} tech       — Technical docs (Architecture, DB, Deployment)"
-echo -e "  ${GREEN}2)${NC} sop        — SOP User Guides (step-by-step)"
-echo -e "  ${GREEN}3)${NC} api        — API Reference (endpoints, schemas)"
-echo -e "  ${GREEN}4)${NC} all        — Full documentation suite"
+echo -e "  ${GREEN}1)${NC} knowledge  — Personas, JTBD, Process Flows"
+echo -e "  ${GREEN}2)${NC} tech       — Technical docs (Architecture, DB, Deployment)"
+echo -e "  ${GREEN}3)${NC} sop        — SOP User Guides (enriched with knowledge)"
+echo -e "  ${GREEN}4)${NC} api        — API Reference (endpoints, schemas)"
+echo -e "  ${GREEN}5)${NC} all        — Full documentation suite ${YELLOW}★ recommended${NC}"
 echo ""
-read -p "$(echo -e ${BLUE}Select [1-4]:${NC} )" DOC_CHOICE
+read -p "$(echo -e ${BLUE}Select [1-5]:${NC} )" DOC_CHOICE
 
 case $DOC_CHOICE in
-  1) DOC_TYPE="tech" ;;
-  2) DOC_TYPE="sop" ;;
-  3) DOC_TYPE="api" ;;
-  4) DOC_TYPE="all" ;;
+  1) DOC_TYPE="knowledge" ;;
+  2) DOC_TYPE="tech" ;;
+  3) DOC_TYPE="sop" ;;
+  4) DOC_TYPE="api" ;;
+  5) DOC_TYPE="all" ;;
   *) echo -e "${RED}❌ Invalid choice${NC}"; exit 1 ;;
 esac
 
@@ -77,14 +79,48 @@ echo ""
 # Step 4: Documentation language
 echo -e "${BOLD}🌏 Step 4: Output Language${NC}"
 echo ""
-echo -e "  ${GREEN}1)${NC} en — English (default)"
+echo -e "  ${GREEN}1)${NC} en — English"
 echo -e "  ${GREEN}2)${NC} vi — Tiếng Việt"
+echo -e "  ${GREEN}3)${NC} zh — 中文"
+echo -e "  ${GREEN}4)${NC} ru — Русский"
 echo ""
-read -p "$(echo -e ${BLUE}Select [1-2] \(Enter = English\):${NC} )" LANG_CHOICE
+read -p "$(echo -e ${BLUE}Select [1-4] \(Enter = English\):${NC} )" LANG_CHOICE
 
 case $LANG_CHOICE in
   2) DOC_LANG="Vietnamese" ;;
+  3) DOC_LANG="Chinese" ;;
+  4) DOC_LANG="Russian" ;;
   *) DOC_LANG="English" ;;
+esac
+
+echo ""
+
+# Step 5: SEO optimization
+echo -e "${BOLD}🔍 Step 5: SEO Optimization${NC}"
+echo ""
+echo -e "  ${GREEN}1)${NC} yes — SEO frontmatter + checklist + sitemap ${YELLOW}★ recommended${NC}"
+echo -e "  ${GREEN}2)${NC} no  — Skip SEO"
+echo ""
+read -p "$(echo -e ${BLUE}Select [1-2] \(Enter = Yes\):${NC} )" SEO_CHOICE
+
+case $SEO_CHOICE in
+  2) SEO="no" ;;
+  *) SEO="yes" ;;
+esac
+
+echo ""
+
+# Step 6: LLM optimization
+echo -e "${BOLD}🤖 Step 6: AI/LLM Optimization${NC}"
+echo ""
+echo -e "  ${GREEN}1)${NC} yes — AI-readable structure + NotebookLM sitemap ${YELLOW}★ recommended${NC}"
+echo -e "  ${GREEN}2)${NC} no  — Skip LLM optimization"
+echo ""
+read -p "$(echo -e ${BLUE}Select [1-2] \(Enter = Yes\):${NC} )" LLM_CHOICE
+
+case $LLM_CHOICE in
+  2) LLM="no" ;;
+  *) LLM="yes" ;;
 esac
 
 echo ""
@@ -98,8 +134,10 @@ Configuration:
 - Document type: $DOC_TYPE
 - Output format: $FORMAT
 - Language: $DOC_LANG
+- SEO optimization: $SEO
+- LLM optimization: $LLM
 
-Please refer to the skill file at skills/DocKit Master/SKILL.md and execute the procedure.
+Please refer to the skill file at skills/doc-kit/SKILL.md and execute the procedure.
 Start from Step 2 (Analyze Codebase) since input parameters are already provided above."
 
 echo -e "${BOLD}✅ Prompt successfully generated!${NC}"

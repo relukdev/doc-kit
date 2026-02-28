@@ -140,7 +140,7 @@ Key rules to enforce:
 - **Quick Reference**: Every doc starts with a summary box
 - **Progressive Disclosure**: Use `<details>` for advanced content
 - **Admonitions**: Use `:::tip`, `:::note`, `:::caution`, `:::danger` for callouts
-- **Mermaid**: Dark-mode colors (fill: `#2d333b`, border: `#6d5dfc`)
+- **Mermaid**: Dark-mode colors (fill: `#232221`, border: `#60A5FA`)
 - **Internal Links**: ≥2 cross-links per page
 
 ### Step 3b: Apply SEO & LLM Guidelines (If enabled)
@@ -228,7 +228,7 @@ Present to user:
 For a fast interactive experience, users can run:
 
 ```bash
-bash ~/.gemini/antigravity/skills/DocKit Master/scripts/doc-gen.sh
+bash ~/.gemini/antigravity/skills/doc-kit/scripts/doc-gen.sh
 ```
 
 ## UX Principles Applied

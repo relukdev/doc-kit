@@ -199,15 +199,15 @@ Every page MUST link to ≥2 other doc pages. Use this pattern:
 
 | Location | Type | Example |
 |----------|------|---------|
-| **Quick Reference box** | Related docs | `See [Database](./database.md)` |
-| **Within body text** | Contextual | `...uses the [auth flow](./data-flow.md#authentication)` |
-| **Related section** (bottom) | Cross-references | `## Related\n- [Architecture](./architecture.md)` |
-| **See Also** | Alternative paths | `:::tip\nFor deployment, see [Deploy Guide](./deployment.md)\n:::` |
+| **Quick Reference box** | Related docs | `See [Database](./database)` |
+| **Within body text** | Contextual | `...uses the [auth flow](./data-flow#authentication)` |
+| **Related section** (bottom) | Cross-references | `## Related\n- [Architecture](./architecture)` |
+| **See Also** | Alternative paths | `:::tip\nFor deployment, see [Deploy Guide](./deployment)\n:::` |
 
 ### Anchor Text Rules
 
 | ✅ Descriptive | ❌ Generic |
 |---------------|-----------|
-| "See the [deployment guide](./deployment.md)" | "Click [here](./deployment.md)" |
-| "Refer to [database schema](./database.md)" | "See [this page](./database.md)" |
-| "Follow the [user registration SOP](./sop/registration.md)" | "Read [more](./sop/registration.md)" |
+| "See the [deployment guide](./deployment)" | "Click [here](./deployment)" |
+| "Refer to [database schema](./database)" | "See [this page](./database)" |
+| "Follow the [user registration SOP](./sop/registration)" | "Read [more](./sop/registration)" |
