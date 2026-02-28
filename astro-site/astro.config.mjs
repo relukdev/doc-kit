@@ -96,5 +96,6 @@ export default defineConfig({
     },
 
     // CUSTOMIZE: Deployment
-    site: 'https://doc-kit.pages.dev',
+    site: 'https://relukdev.github.io',
+    base: '/doc-kit/docs',
 });
