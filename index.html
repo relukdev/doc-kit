@@ -45,6 +45,7 @@
         }
     </script>
     <link rel="stylesheet" href="css/styles.css">
+    <script src="pages/js/translations/landing.js"></script>
 </head>
 
 <body class="antialiased">
@@ -59,10 +60,12 @@
             <span class="font-heading font-bold text-base sm:text-lg tracking-tight">DocKit Master</span>
         </a>
         <div class="hidden md:flex items-center gap-6 text-sm text-zinc-400">
-            <a href="#" class="text-white transition-colors cursor-pointer">Home</a>
-            <a href="#features" class="hover:text-white transition-colors cursor-pointer">Features</a>
-            <a href="docs/" class="hover:text-white transition-colors cursor-pointer">Docs Site</a>
-            <a href="pages/claw/index.html" class="hover:text-white transition-colors cursor-pointer">Claw</a>
+            <a href="#" class="text-white transition-colors cursor-pointer" data-i18n="nav.home">Home</a>
+            <a href="#features" class="hover:text-white transition-colors cursor-pointer"
+                data-i18n="nav.features">Features</a>
+            <a href="docs/" class="hover:text-white transition-colors cursor-pointer" data-i18n="nav.docs">Docs Site</a>
+            <a href="pages/claw/index.html" class="hover:text-white transition-colors cursor-pointer"
+                data-i18n="nav.claw">Claw</a>
             <div class="lang-dropdown relative">
                 <button onclick="toggleLangMenu()" id="langTrigger"
                     class="lang-trigger flex items-center gap-1.5 bg-white/5 hover:bg-white/10 text-zinc-300 text-sm font-medium px-3 h-9 rounded-xl border border-white/10 transition-all cursor-pointer">
@@ -92,7 +95,8 @@
                 class="hidden lg:inline-flex items-center justify-center gap-2 bg-white/5 hover:bg-white/10 text-zinc-300 text-sm font-medium px-4 h-9 rounded-xl border border-white/10 transition-all cursor-pointer">⭐
                 Star</a>
             <a href="#start"
-                class="cta-primary text-white text-sm font-semibold px-4 h-9 rounded-xl transition-all cursor-pointer hidden md:flex items-center justify-center shrink-0">Get
+                class="cta-primary text-white text-sm font-semibold px-4 h-9 rounded-xl transition-all cursor-pointer hidden md:flex items-center justify-center shrink-0"
+                data-i18n="nav.getStarted">Get
                 Started Free</a>
             <button
                 class="md:hidden bg-white/5 border border-white/10 w-9 h-9 flex items-center justify-center rounded-xl shrink-0"
@@ -108,10 +112,13 @@
     <!-- MOBILE MENU -->
     <div id="mobileMenu"
         class="md:hidden mobile-menu fixed top-20 left-4 right-4 z-40 bg-zinc-900/95 backdrop-blur-xl border border-white/10 rounded-2xl px-6 py-4 flex flex-col gap-4 text-sm font-medium shadow-2xl">
-        <a href="#" onclick="closeMobileMenu()" class="text-white py-2">Home</a>
-        <a href="#features" onclick="closeMobileMenu()" class="text-zinc-300 hover:text-white py-2">Features</a>
-        <a href="docs/" onclick="closeMobileMenu()" class="text-zinc-300 hover:text-white py-2">Docs Site</a>
-        <a href="pages/claw/index.html" onclick="closeMobileMenu()" class="text-zinc-300 hover:text-white py-2">Claw</a>
+        <a href="#" onclick="closeMobileMenu()" class="text-white py-2" data-i18n="nav.home">Home</a>
+        <a href="#features" onclick="closeMobileMenu()" class="text-zinc-300 hover:text-white py-2"
+            data-i18n="nav.features">Features</a>
+        <a href="docs/" onclick="closeMobileMenu()" class="text-zinc-300 hover:text-white py-2"
+            data-i18n="nav.docs">Docs Site</a>
+        <a href="pages/claw/index.html" onclick="closeMobileMenu()" class="text-zinc-300 hover:text-white py-2"
+            data-i18n="nav.claw">Claw</a>
         <div class="lang-dropdown relative">
             <button onclick="toggleLangMenu()" id="langTriggerMobile"
                 class="lang-trigger flex items-center justify-center gap-1.5 w-full bg-white/5 hover:bg-white/10 text-zinc-300 text-sm font-medium px-3 py-2 rounded-xl border border-white/10 transition-all cursor-pointer">
@@ -136,7 +143,8 @@
             </div>
         </div>
         <a href="#start" onclick="closeMobileMenu()"
-            class="cta-primary text-white text-center font-semibold px-4 py-2.5 rounded-xl mt-2">Get Started Free</a>
+            class="cta-primary text-white text-center font-semibold px-4 py-2.5 rounded-xl mt-2"
+            data-i18n="nav.getStarted">Get Started Free</a>
     </div>
 
     <!-- HERO -->
@@ -154,52 +162,55 @@
                     <span
                         class="w-5 h-5 rounded-full bg-gradient-to-br from-amber-400 to-orange-400 border-2 border-surface-400"></span>
                 </span>
-                Google Antigravity Toolkit
+                <span data-i18n="hero.badge">Google Antigravity Toolkit</span>
             </div>
             <h1
                 class="font-heading font-extrabold text-4xl sm:text-5xl md:text-6xl lg:text-7xl tracking-tight leading-[1.05] mb-6">
-                <span
-                    class="bg-gradient-to-r from-white via-white to-zinc-400 bg-clip-text text-transparent">Documentation
+                <span class="bg-gradient-to-r from-white via-white to-zinc-400 bg-clip-text text-transparent"
+                    data-i18n="hero.title1">Documentation
                     that</span><br>
-                <span
-                    class="bg-gradient-to-r from-accent-light via-magic to-magic-light bg-clip-text text-transparent">Writes
+                <span class="bg-gradient-to-r from-accent-light via-magic to-magic-light bg-clip-text text-transparent"
+                    data-i18n="hero.title2">Writes
                     Itself</span>
             </h1>
-            <p class="text-zinc-400 text-lg sm:text-xl max-w-2xl mx-auto mb-4 leading-relaxed">
+            <p class="text-zinc-400 text-lg sm:text-xl max-w-2xl mx-auto mb-4 leading-relaxed" data-i18n="hero.desc">
                 Unleash your AI agent. One scan = complete knowledge base:<br class="hidden sm:block">
                 <span class="text-white font-medium">Personas, JTBD, Process Flows, Tech Docs, SOPs, API
                     References</span> — all
                 automated.
             </p>
-            <p class="text-zinc-600 text-sm max-w-lg mx-auto mb-10">Output as structured Markdown or a premium
+            <p class="text-zinc-600 text-sm max-w-lg mx-auto mb-10" data-i18n="hero.subdesc">Output as structured
+                Markdown or a premium
                 Astro Starlight site with glassmorphism, dark mode, and rich diagrams.</p>
             <div class="flex flex-col sm:flex-row items-center justify-center gap-4 mb-16">
                 <a href="#start"
-                    class="cta-primary text-white font-semibold px-10 py-4 rounded-2xl transition-all cursor-pointer glow-purple text-base">✦
+                    class="cta-primary text-white font-semibold px-10 py-4 rounded-2xl transition-all cursor-pointer glow-purple text-base"
+                    data-i18n="hero.cta1">✦
                     Get Started — 60 Seconds</a>
                 <a href="#magic"
-                    class="bg-white/5 hover:bg-white/10 text-zinc-300 font-medium px-8 py-4 rounded-2xl border border-white/10 transition-all cursor-pointer text-base">See
+                    class="bg-white/5 hover:bg-white/10 text-zinc-300 font-medium px-8 py-4 rounded-2xl border border-white/10 transition-all cursor-pointer text-base"
+                    data-i18n="hero.cta2">See
                     the Magic ↓</a>
             </div>
             <div class="flex flex-wrap items-center justify-center gap-x-6 gap-y-4 text-center">
                 <div>
                     <div class="text-2xl font-bold text-white">5</div>
-                    <div class="text-xs text-zinc-500 mt-1">Doc Types</div>
+                    <div class="text-xs text-zinc-500 mt-1" data-i18n="hero.stat1">Doc Types</div>
                 </div>
                 <div class="w-px h-8 bg-zinc-800 hidden sm:block"></div>
                 <div>
                     <div class="text-2xl font-bold text-accent-light">2</div>
-                    <div class="text-xs text-zinc-500 mt-1">Output Formats</div>
+                    <div class="text-xs text-zinc-500 mt-1" data-i18n="hero.stat2">Output Formats</div>
                 </div>
                 <div class="w-px h-8 bg-zinc-800 hidden sm:block"></div>
                 <div>
                     <div class="text-2xl font-bold text-magic">11</div>
-                    <div class="text-xs text-zinc-500 mt-1">AI Sub-Skills</div>
+                    <div class="text-xs text-zinc-500 mt-1" data-i18n="hero.stat3">AI Sub-Skills</div>
                 </div>
                 <div class="w-px h-8 bg-zinc-800 hidden sm:block"></div>
                 <div>
                     <div class="text-2xl font-bold text-success">$0</div>
-                    <div class="text-xs text-zinc-500 mt-1">Forever Free</div>
+                    <div class="text-xs text-zinc-500 mt-1" data-i18n="hero.stat4">Forever Free</div>
                 </div>
             </div>
         </div>
@@ -209,60 +220,68 @@
     <!-- PROBLEM / SOLUTION -->
     <section id="problem" class="max-w-5xl mx-auto px-4 py-24">
         <div class="text-center mb-16 reveal">
-            <p class="text-magic text-sm font-semibold tracking-widest uppercase mb-3">The Real Problem</p>
-            <h2 class="font-heading font-bold text-3xl sm:text-4xl tracking-tight mb-4">Your codebase is
+            <p class="text-magic text-sm font-semibold tracking-widest uppercase mb-3" data-i18n="problem.label">The
+                Real Problem</p>
+            <h2 class="font-heading font-bold text-3xl sm:text-4xl tracking-tight mb-4" data-i18n="problem.title">Your
+                codebase is
                 amazing.<br>Your docs are... nonexistent.</h2>
-            <p class="text-zinc-500 text-base max-w-xl mx-auto">This is the reality for 90% of dev teams and solo
+            <p class="text-zinc-500 text-base max-w-xl mx-auto" data-i18n="problem.subtitle">This is the reality for 90%
+                of dev teams and solo
                 makers.</p>
         </div>
         <div class="grid md:grid-cols-2 gap-6 mb-12">
             <div class="before-card rounded-2xl p-8 reveal">
                 <div class="flex items-center gap-2 mb-6"><span class="text-red-400 text-lg">✕</span><span
-                        class="text-red-400 font-semibold text-sm uppercase tracking-wide">Without DocKit Master</span>
+                        class="text-red-400 font-semibold text-sm uppercase tracking-wide"
+                        data-i18n="problem.before">Without DocKit Master</span>
                 </div>
                 <ul class="space-y-4 text-sm">
-                    <li class="flex gap-3 text-zinc-400"><span
-                            class="text-red-400/60 mt-0.5 shrink-0">●</span><span>"We'll write docs later" — later never
+                    <li class="flex gap-3 text-zinc-400"><span class="text-red-400/60 mt-0.5 shrink-0">●</span><span
+                            data-i18n="problem.beforeItems.0">"We'll write docs later" — later never
                             comes</span></li>
-                    <li class="flex gap-3 text-zinc-400"><span class="text-red-400/60 mt-0.5 shrink-0">●</span><span>New
+                    <li class="flex gap-3 text-zinc-400"><span class="text-red-400/60 mt-0.5 shrink-0">●</span><span
+                            data-i18n="problem.beforeItems.1">New
                             team members spend weeks understanding the codebase</span></li>
-                    <li class="flex gap-3 text-zinc-400"><span class="text-red-400/60 mt-0.5 shrink-0">●</span><span>API
+                    <li class="flex gap-3 text-zinc-400"><span class="text-red-400/60 mt-0.5 shrink-0">●</span><span
+                            data-i18n="problem.beforeItems.2">API
                             docs are outdated the day they're written</span></li>
-                    <li class="flex gap-3 text-zinc-400"><span
-                            class="text-red-400/60 mt-0.5 shrink-0">●</span><span>Hiring a technical writer:
+                    <li class="flex gap-3 text-zinc-400"><span class="text-red-400/60 mt-0.5 shrink-0">●</span><span
+                            data-i18n="problem.beforeItems.3">Hiring a technical writer:
                             $5,000–$20,000. Wait 3–6 weeks.</span></li>
-                    <li class="flex gap-3 text-zinc-400"><span
-                            class="text-red-400/60 mt-0.5 shrink-0">●</span><span>SOPs? "Just ask David" — but David
+                    <li class="flex gap-3 text-zinc-400"><span class="text-red-400/60 mt-0.5 shrink-0">●</span><span
+                            data-i18n="problem.beforeItems.4">SOPs? "Just ask David" — but David
                             left last month.</span></li>
                 </ul>
             </div>
             <div class="after-card rounded-2xl p-8 reveal reveal-delay-1">
                 <div class="flex items-center gap-2 mb-6"><span class="text-emerald-400 text-lg">✦</span><span
-                        class="text-emerald-400 font-semibold text-sm uppercase tracking-wide">With DocKit Master</span>
+                        class="text-emerald-400 font-semibold text-sm uppercase tracking-wide"
+                        data-i18n="problem.after">With DocKit Master</span>
                 </div>
                 <ul class="space-y-4 text-sm">
-                    <li class="flex gap-3 text-zinc-300"><span
-                            class="text-emerald-400/80 mt-0.5 shrink-0">✓</span><span>Complete docs generated in <span
+                    <li class="flex gap-3 text-zinc-300"><span class="text-emerald-400/80 mt-0.5 shrink-0">✓</span><span
+                            data-i18n="problem.afterItems.0">Complete docs generated in <span
                                 class="text-white font-medium">minutes</span>, not weeks</span></li>
-                    <li class="flex gap-3 text-zinc-300"><span
-                            class="text-emerald-400/80 mt-0.5 shrink-0">✓</span><span>AI traces <span
-                                class="text-white font-medium">actual code paths</span> — no shallow analysis</span>
+                    <li class="flex gap-3 text-zinc-300"><span class="text-emerald-400/80 mt-0.5 shrink-0">✓</span><span
+                            data-i18n="problem.afterItems.1">AI traces <span class="text-white font-medium">actual code
+                                paths</span> — no shallow analysis</span>
                     </li>
-                    <li class="flex gap-3 text-zinc-300"><span
-                            class="text-emerald-400/80 mt-0.5 shrink-0">✓</span><span>Every claim cites <span
+                    <li class="flex gap-3 text-zinc-300"><span class="text-emerald-400/80 mt-0.5 shrink-0">✓</span><span
+                            data-i18n="problem.afterItems.2">Every claim cites <span
                                 class="text-white font-medium">(file:line_number)</span> — verifiable</span></li>
-                    <li class="flex gap-3 text-zinc-300"><span
-                            class="text-emerald-400/80 mt-0.5 shrink-0">✓</span><span>$0 cost. Zero waiting.
+                    <li class="flex gap-3 text-zinc-300"><span class="text-emerald-400/80 mt-0.5 shrink-0">✓</span><span
+                            data-i18n="problem.afterItems.3">$0 cost. Zero waiting.
                             Deploy-ready docs.</span></li>
-                    <li class="flex gap-3 text-zinc-300"><span
-                            class="text-emerald-400/80 mt-0.5 shrink-0">✓</span><span>Premium Astro Starlight site with
+                    <li class="flex gap-3 text-zinc-300"><span class="text-emerald-400/80 mt-0.5 shrink-0">✓</span><span
+                            data-i18n="problem.afterItems.4">Premium Astro Starlight site with
                             dark
                             mode, diagrams, search</span></li>
                 </ul>
             </div>
         </div>
         <div class="text-center reveal">
-            <p class="text-zinc-500 text-sm italic">"Good documentation isn't a luxury — it's the difference between a
+            <p class="text-zinc-500 text-sm italic" data-i18n="problem.quote">"Good documentation isn't a luxury — it's
+                the difference between a
                 <span class="text-white">product</span> and a <span class="text-white">project</span>."
             </p>
         </div>
@@ -272,10 +291,13 @@
     <!-- MAGIC DEMO -->
     <section id="magic" class="max-w-6xl mx-auto px-4 py-24">
         <div class="text-center mb-16 reveal">
-            <p class="text-accent-light text-sm font-semibold tracking-widest uppercase mb-3">The Magic</p>
-            <h2 class="font-heading font-bold text-3xl sm:text-4xl tracking-tight mb-4">One scan. Complete
+            <p class="text-accent-light text-sm font-semibold tracking-widest uppercase mb-3" data-i18n="magic.label">
+                The Magic</p>
+            <h2 class="font-heading font-bold text-3xl sm:text-4xl tracking-tight mb-4" data-i18n="magic.title">One
+                scan. Complete
                 knowledge base.</h2>
-            <p class="text-zinc-500 text-base max-w-xl mx-auto">DocKit Master orchestrates 11 AI sub-skills to analyze,
+            <p class="text-zinc-500 text-base max-w-xl mx-auto" data-i18n="magic.subtitle">DocKit Master orchestrates 11
+                AI sub-skills to analyze,
                 systematize, and write your entire knowledge base + documentation suite.</p>
         </div>
 
@@ -323,9 +345,11 @@
                 <div
                     class="w-12 h-12 rounded-2xl bg-gradient-to-br from-accent/20 to-accent/5 flex items-center justify-center text-accent-light mb-5 text-2xl">
                     🧠</div>
-                <h3 class="font-heading font-bold text-lg mb-2 group-hover:text-accent-light transition-colors">Deep
+                <h3 class="font-heading font-bold text-lg mb-2 group-hover:text-accent-light transition-colors"
+                    data-i18n="features.deepCode.title">Deep
                     Code Analysis</h3>
-                <p class="text-zinc-500 text-sm leading-relaxed">Traces actual code paths, inspects ORMs, maps API
+                <p class="text-zinc-500 text-sm leading-relaxed" data-i18n="features.deepCode.desc">Traces actual code
+                    paths, inspects ORMs, maps API
                     routes. No more guessing or shallow descriptions.</p>
                 <span
                     class="text-accent-light text-xs mt-3 inline-block opacity-0 group-hover:opacity-100 transition-opacity">Learn
@@ -335,8 +359,10 @@
                 <div
                     class="w-12 h-12 rounded-2xl bg-gradient-to-br from-magic/20 to-magic/5 flex items-center justify-center text-magic-light mb-5 text-2xl">
                     📐</div>
-                <h3 class="font-heading font-bold text-lg mb-2">Intelligent Diagrams</h3>
-                <p class="text-zinc-500 text-sm leading-relaxed">Beautiful Mermaid diagrams for Data Flows, ER Diagrams,
+                <h3 class="font-heading font-bold text-lg mb-2" data-i18n="features.diagrams.title">Intelligent Diagrams
+                </h3>
+                <p class="text-zinc-500 text-sm leading-relaxed" data-i18n="features.diagrams.desc">Beautiful Mermaid
+                    diagrams for Data Flows, ER Diagrams,
                     and System Architecture — dark-mode ready.</p>
             </div>
             <a href="pages/features/astro-starlight.html"
@@ -344,9 +370,11 @@
                 <div
                     class="w-12 h-12 rounded-2xl bg-gradient-to-br from-success/20 to-success/5 flex items-center justify-center text-success-light mb-5 text-2xl">
                     ⚡</div>
-                <h3 class="font-heading font-bold text-lg mb-2 group-hover:text-accent-light transition-colors">Dual
+                <h3 class="font-heading font-bold text-lg mb-2 group-hover:text-accent-light transition-colors"
+                    data-i18n="features.dualOutput.title">Dual
                     Output Formats</h3>
-                <p class="text-zinc-500 text-sm leading-relaxed">Clean Markdown files or a premium Astro Starlight site
+                <p class="text-zinc-500 text-sm leading-relaxed" data-i18n="features.dualOutput.desc">Clean Markdown
+                    files or a premium Astro Starlight site
                     with
                     glassmorphism, search, and sidebar navigation.</p>
                 <span
@@ -357,16 +385,19 @@
                 <div
                     class="w-12 h-12 rounded-2xl bg-gradient-to-br from-warn/20 to-warn/5 flex items-center justify-center text-warn-light mb-5 text-2xl">
                     🎯</div>
-                <h3 class="font-heading font-bold text-lg mb-2">UX-Powered Docs</h3>
-                <p class="text-zinc-500 text-sm leading-relaxed">Applies Hick's Law, Miller's Law, progressive
+                <h3 class="font-heading font-bold text-lg mb-2" data-i18n="features.ux.title">UX-Powered Docs</h3>
+                <p class="text-zinc-500 text-sm leading-relaxed" data-i18n="features.ux.desc">Applies Hick's Law,
+                    Miller's Law, progressive
                     disclosure. Docs that are scannable, not overwhelming.</p>
             </div>
             <div class="glass-card rounded-2xl p-7 reveal reveal-delay-1">
                 <div
                     class="w-12 h-12 rounded-2xl bg-gradient-to-br from-cyan-500/20 to-cyan-500/5 flex items-center justify-center text-cyan-400 mb-5 text-2xl">
                     🔍</div>
-                <h3 class="font-heading font-bold text-lg mb-2">Zero Shallow Analysis</h3>
-                <p class="text-zinc-500 text-sm leading-relaxed">Every technical claim cites <code
+                <h3 class="font-heading font-bold text-lg mb-2" data-i18n="features.zeroShallow.title">Zero Shallow
+                    Analysis</h3>
+                <p class="text-zinc-500 text-sm leading-relaxed" data-i18n="features.zeroShallow.desc">Every technical
+                    claim cites <code
                         class="text-accent-light bg-white/5 px-1.5 py-0.5 rounded text-xs">(file_path:line_number)</code>.
                     Verifiable by design.</p>
             </div>
@@ -374,17 +405,21 @@
                 <div
                     class="w-12 h-12 rounded-2xl bg-gradient-to-br from-rose-500/20 to-rose-500/5 flex items-center justify-center text-rose-400 mb-5 text-2xl">
                     🌍</div>
-                <h3 class="font-heading font-bold text-lg mb-2">Multi-Language Output</h3>
-                <p class="text-zinc-500 text-sm leading-relaxed">Auto-detect chat language. Support for English,
+                <h3 class="font-heading font-bold text-lg mb-2" data-i18n="features.multiLang.title">Multi-Language
+                    Output</h3>
+                <p class="text-zinc-500 text-sm leading-relaxed" data-i18n="features.multiLang.desc">Auto-detect chat
+                    language. Support for English,
                     Vietnamese, Chinese, Russian, and more.</p>
             </div>
             <a href="pages/features/knowledge-engine.html" class="glass-card rounded-2xl p-7 reveal block group">
                 <div
                     class="w-12 h-12 rounded-2xl bg-gradient-to-br from-orange-500/20 to-orange-500/5 flex items-center justify-center text-orange-400 mb-5 text-2xl">
                     🎯</div>
-                <h3 class="font-heading font-bold text-lg mb-2 group-hover:text-accent-light transition-colors">
+                <h3 class="font-heading font-bold text-lg mb-2 group-hover:text-accent-light transition-colors"
+                    data-i18n="features.knowledge.title">
                     Knowledge Engine</h3>
-                <p class="text-zinc-500 text-sm leading-relaxed">Auto-generate Personas, JTBD Canvases, and 4 types of
+                <p class="text-zinc-500 text-sm leading-relaxed" data-i18n="features.knowledge.desc">Auto-generate
+                    Personas, JTBD Canvases, and 4 types of
                     Process Flow diagrams from your codebase.</p>
                 <span
                     class="text-accent-light text-xs mt-3 inline-block opacity-0 group-hover:opacity-100 transition-opacity">Learn
@@ -395,9 +430,11 @@
                 <div
                     class="w-12 h-12 rounded-2xl bg-gradient-to-br from-teal-500/20 to-teal-500/5 flex items-center justify-center text-teal-400 mb-5 text-2xl">
                     📈</div>
-                <h3 class="font-heading font-bold text-lg mb-2 group-hover:text-accent-light transition-colors">SEO
+                <h3 class="font-heading font-bold text-lg mb-2 group-hover:text-accent-light transition-colors"
+                    data-i18n="features.seo.title">SEO
                     Optimized</h3>
-                <p class="text-zinc-500 text-sm leading-relaxed">Built-in SEO checklist, keyword strategy, content
+                <p class="text-zinc-500 text-sm leading-relaxed" data-i18n="features.seo.desc">Built-in SEO checklist,
+                    keyword strategy, content
                     writing
                     guidelines, sitemap generation, and robots directives.</p>
                 <span
@@ -408,8 +445,9 @@
                 <div
                     class="w-12 h-12 rounded-2xl bg-gradient-to-br from-violet-500/20 to-violet-500/5 flex items-center justify-center text-violet-400 mb-5 text-2xl">
                     🤖</div>
-                <h3 class="font-heading font-bold text-lg mb-2">AI/LLM-Ready</h3>
-                <p class="text-zinc-500 text-sm leading-relaxed">Documentation structured for AI parsing.
+                <h3 class="font-heading font-bold text-lg mb-2" data-i18n="features.ai.title">AI/LLM-Ready</h3>
+                <p class="text-zinc-500 text-sm leading-relaxed" data-i18n="features.ai.desc">Documentation structured
+                    for AI parsing.
                     NotebookLM-friendly
                     sitemaps, text fallbacks for diagrams, clean UTF-8.</p>
             </div>
@@ -420,51 +458,65 @@
     <!-- WHO IS THIS FOR -->
     <section class="max-w-5xl mx-auto px-4 py-24">
         <div class="text-center mb-16 reveal">
-            <p class="text-warn text-sm font-semibold tracking-widest uppercase mb-3">Built for</p>
-            <h2 class="font-heading font-bold text-3xl sm:text-4xl tracking-tight mb-4">Your code deserves great
+            <p class="text-warn text-sm font-semibold tracking-widest uppercase mb-3" data-i18n="personas.label">Built
+                for</p>
+            <h2 class="font-heading font-bold text-3xl sm:text-4xl tracking-tight mb-4" data-i18n="personas.title">Your
+                code deserves great
                 docs.<br>Now it gets them automatically.</h2>
         </div>
         <div class="grid sm:grid-cols-2 lg:grid-cols-3 gap-4 reveal">
             <a href="pages/use-cases/cto-tech-leads.html"
                 class="persona-pill rounded-2xl p-6 text-center cursor-pointer block group">
-                <h4 class="font-heading font-bold text-base mb-1 group-hover:text-accent-light transition-colors">🏗️
+                <h4 class="font-heading font-bold text-base mb-1 group-hover:text-accent-light transition-colors"
+                    data-i18n="personas.cto.title">🏗️
                     CTOs & Tech Leads</h4>
-                <p class="text-zinc-500 text-xs leading-relaxed">Onboard new devs in days, not weeks. Architecture docs
+                <p class="text-zinc-500 text-xs leading-relaxed" data-i18n="personas.cto.desc">Onboard new devs in days,
+                    not weeks. Architecture docs
                     always current.</p>
             </a>
             <a href="pages/use-cases/developers.html"
                 class="persona-pill rounded-2xl p-6 text-center cursor-pointer block group">
-                <h4 class="font-heading font-bold text-base mb-1 group-hover:text-accent-light transition-colors">💻
+                <h4 class="font-heading font-bold text-base mb-1 group-hover:text-accent-light transition-colors"
+                    data-i18n="personas.dev.title">💻
                     Developers</h4>
-                <p class="text-zinc-500 text-xs leading-relaxed">Stop writing docs manually. Let AI trace the code and
+                <p class="text-zinc-500 text-xs leading-relaxed" data-i18n="personas.dev.desc">Stop writing docs
+                    manually. Let AI trace the code and
                     generate everything.</p>
             </a>
             <a href="pages/use-cases/product-managers.html"
                 class="persona-pill rounded-2xl p-6 text-center cursor-pointer block group">
-                <h4 class="font-heading font-bold text-base mb-1 group-hover:text-accent-light transition-colors">📋
+                <h4 class="font-heading font-bold text-base mb-1 group-hover:text-accent-light transition-colors"
+                    data-i18n="personas.pm.title">📋
                     Product Managers</h4>
-                <p class="text-zinc-500 text-xs leading-relaxed">SOP guides with visual flows. Hand off to support and
+                <p class="text-zinc-500 text-xs leading-relaxed" data-i18n="personas.pm.desc">SOP guides with visual
+                    flows. Hand off to support and
                     training teams.</p>
             </a>
             <a href="pages/use-cases/startup-founders.html"
                 class="persona-pill rounded-2xl p-6 text-center cursor-pointer block group">
-                <h4 class="font-heading font-bold text-base mb-1 group-hover:text-accent-light transition-colors">🚀
+                <h4 class="font-heading font-bold text-base mb-1 group-hover:text-accent-light transition-colors"
+                    data-i18n="personas.startup.title">🚀
                     Startup Founders</h4>
-                <p class="text-zinc-500 text-xs leading-relaxed">Ship professional docs for investors and enterprise
+                <p class="text-zinc-500 text-xs leading-relaxed" data-i18n="personas.startup.desc">Ship professional
+                    docs for investors and enterprise
                     clients. Zero extra cost.</p>
             </a>
             <a href="pages/use-cases/solo-makers.html"
                 class="persona-pill rounded-2xl p-6 text-center cursor-pointer block group">
-                <h4 class="font-heading font-bold text-base mb-1 group-hover:text-accent-light transition-colors">💡
+                <h4 class="font-heading font-bold text-base mb-1 group-hover:text-accent-light transition-colors"
+                    data-i18n="personas.solo.title">💡
                     Solo Makers</h4>
-                <p class="text-zinc-500 text-xs leading-relaxed">One person = entire docs team. Technical + user-facing,
+                <p class="text-zinc-500 text-xs leading-relaxed" data-i18n="personas.solo.desc">One person = entire docs
+                    team. Technical + user-facing,
                     all automated.</p>
             </a>
             <a href="pages/use-cases/api-providers.html"
                 class="persona-pill rounded-2xl p-6 text-center cursor-pointer block group">
-                <h4 class="font-heading font-bold text-base mb-1 group-hover:text-accent-light transition-colors">🔌 API
+                <h4 class="font-heading font-bold text-base mb-1 group-hover:text-accent-light transition-colors"
+                    data-i18n="personas.api.title">🔌 API
                     Providers</h4>
-                <p class="text-zinc-500 text-xs leading-relaxed">Auto-generate endpoint docs with examples in cURL, JS,
+                <p class="text-zinc-500 text-xs leading-relaxed" data-i18n="personas.api.desc">Auto-generate endpoint
+                    docs with examples in cURL, JS,
                     and Python.</p>
             </a>
         </div>
@@ -474,9 +526,12 @@
     <!-- HOW IT WORKS -->
     <section id="how" class="max-w-5xl mx-auto px-4 py-24">
         <div class="text-center mb-16 reveal">
-            <p class="text-accent-light text-sm font-semibold tracking-widest uppercase mb-3">Surprisingly Simple</p>
-            <h2 class="font-heading font-bold text-3xl sm:text-4xl tracking-tight mb-4">3 steps. Done.</h2>
-            <p class="text-zinc-500 text-base max-w-lg mx-auto">No complicated setup. No config files. Just run and go.
+            <p class="text-accent-light text-sm font-semibold tracking-widest uppercase mb-3" data-i18n="how.label">
+                Surprisingly Simple</p>
+            <h2 class="font-heading font-bold text-3xl sm:text-4xl tracking-tight mb-4" data-i18n="how.title">3 steps.
+                Done.</h2>
+            <p class="text-zinc-500 text-base max-w-lg mx-auto" data-i18n="how.subtitle">No complicated setup. No config
+                files. Just run and go.
             </p>
         </div>
         <div class="grid md:grid-cols-3 gap-8 reveal">
@@ -484,8 +539,9 @@
                 <div
                     class="step-ring rounded-full flex items-center justify-center text-accent-light font-heading font-bold text-xl mx-auto mb-6">
                     1</div>
-                <h3 class="font-heading font-bold text-lg mb-3">Install</h3>
-                <p class="text-zinc-500 text-sm leading-relaxed mb-4">Copy doc-kit into your Antigravity skills
+                <h3 class="font-heading font-bold text-lg mb-3" data-i18n="how.step1.title">Install</h3>
+                <p class="text-zinc-500 text-sm leading-relaxed mb-4" data-i18n="how.step1.desc">Copy doc-kit into your
+                    Antigravity skills
                     folder.
                     One command.</p>
                 <div class="bg-zinc-900/80 rounded-xl p-4 text-left"><code
@@ -497,8 +553,9 @@
                 <div
                     class="step-ring rounded-full flex items-center justify-center text-magic-light font-heading font-bold text-xl mx-auto mb-6">
                     2</div>
-                <h3 class="font-heading font-bold text-lg mb-3">Generate Prompt</h3>
-                <p class="text-zinc-500 text-sm leading-relaxed mb-4">Run the interactive CLI to pick doc type, output
+                <h3 class="font-heading font-bold text-lg mb-3" data-i18n="how.step2.title">Generate Prompt</h3>
+                <p class="text-zinc-500 text-sm leading-relaxed mb-4" data-i18n="how.step2.desc">Run the interactive CLI
+                    to pick doc type, output
                     format, and language.</p>
                 <div class="bg-zinc-900/80 rounded-xl p-4 text-left">
                     <code class="text-xs text-accent-light">bash dockit-master.sh</code>
@@ -509,8 +566,9 @@
                 <div
                     class="step-ring rounded-full flex items-center justify-center text-success-light font-heading font-bold text-xl mx-auto mb-6">
                     3</div>
-                <h3 class="font-heading font-bold text-lg mb-3">Let AI Work</h3>
-                <p class="text-zinc-500 text-sm leading-relaxed mb-4">Paste the prompt. AI orchestrates 11 skills to
+                <h3 class="font-heading font-bold text-lg mb-3" data-i18n="how.step3.title">Let AI Work</h3>
+                <p class="text-zinc-500 text-sm leading-relaxed mb-4" data-i18n="how.step3.desc">Paste the prompt. AI
+                    orchestrates 11 skills to
                     systematize and document.</p>
                 <div class="bg-zinc-900/80 rounded-xl p-4 text-left">
                     <p class="text-xs text-emerald-400">✓ Personas, JTBD, Process Flows</p>
@@ -853,7 +911,8 @@
                 <a href="https://github.com/relukdev/doc-kit" target="_blank"
                     class="hover:text-white transition-colors cursor-pointer">GitHub</a>
             </div>
-            <p class="text-zinc-600 text-xs">Your code dreams it. AI documents it. DocKit Master makes it beautiful.</p>
+            <p class="text-zinc-600 text-xs" data-i18n="footer.tagline">Your code dreams it. AI documents it. DocKit
+                Master makes it beautiful.</p>
         </div>
     </footer>
 
@@ -865,6 +924,30 @@
             ru: { flag: '🇷🇺', code: 'RU', name: 'Русский' },
             zh: { flag: '🇨🇳', code: 'ZH', name: '中文' }
         };
+
+        let currentLang = 'en';
+
+        // i18n helper — resolve dot-notation keys from landingTranslations
+        function t(key) {
+            const keys = key.split('.');
+            let val = landingTranslations[currentLang];
+            for (const k of keys) { val = val?.[k]; }
+            if (val === undefined && currentLang !== 'en') {
+                let fb = landingTranslations['en'];
+                for (const k of keys) { fb = fb?.[k]; }
+                return fb;
+            }
+            return val;
+        }
+
+        // Apply translations to all data-i18n elements
+        function applyTranslations() {
+            document.querySelectorAll('[data-i18n]').forEach(el => {
+                const text = t(el.dataset.i18n);
+                if (text !== undefined) el.innerHTML = text;
+            });
+            document.documentElement.lang = currentLang;
+        }
 
         // Toggle language dropdown
         function toggleLangMenu() {
@@ -880,8 +963,9 @@
             }
         });
 
-        // Language switcher — persists to localStorage for sub-pages
+        // Language switcher — translates page + persists to localStorage
         function switchLang(lang) {
+            currentLang = lang;
             localStorage.setItem('dockit-lang', lang);
             const data = langData[lang] || langData.en;
             // Update all trigger buttons
@@ -897,14 +981,18 @@
                     opt.classList.remove('bg-white/10', 'text-white');
                 }
             });
+            // Apply translations
+            applyTranslations();
             // Close menus
             document.querySelectorAll('.lang-menu').forEach(m => m.classList.add('hidden'));
         }
 
-        // Auto-highlight saved lang on load
+        // Auto-detect and apply saved lang on load
         (function () {
             const saved = localStorage.getItem('dockit-lang');
-            if (saved) switchLang(saved);
+            if (saved && langData[saved]) {
+                switchLang(saved);
+            }
         })();
 
         // Mobile menu
